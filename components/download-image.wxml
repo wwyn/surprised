@@ -1,0 +1,8 @@
+<!--components/download-image.wxml-->
+<view class="position-fix" wx:if="{{showImg}}" catchtouchmove='true'>
+    <view class="download" style="background-image:url({{img_url}}/public/wechat/empty/img_loading.png);">
+        <image   data-img="{{imgUrl}}" catchtap="preview_img"  class="download-img"  style="width:{{ctx_img_rect_w}}px;height:{{ctx_img_rect_h}}px;" src="{{imgUrl}}" mode="widthFix" catchtap="preview_img"></image>
+        <image class="download-icon" bindtap="evt_download" src="{{img_url}}/public/wechat/empty/download.png" mode="widthFix"></image>
+        <image class="download-close" bindtap="evt_close" src="{{img_url}}/public/wechat/empty/close_img.png" mode="widthFix"></image>
+    </view>
+</view>

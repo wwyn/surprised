@@ -1,0 +1,119 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../../utils/fmt.wxs" module="fmt" />
+<block wx:if="{{hideLoading}}">
+    <view class="weui-tab">
+        <view class="weui-navbar" style="position: fixed;">
+            <navigator open-type="redirect" url="/pages/member/order/index?order_type=all" class="weui-navbar__item {{order_type=='all'?'weui-bar__item_on':''}}" >
+                <view class="weui-navbar__title">全部</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/order/index?order_type=s1" class="weui-navbar__item {{order_type=='s1'?'weui-bar__item_on':''}}">
+                <view class="weui-navbar__title">待付款</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/order/index?order_type=s2" class="weui-navbar__item {{order_type=='s2'?'weui-bar__item_on':''}}">
+                <view class="weui-navbar__title">待发货</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/order/index?order_type=s3" class="weui-navbar__item {{order_type=='s3'?'weui-bar__item_on':''}}">
+                <view class="weui-navbar__title">待收货</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/order/index?order_type=s6" class="weui-navbar__item {{order_type=='s6'?'weui-bar__item_on':''}}">
+                <view class="weui-navbar__title">已取消</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/order/index?order_type=s5" class="weui-navbar__item {{order_type=='s5'?'weui-bar__item_on':''}}">
+                <view class="weui-navbar__title">退款/售后</view>
+            </navigator>
+            <!-- <navigator open-type="redirect" url="/pages/member/order/index?order_type=s4" class="weui-navbar__item {{order_type=='s4'?'weui-bar__item_on':''}}">
+                <view class="weui-navbar__title">待评价</view>
+            </navigator> -->
+        </view>
+    </view>
+    <view class="prompt-panel-new" wx:if="{{empty_list == 'YES'}}">
+        <view class="icon-empty">
+            <image class="list-null" mode="widthFix" src="{{img_url}}/public/wechat/mall/groupbooking/list_null.png"></image>
+            <view class="empty-tips">
+                <view class="">暂时没有任何订单哦～</view>
+                <!-- <navigator class="go-shop-link" url="/pages/index/index" open-type="switchTab">
+                    去逛逛
+                    <image class="right" mode="widthFix" src="{{img_url}}/public/wechat/mall/groupbooking/right.png"></image>
+                </navigator> -->
+            </view>
+        </view>
+    </view>
+    <scroll-view scroll-y="true" style="height:{{sv_height}}px;" bindscrolltolower="evt_scrolltolower" wx:if="{{order_list}}">
+        <view class="order-list">
+            <view class="order-item weui-panel"  wx:for="{{order_list}}" wx:for-item="order" wx:key="order_id">
+                <navigator url="detail/detail?order_id={{order.order_id}}" class="{{order.status}}">
+                    <!-- {{order.order_id}} -->
+                    <view class="weui-panel__hd order-status">
+                        <view class="">
+                            {{order.merchant_id!=0?merchant_list[order.merchant_id].show_name:'自营商品'}}
+                        </view>
+                        <view class="status">
+                            {{status_kvmap.pay_status[order.pay_status]}}
+                            <text wx:if="{{order.pay_status!=5}}">{{status_kvmap.ship_status[order.ship_status]?'/'+status_kvmap.ship_status[order.ship_status]:''}}</text>
+                            <block wx:if="{{order.status=='dead'}}">/{{status_kvmap.order_status[order.status]}}</block>
+                        </view>
+                    </view>
+                    <view class="weui-panel__bd">
+                        <scroll-view scroll-x="true">
+                        <block wx:for="{{order_items_group[order.order_id]}}" wx:for-item="item" wx:key="index">
+                            <view class="order-item-panel">
+                                <block >
+                                    <view class="item-image" wx:if="{{item.item_type == 'product'}}">
+                                        <image mode="aspectFit" bindload="load_image"  src="{{images[item.image_id]?images[item.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.image_id}}" />
+                                    </view>
+                                    <view class="order-detail">
+                                        <view class="item-name">
+                                            {{item.name}}
+                                        </view>
+                                        <view class="item-desc clearfix">
+                                            {{item.spec_info?item.spec_info:''}}<text>x{{item.nums}}</text>
+                                        </view>
+                                        <view class="item-price">
+                                            <view>￥{{fmt.price(item.buy_price)}}</view>
+                                            <view>ID:{{item.goods_id}}</view>
+                                        </view>
+                                    </view>
+                                   
+                                </block>
+
+                            </view>
+                            <view class="cart-remark">
+                                <text>备注：</text>
+                                {{item.remark?item.remark:'暂无备注'}}
+                                <!-- <label>备注</label> -->
+                            </view>
+                          </block>
+                        </scroll-view>
+                    </view>
+                    <!-- <view class="weui-panel__ft">
+                        共{{order.quantity}}件商品 订单金额：¥ {{fmt.price(order.order_total)}}
+                        <view class="weui-media-box__desc media-box-actions" wx:if="{{order.status!='dead'}}">
+                            <button size="mini" catchtap="evt_navigator" data-url="/pages/order/payment/payment?order_id={{order.order_id}}" plain="true" wx:if="{{order.pay_status!='1' && order.pay_status!='2'&& order.pay_status!='5'}}">立即付款</button>
+                            <button size="mini" data-orderid="{{order.order_id}}" catchtap="evt_cancelorder"  plain="true" wx:if="{{order.pay_status!='1' && order.pay_status!='2' && order.is_cod == 'N' && order.ship_status=='0' && order.is_virtual === 'false'}}">取消订单</button>
+                            <button wx:if="{{order.ship_status=='1' && order.ship_status!='5' && order.is_virtual === 'false'}}" size="mini" data-orderid="{{order.order_id}}" catchtap="evt_confirmorder"  plain="true">确认收货</button>
+                            <button wx:if="{{order.ship_status!='0' && order.is_virtual === 'false'}}" size="mini" catchtap="evt_navigator" data-url="/pages/member/logistics/tracker/index?order_id={{order.order_id}}" plain="true" wx:if="{{order.pay_status!='5' && order.is_virtual === 'false'}}">查看物流</button>
+                            <button size="mini" catchtap="evt_navigator" data-url="/pages/member/comment/index?order_id={{order.order_id}}" plain="true" wx:if="{{order.ship_status=='5'&&order.pay_status!='5' && order.is_virtual === 'false'}}">评价商品</button>
+                        </view>
+                    </view> -->
+                    <view class="weui-panel__ft order-total-block">
+                        共{{order.quantity}}件商品 订单金额：¥ {{fmt.price(order.order_total)}}
+                    </view>
+                    <view class="weui-panel__ft handle-block-order" wx:if="{{order.status!='dead'&& order.pay_status!='5'}}">
+                        <view class="weui-media-box__desc media-box-actions">
+                            
+                            <button size="mini" data-orderid="{{order.order_id}}" catchtap="evt_cancelorder"  plain="true" wx:if="{{order.pay_status!='1' && order.pay_status!='2' && order.ship_status=='0' && order.pay_status!='5'}}">取消订单</button>
+                            <button class="red-btn" size="mini" catchtap="evt_navigator" data-url="/pages/order/payment/payment?order_id={{order.order_id}}" plain="true" wx:if="{{order.pay_status!='1' && order.pay_status!='2' && order.is_cod == 'N'&& order.pay_status!='5' && order.pay_status!='4'}}">立即支付</button>
+                            <button size="mini" catchtap="evt_navigator" data-url="/pages/member/logistics/tracker/index?order_id={{order.order_id}}" plain="true" wx:if="{{order.ship_status!='0'}}">查看物流</button>
+                            <button class="red-btn" size="mini" catchtap="orderSure_Fun" data-order_id="{{order.order_id}}" wx:if="{{order.status=='active' && order.ship_status=='1'}}" plain="true">确认收货</button>
+                            <button class="red-btn" size="mini" catchtap="evt_navigator" data-url="/pages/member/aftersales/request/request?order_id={{order.order_id}}&product_id={{order.order_items[0].product_id}}" plain="true" wx:if="{{order.can_aftersales}}">售后服务</button>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <view class="weui-loadmore" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+        <view class="weui-loadmore weui-loadmore_line" wx:if="{{pager.total>1 && pager.total == pager.current}}">
+            <view class="weui-loadmore__tips">共{{order_count}}单</view>
+        </view>
+    </scroll-view>
+</block>

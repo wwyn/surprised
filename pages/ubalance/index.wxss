@@ -1,0 +1,176 @@
+page{
+    background:#efefef;
+    overflow-y: auto!important;
+}
+.head{
+    font-size: 64rpx;
+    color:#fff;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-size:100% auto;
+    text-align: center;
+    height:200rpx;
+    padding:56rpx 0;
+}
+.go_exchange_coupon{
+    width:140rpx;
+    height:50rpx;
+    line-height:50rpx;
+    border-radius:25rpx;
+    color:#FC4773;
+    font-size:28rpx;
+    text-align:center;
+    background:#fff;
+    margin:0 auto;
+    margin-top:30rpx;
+}
+.filter{
+  position:absolute;
+  top:30rpx;
+  right:30rpx;
+  font-size:30rpx;
+}
+.price-total{
+  display:flex;
+  padding:16rpx 0;
+  background:#fff;
+}
+.price-total view:nth-child(1){
+  border-right:1rpx solid #ebebeb;
+}
+.price-total view{
+  flex:1;
+  text-align:center;
+  font-size:26rpx;
+  color:#333;
+  padding:30rpx 0;
+}
+.price-total label{
+  display:block;
+}
+.price-total label.price{
+  font-size:36rpx;
+  color:#FC4773;
+}
+.weui-bar__item_on{
+    border-bottom-color: #FE973E;
+}
+.opt-time{
+    float: right;
+}
+.weui-navbar{
+    position: relative;
+    background: #fff;
+}
+.footer-btns{
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+}
+.footer-btns button{
+    border: none;
+    border-radius: 0;
+    width: 50%;
+    padding: 0;
+    margin: 0;
+}
+.footer-btns button::after{
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.position-fix{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background:rgba(0,0,0,0.3);
+}
+.ubalance-filter{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#fff;
+}
+.ubalance-filter .title{
+    text-align:center;
+    padding:30rpx 0; 
+    position:relative;
+    line-height:34rpx;
+}
+.ubalance-filter .type{
+    /* display:flex; */
+    padding:0 20rpx 0 30rpx;
+}
+.ubalance-filter label{
+    width:216rpx;
+    line-height:80rpx;
+    display:block;
+    text-align:center;
+    margin-right:20rpx;
+    float:left;
+    background:#EBEBEB;
+    color:#666;
+    font-size:28rpx;
+    margin-bottom:20rpx;
+}
+.ubalance-filter label:nth-child(3n){
+  margin-right:0;
+}
+.ubalance-filter label.active{
+    background:#FC4773;
+    color:#fff;
+}
+.record-title{
+    font-size:28rpx;
+    color:#333;
+    background:#fff;
+    padding:30rpx 30rpx;
+}
+.record-list{
+  background:#fff;
+}
+.record-item{
+    padding:30rpx 0;
+    margin:0 30rpx;
+    background:#fff;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1rpx solid #ebebeb;
+}
+.record-item .record-type{
+    font-size:28rpx;
+    color:#333;
+    font-weight:600;
+    line-height:40rpx;
+}
+.ubalance-filter image{
+    width:22rpx;
+    height:22rpx;
+    position:absolute;
+    right:30rpx;
+    top:36rpx;
+}
+.record-item .record-time{
+    font-size:24rpx;
+    color:#999;
+    line-height:34rpx;
+    margin-top:14rpx;
+}
+.record-item .change-fund{
+    color:#FC4773;
+    font-size:36rpx;
+}
+.no-data{
+    text-align:center;
+    color:#9B9B9B;
+    font-size:32rpx;
+    padding:260rpx;
+}

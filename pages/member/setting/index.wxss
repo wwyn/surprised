@@ -1,0 +1,18 @@
+page{
+    background: #efefef;
+}
+.avatar-panel{
+    text-align: center;
+    padding: 10px 0 0 0;
+
+}
+.avatar{
+    border-radius: 100%;
+    border: 1px #fff solid;
+    width: 60px;
+    height: 60px;
+}
+
+.weui-footer{
+    padding: 20px 0;
+}

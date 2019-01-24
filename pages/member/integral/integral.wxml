@@ -1,0 +1,40 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+    <view class="weui-panel">
+            <view class="weui-panel__hd head">
+                {{member.integral?member.integral:0}}
+            </view>
+    </view>
+    <view class="weui-grids">
+        <navigator url="/pages/integralmall/gallery" class="weui-grid" hover-class="weui-grid_active">
+            <view class="weui-grid__label">积分商城</view>
+        </navigator>
+        <navigator url="/pages/digitalmarketing/actlists/list" class="weui-grid" hover-class="weui-grid_active">
+            <view class="weui-grid__label">积分抽奖</view>
+        </navigator>
+        <navigator url="/pages/member/integralexchange/index" class="weui-grid" hover-class="weui-grid_active">
+            <view class="weui-grid__label">兑优惠券</view>
+        </navigator>
+    </view>
+    <view class="weui-cells__title">积分变动历史</view>
+    <view class="integral-list weui-cells">
+        <block wx:for="{{integral_list}}" wx:for-item="item" wx:key="index">
+            <view bindtap="evt_changealert" class="weui-cell" data-orderid="{{item.order_id}}" data-changetime="{{item.change_time}}" data-changeexpire="{{item.change_expire}}" data-remark="{{item.remark}}">
+                <view class="weui-cell__hd">
+                    <text>{{item.timeago}}</text>
+                    {{reason_map[item.change_reason]}}
+                </view>
+                <view class="weui-cell__bd">
+                    {{item.change>0?'+':''}}{{item.change}}
+                </view>
+                <view class="weui-cell__ft">
+                    余额:{{item.balance}}
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="weui-loadmore" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+    <view class="weui-loadmore weui-loadmore_line" wx:if="{{pager.total>1 && pager.total == pager.current}}">
+        <view class="weui-loadmore__tips">无更多记录</view>
+    </view>
+</block>

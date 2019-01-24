@@ -1,0 +1,4 @@
+<!-- 视频组件 -->
+<template name="widget-videos">
+    <video wx:if="{{data.video_url != ''}}" src="{{data.video_url}}" controls="{{data.show_controls}}" autoplay="{{data.is_autoplay}}" poster="{{data.poster_url}}" class="widget-video" style="height:{{data.height}}px;width:100%"></video>
+</template>

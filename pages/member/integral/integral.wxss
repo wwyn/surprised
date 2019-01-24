@@ -1,0 +1,28 @@
+page{
+    background: #efefef;
+}
+.head{
+    font-size: 32px;
+    color:#fff;
+    background: linear-gradient(to bottom,#1484F7,#35A2FB);
+    text-align: center;
+}
+.weui-bar__item_on{
+    border-bottom-color: #1484F7;
+}
+.weui-panel__hd:after{
+    display: none;
+}
+.integral-list{
+    margin-top: 0;
+}
+.weui-grids{
+    background: #fff;
+}
+.weui-grid__icon image{
+    width: 100%;
+    height: 100%;
+}
+.weui-grids{
+    border-top: none;
+}

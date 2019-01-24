@@ -1,0 +1,86 @@
+
+<!--
+    widget-goodslist
+    商品列表
+-->
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<template name="widget-limitimepurchase">
+    <view class="widget-goodslist weui-panel widget-goodslist-{{data.display_type}} with-title" wx:if="{{data.items.length>0}}">
+             <view class="clearfix" style="padding:10px 15px;line-height:20px;border-bottom: 1px solid #eee">
+                <image src="{{data.imgSrc}}" wx:if="{{data.imgSrc != null}}" style="width:20px;height:20px;margin-right: 5px;vertical-align:middle;"/><text style="font-size: 16px;font-weight: 700;">限时抢购</text> 
+                <navigator url="/pages/limitimepurchase/index" style="float: right;">更多></navigator>
+            </view> 
+            <view class="goodslist-body {{data.with_panel?'weui-panel__bd':''}}">
+                <block wx:if="{{data.countdown}}">
+                    <view class="countdown" wx:if="{{data.countdown.days != '00' || data.countdown.hours != '00' || data.countdown.minutes != '00' || data.countdown.seconds != '00'}}">
+                        {{(data.items[0].carry_out_time < data.timestamp)&&(data.items[0].rollback_time > data.timestamp)?'距结束':'距开启'}}
+                        <text> {{ data.countdown.days }} </text>天
+                        <text> {{ data.countdown.hours }} </text> :
+                        <text> {{ data.countdown.minutes }} </text> :
+                        <text> {{ data.countdown.seconds }}</text>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="countdown">
+                        限时降价已结束
+                    </view>
+                </block>
+                <!--type:swiper-->
+                <scroll-view scroll-x="true" style="height:{{data.swiper_height*1+data.swiper_item_margin*2}}px;" wx:if="{{data.display_type=='swiper'}}">
+                    <view class="widget-goodslist-swiper-scrollviewbox">
+                            <navigator style="margin:10px;width:{{data.swiper_height-40}}px" wx:for="{{data.items[0].products}}"  url="/pages/product/product?product_id={{item.product_id}}">
+                                <image src="{{item.image_url}}" style="width:{{data.swiper_height-40}}px;height:{{data.swiper_height-40}}px;" mode="aspectFit" />
+                                <view style="width:{{data.swiper_height-40}}px;" class="g-name">{{item.name}}</view>
+                                <view style="width:{{data.swiper_height-40}}px;color:{{data.bgColor}}" class="g-price">￥{{fmt.price(data.countdown?item.end_price:item.price)}}</view>
+                            </navigator>
+                    </view>
+                </scroll-view>
+                <!--type:gallery-->
+                <navigator wx:if="{{data.display_type=='gallery'}}" wx:for="{{data.items[0].products}}"  url="/pages/product/product?product_id={{item.product_id}}">
+                    <view class="g-image">
+                        <image src="{{item.image_url}}" mode="aspectFit" />
+                    </view>
+                    <view class="g-name">
+                        {{item.name}}
+                    </view>
+                    <view class="g-price" style="color:{{data.bgColor}}">
+                        ￥{{fmt.price(data.countdown?item.end_price:item.price)}}
+                    </view>
+                </navigator>
+                <!--type:grid-->
+                <navigator wx:if="{{data.display_type=='grid'}}" wx:for="{{data.items[0].products}}"  url="/pages/product/product?product_id={{item.product_id}}">
+                    <view class="grid-wrap">
+                        <view>
+                            <view class="g-image">
+                                <image src="{{item.image_url}}" mode="aspectFit" />
+                            </view>
+                            <view class="g-name">
+                                {{item.name}}
+                            </view>
+                            <view class="g-price" style="color:{{data.bgColor}}">
+                                ￥{{fmt.price(data.countdown?item.end_price:item.price)}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <!--type:list-->
+                <navigator class="weui-media-box weui-media-box_appmsg co-item"  wx:if="{{data.display_type=='list'}}" wx:for="{{data.items[0].products}}"  url="/pages/product/product?product_id={{item.product_id}}">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg g-image">
+                            <image src="{{item.image_url}}" mode="aspectFit" />
+                    </view>
+                    <view class="weui-media-box__bd">
+                        <view class="weui-media-box__desc co-name">
+                            <view class="g-name">
+                                {{item.name}}
+                            </view>
+                        </view>
+                        <view class="weui-media-box__desc co-inline">
+                            <view class="g-price" style="color:{{data.bgColor}}">
+                                ￥{{fmt.price(data.countdown?item.end_price:item.price)}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+    </view>
+</template>

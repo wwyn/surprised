@@ -1,0 +1,195 @@
+
+<!--
+    widget-showcase
+    智能橱窗
+-->
+<template name="widget-smartwindow">
+  <view class="widget-smartwindow {{data.cols}}" wx:if="{{data.items.length>0}}">
+  
+    <!--通栏,一分为二,一分为三-->
+    <view class="{{data.has_gap?'has_gap':''}}" wx:if="{{data.items.length>0&&(data.cols=='col-1')}}">
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  wx:for="{{data.items}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-30):data.systeminfo.windowWidth}}px">
+        <navigator url="{{item.url?item.url.url:''}}" open-type="{{item.url?item.url.openType:'navigate'}}">
+            <image src="{{item.image.src}}" mode="widthFix"/>
+            <label wx:if="{{item.text!=''&&item.text!=null}}">{{item.text}}</label>
+        </navigator>
+      </view>
+    </view>
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-1')}}">
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-30):data.systeminfo.windowWidth}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-30):data.systeminfo.windowWidth}}px;">
+      </view>
+    </view>
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{data.items.length>0&&(data.cols=='col-2')}}">
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  wx:for="{{data.items}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/2:data.systeminfo.windowWidth/2}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/2:data.systeminfo.windowWidth/2}}px;">
+        <navigator url="{{item.url?item.url.url:''}}" open-type="{{item.url?item.url.openType:'navigate'}}">
+            <image src="{{item.image.src}}" mode="widthFix"/>
+            <label wx:if="{{item.text!=''&&item.text!=null}}">{{item.text}}</label>
+        </navigator>
+      </view>
+    </view>
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-2')}}">
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/2:data.systeminfo.windowWidth/2}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/2:data.systeminfo.windowWidth/2}}px;">
+       
+      </view>
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/2:data.systeminfo.windowWidth/2}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/2:data.systeminfo.windowWidth/2}}px;">
+        
+      </view>
+    </view>
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{data.items.length>0&&(data.cols=='col-3')}}">
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  wx:for="{{data.items}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+        <navigator url="{{item.url?item.url.url:''}}" open-type="{{item.url?item.url.openType:'navigate'}}">
+            <image src="{{item.image.src}}" mode="widthFix"/>
+            <label wx:if="{{item.text!=''&&item.text!=null}}">{{item.text}}</label>
+        </navigator>
+      </view>
+    </view>
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-3')}}">
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+      </view>
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+      </view>
+      <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+      </view>
+    </view>
+    <!--一大两小-->
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{data.cols=='col-4'}}">
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)*2/3:data.systeminfo.windowWidth*2/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)*2/3+10:data.systeminfo.windowWidth*2/3}}px;">
+              <navigator url="{{data.items[0].url?data.items[0].url.url:''}}" open-type="{{data.items[0].url?data.items[0].url.openType:'navigate'}}" wx:if="data.items[0]">
+                  <image src="{{data.items[0].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[0].text!=''&&data.items[0].text!=null}}">{{data.items[0].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[1].url?data.items[1].url.url:''}}" open-type="{{data.items[1].url?data.items[1].url.openType:'navigate'}}" wx:if="data.items[1]">
+                  <image src="{{data.items[1].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[1].text!=''&&data.items[1].text!=null}}">{{data.items[1].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[2].url?data.items[2].url.url:''}}" open-type="{{data.items[2].url?data.items[2].url.openType:'navigate'}}" wx:if="data.items[2]">
+                  <image src="{{data.items[2].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[2].text!=''&&data.items[2].text!=null}}">{{data.items[2].text}}</label>
+              </navigator>
+        </view>
+    </view>
+    <!--两大两小-->
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-5')}}">
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[0].url?data.items[0].url.url:''}}" open-type="{{data.items[0].url?data.items[0].url.openType:'navigate'}}" wx:if="data.items[0]">
+                  <image src="{{data.items[0].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[0].text!=''&&data.items[0].text!=null}}">{{data.items[0].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)*2/3:data.systeminfo.windowWidth*2/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[1].url?data.items[1].url.url:''}}" open-type="{{data.items[1].url?data.items[1].url.openType:'navigate'}}" wx:if="data.items[1]">
+                  <image src="{{data.items[1].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[1].text!=''&&data.items[1].text!=null}}">{{data.items[1].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)*2/3:data.systeminfo.windowWidth*2/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[2].url?data.items[2].url.url:''}}" open-type="{{data.items[2].url?data.items[2].url.openType:'navigate'}}" wx:if="data.items[2]">
+                  <image src="{{data.items[2].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[2].text!=''&&data.items[2].text!=null}}">{{data.items[2].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[3].url?data.items[3].url.url:''}}" open-type="{{data.items[3].url?data.items[3].url.openType:'navigate'}}" wx:if="data.items[3]">
+                  <image src="{{data.items[3].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[3].text!=''&&data.items[3].text!=null}}">{{data.items[3].text}}</label>
+              </navigator>
+        </view>
+    </view>
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-6')}}">
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)*2/3:data.systeminfo.windowWidth*2/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[0].url?data.items[0].url.url:''}}" open-type="{{data.items[0].url?data.items[0].url.openType:'navigate'}}" wx:if="data.items[0]">
+                  <image src="{{data.items[0].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[0].text!=''&&data.items[0].text!=null}}">{{data.items[0].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"   style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[1].url?data.items[1].url.url:''}}" open-type="{{data.items[1].url?data.items[1].url.openType:'navigate'}}" wx:if="data.items[1]">
+                  <image src="{{data.items[1].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[1].text!=''&&data.items[1].text!=null}}">{{data.items[1].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[2].url?data.items[2].url.url:''}}" open-type="{{data.items[2].url?data.items[2].url.openType:'navigate'}}" wx:if="data.items[2]">
+                  <image src="{{data.items[2].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[2].text!=''&&data.items[2].text!=null}}">{{data.items[2].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-40)*2/3:data.systeminfo.windowWidth*2/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-40)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[3].url?data.items[3].url.url:''}}" open-type="{{data.items[3].url?data.items[3].url.openType:'navigate'}}" wx:if="data.items[3]">
+                  <image src="{{data.items[3].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[3].text!=''&&data.items[3].text!=null}}">{{data.items[3].text}}</label>
+              </navigator>
+        </view>
+    </view>
+    <!--一大四小-->
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-7')}}">
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)*2/3+10:data.systeminfo.windowWidth*2/3}}px;">
+              <navigator url="{{data.items[0].url?data.items[0].url.url:''}}" open-type="{{data.items[0].url?data.items[0].url.openType:'navigate'}}" wx:if="data.items[0]">
+                  <image src="{{data.items[0].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[0].text!=''&&data.items[0].text!=null}}">{{data.items[0].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[1].url?data.items[1].url.url:''}}" open-type="{{data.items[1].url?data.items[1].url.openType:'navigate'}}" wx:if="data.items[1]">
+                  <image src="{{data.items[1].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[1].text!=''&&data.items[1].text!=null}}">{{data.items[1].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[2].url?data.items[2].url.url:''}}" open-type="{{data.items[2].url?data.items[2].url.openType:'navigate'}}" wx:if="data.items[2]">
+                  <image src="{{data.items[2].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[2].text!=''&&data.items[2].text!=null}}">{{data.items[2].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}"  style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[3].url?data.items[3].url.url:''}}" open-type="{{data.items[3].url?data.items[3].url.openType:'navigate'}}" wx:if="data.items[3]">
+                  <image src="{{data.items[3].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[3].text!=''&&data.items[3].text!=null}}">{{data.items[3].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[4].url?data.items[4].url.url:''}}" open-type="{{data.items[4].url?data.items[4].url.openType:'navigate'}}" wx:if="data.items[4]">
+                  <image src="{{data.items[4].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[4].text!=''&&data.items[4].text!=null}}">{{data.items[4].text}}</label>
+              </navigator>
+        </view>
+    </view>
+    <!--一大四小-->
+    <view class="{{data.has_gap?'has_gap':''}}" wx:elif="{{(data.cols=='col-8')}}">
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)*2/3+10:data.systeminfo.windowWidth*2/3}}px;">
+              <navigator url="{{data.items[2].url?data.items[2].url.url:''}}" open-type="{{data.items[2].url?data.items[2].url.openType:'navigate'}}" wx:if="data.items[2]">
+                  <image src="{{data.items[2].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[2].text!=''&&data.items[2].text!=null}}">{{data.items[2].text}}</label>
+              </navigator>
+        </view>
+          <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[1].url?data.items[1].url.url:''}}" open-type="{{data.items[1].url?data.items[1].url.openType:'navigate'}}" wx:if="data.items[1]">
+                  <image src="{{data.items[1].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[1].text!=''&&data.items[1].text!=null}}">{{data.items[1].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[0].url?data.items[0].url.url:''}}" open-type="{{data.items[0].url?data.items[0].url.openType:'navigate'}}" wx:if="data.items[0]">
+                  <image src="{{data.items[0].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[0].text!=''&&data.items[0].text!=null}}">{{data.items[0].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[4].url?data.items[4].url.url:''}}" open-type="{{data.items[3].url?data.items[4].url.openType:'navigate'}}" wx:if="data.items[4]">
+                  <image src="{{data.items[4].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[4].text!=''&&data.items[4].text!=null}}">{{data.items[4].text}}</label>
+              </navigator>
+        </view>
+        <view class="{{data.has_gap?'has_gap':''}} {{data.has_radius?'has_radius':''}}" style="width:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;height:{{data.has_gap?(data.systeminfo.windowWidth-50)/3:data.systeminfo.windowWidth/3}}px;">
+              <navigator url="{{data.items[3].url?data.items[3].url.url:''}}" open-type="{{data.items[3].url?data.items[3].url.openType:'navigate'}}" wx:if="data.items[3]">
+                  <image src="{{data.items[3].image.src}}"  mode="widthFix"/>
+                  <label wx:if="{{data.items[3].text!=''&&data.items[3].text!=null}}">{{data.items[3].text}}</label>
+              </navigator>
+        </view>
+    </view>
+  </view>
+</template>

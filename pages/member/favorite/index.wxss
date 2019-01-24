@@ -1,0 +1,47 @@
+page{
+ background:#efefef;
+
+}
+
+.weui-media-box__thumb{
+    width: 70px;
+    height: 70px;
+}
+.co-item{
+    padding-right: 25px;
+}
+.co-name{
+    color: #333;
+}
+.co-price{
+    line-height: 22px;
+    color: #f60;
+    font-weight: lighter;
+    font-stretch: ultra-condensed;
+}
+.co-price text{
+    color: #999;
+}
+
+.co-inline{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.prompt-panel{
+  background-color:#efefef;
+}
+
+.prompt-panel .icon-empty-list{
+    width: 120px;
+    height: 120px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px 0;
+    margin-top:50px;
+}
+
+.weui-panel:after {
+  border-bottom:0;
+}

@@ -1,0 +1,24 @@
+<!--
+    widget-sixteenpalaces
+    十六宫格
+-->
+<template name="widget-sixteenpalaces">
+    <view class="widget-sixteenpalaces"  style="background:{{data.bgColor}}" wx:if="{{data.items.length>0}}"> 
+        <!-- <view  class="sixteenpalaces {{data.has_radius?'has_radius':''}} {{data.has_gap?'has_gap':''}}" style="grid-template-columns:{{(data.has_gap?(data.systeminfo.windowWidth-60)/4+'px 10px '+(data.systeminfo.windowWidth-60)/4+'px 10px '+(data.systeminfo.windowWidth-60)/4+'px 10px '+(data.systeminfo.windowWidth-60)/4+'px':(data.systeminfo.windowWidth)/4+'px 0px '+(data.systeminfo.windowWidth)/4+'px 0px '+(data.systeminfo.windowWidth)/4+'px 0px '+(data.systeminfo.windowWidth)/4+'px')}};grid-template-rows:{{(data.has_gap?(data.systeminfo.windowWidth-60)/4+'px 10px '+(data.systeminfo.windowWidth-60)/4+'px 10px '+(data.systeminfo.windowWidth-60)/4+'px 10px '+(data.systeminfo.windowWidth-60)/4+'px':(data.systeminfo.windowWidth)/4+'px 0px '+(data.systeminfo.windowWidth)/4+'px 0px '+(data.systeminfo.windowWidth)/4+'px 0px '+(data.systeminfo.windowWidth)/4+'px')}};padding:{{(data.has_gap?'10px 15px':'0')}}"> -->
+        <!-- <view  class="sixteenpalaces" style="grid-auto-columns:{{(data.has_gap?(data.systeminfo.windowWidth-60)/4+'px 10px':(data.systeminfo.windowWidth)/4+'px 0px')}};grid-auto-rows:{{(data.has_gap?(data.systeminfo.windowWidth-60)/4+'px 10px':(data.systeminfo.windowWidth)/4+'px 0px')}};padding:{{(data.has_gap?'10px 15px':'0')}}">
+            <navigator class="link  {{data.has_radius?'has_radius':''}}" url="{{item.url?item.url.url:''}}" wx:for="{{data.items}}" style="grid-column-start:{{item.cs}};grid-column-end:{{item.ce}};grid-row-start:{{item.rs}};grid-row-end:{{item.re}}">
+                 <image src="{{item.image.src}}" mode="widthFix" style="width:100%;"  wx:if="item.image!=undefined&&item.image.src"></image> 
+            </navigator>
+        </view> -->
+      <view  class="sixteenpalaces" style="height:{{data.systeminfo.windowWidth/4*data.rows+'px'}};position:relative;" wx:if="{{!data.has_gap}}">
+            <navigator class="link  {{data.has_radius?'has_radius':''}}" url="{{item.url?item.url.url:''}}" open-type="{{item.url?item.url.openType:'navigate'}}" wx:for="{{data.items}}" style="width:{{(item.ce-item.cs+1)/2*(data.systeminfo.windowWidth)/4+'px'}};height:{{(item.re-item.rs+1)/2*(data.systeminfo.windowWidth)/4+'px'}};position:absolute;top:{{(item.rs-1)/2*(data.systeminfo.windowWidth)/4+'px'}};left:{{(item.cs-1)/2*(data.systeminfo.windowWidth)/4+'px'}}">
+                 <image src="{{item.image.src}}" mode="widthFix" style="width:100%;"  wx:if="{{item.image!=undefined&&item.image.src}}"></image> 
+            </navigator>
+      </view>
+      <view  class="sixteenpalaces" style="height:{{data.rows*(data.systeminfo.windowWidth-60)/4+(data.rows-1)*10+'px'}};width:{{(data.systeminfo.windowWidth-30)+'px'}};padding:10px 15px;position:relative;" wx:else>
+            <navigator class="link  {{data.has_radius?'has_radius':''}}" url="{{item.url?item.url.url:''}}" open-type="{{item.url?item.url.openType:'navigate'}}" wx:for="{{data.items}}" style="width:{{(item.ce-item.cs+1)/2*(data.systeminfo.windowWidth-60)/4+((item.ce-item.cs+1)/2-1)*10+'px'}};height:{{(item.re-item.rs+1)/2*(data.systeminfo.windowWidth-60)/4+((item.re-item.rs+1)/2-1)*10+'px'}};position:absolute;top:{{(item.rs-1)/2*(data.systeminfo.windowWidth-60)/4+(item.rs-1)/2*10+10+'px'}};left:{{(item.cs-1)/2*(data.systeminfo.windowWidth-60)/4+(item.cs-1)/2*10+15+'px'}}">
+                 <image src="{{item.image.src}}" mode="widthFix" style="width:100%;"  wx:if="{{item.image!=undefined&&item.image.src}}"></image> 
+            </navigator>
+      </view>
+    </view>
+</template>

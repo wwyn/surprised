@@ -1,0 +1,14 @@
+
+<!--
+    widget-slider
+    图片滚动
+-->
+<template name="widget-slider">
+    <swiper class="widget-slider slider" circular="{{data.circular}}" indicator-dots="{{data.indicator_dots && data.items.length>1}}" autoplay="{{data.autoplay}}" interval="{{data.interval}}" duration="{{data.duration}}" style="height:{{data.systeminfo.windowWidth/(data._width/data._height)}}px">
+        <swiper-item wx:for="{{data.items}}" wx:for-item="item" wx:key="*this">
+           <navigator url="{{item.url.url}}" open-type="{{item.url?item.url.openType:'navigate'}}">
+              <image class="slide" src="{{item.image.src}}" mode="{{item.image.mode||'widthFix'}}" data-event-load="evt_imgload" bindload="widget_event_delegate" data-widget-name="slider" data-widget-index="{{data.widget_index}}"/>
+           </navigator>
+        </swiper-item>
+    </swiper>
+</template>

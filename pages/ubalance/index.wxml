@@ -1,0 +1,84 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+<wxs src="../../utils/fmt.wxs" module='fmt'/>
+    <view class="weui-panel">
+        <view class="weui-panel__hd head" style="background-image:url({{img_url}}/public/wechat/member/grade-bg.png)">
+            <view>{{fmt.price(data.user_balance)}}元</view>
+            <navigator url="/pages/ubalance/recharge" hover-class="none">
+                <view class="go_exchange_coupon">去充值</view>
+            </navigator>
+            <view class="filter" bindtap="evt_showfilter">筛选</view>
+        </view>
+    </view>
+    <view class="price-total">
+        <view>
+            <label class="price">{{fmt.price(data.user_balance)}}</label>
+            <label>可用余额(元）</label>
+        </view>
+        <view>
+            <label class="price">{{fmt.price(data.frozen)}}</label>
+            <label>冻结余额(元）</label>
+        </view>
+    </view>
+    <view class="record-title">
+        账户余额明细:
+        <text wx:if="{{type=='all'}}">全部</text>
+        <text wx:if="{{type=='0'}}">收入</text>
+        <text wx:if="{{type=='1'}}">支出</text>
+        <text wx:if="{{type=='2'}}">其他</text>
+    </view>
+    <view wx:if="{{record_list}}">
+        
+        <view class="record-list" >
+            <view class="record-item" wx:for="{{record_list}}" wx:for-item="item" wx:key="*this">
+                <view class="item-detail">
+                    <view class="record-type">{{type_list[item.type]}}</view>
+                    <view class="record-time">{{item.opt_time}}</view>
+                </view>
+                <view class="change-fund">{{fmt.price(item.change_fund)}}</view>
+            </view>
+
+            <!-- <view class="weui-panel" wx:for="{{record_list}}" wx:for-item="item" wx:key="*this">
+                    <view class="weui-panel__hd">
+                        {{type_list[item.type]}}
+                        <view class="opt-time">{{item.opt_time}}</view>
+                    </view>
+                    <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_text">
+                            <view class="weui-media-box__title">
+                                {{item.change_fund}}
+                            </view>
+                            <view class="weui-media-box__desc">
+                                交易后余额:{{item.current_fund}}
+                            </view>
+                        </view>
+                        <navigator url="/pages/ubalance/cash/status?fundlog_id={{item.fundlog_id}}" class="weui-cell weui-cell_access" wx:if="{{item.type=='6'}}">
+                            <view class="weui-cell__bd">查看详情</view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+            </view> -->
+        </view>
+        <view class="weui-loadmore" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+        <view class="weui-loadmore weui-loadmore_line" wx:if="{{pager.total>1 && pager.total == pager.current}}">
+            <view class="weui-loadmore__tips">没有更多了</view>
+        </view>
+    </view>
+    <view class="no-data" wx:else>暂无任何数据</view>
+    <!-- <view class="footer-btns">
+        <button wx:if="{{data.cash_out_enabled == '1'}}" type="default" bindtap="evt_goto" data-url="/pages/ubalance/cash/out">提现</button>
+        <button wx:else type="default"></button>
+        <button type="warn"  bindtap="evt_goto" data-url="/pages/ubalance/recharge">充值</button>
+    </view> -->
+</block>
+<view class="position-fix" wx:if="{{showFilter}}" bindtap="closeFilter">
+    <view class="ubalance-filter" catchtap="evt_showfilter">
+        <view class="title">选择交易类型 <image  catchtap="closeFilter" mode="aspectFit" src="{{img_url}}/public/wechat/empty/close.png"></image></view>
+        <view class="type">
+            <label class="{{type=='all'?'active':''}}"  data-type="all" catchtap="evt_chgtab">全部</label>
+            <label class="{{type=='0'?'active':''}}"  data-type="0" catchtap="evt_chgtab">收入</label>
+            <label class="{{type=='1'?'active':''}}"  data-type="1" catchtap="evt_chgtab">支出</label>
+            <label class="{{type=='2'?'active':''}}"  data-type="2" catchtap="evt_chgtab">其他</label>
+        </view>
+    </view>
+</view>

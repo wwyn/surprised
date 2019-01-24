@@ -1,0 +1,41 @@
+
+<!--
+    widget-showcase
+    智能橱窗
+-->
+<template name="widget-showcase">
+    <view class="widget-showcase {{data.cols}}" style="height:{{data.cols=='col-3'?data.systeminfo.windowWidth/3:data.systeminfo.windowWidth*2/3}}px" wx:if="{{data.cols!='col-1'}}">
+        <view class="case-item case-1 {{data.has_gap?'has-gap':''}}">
+            <navigator url="{{data.items[0].url}}" open-type="{{data.items[0].openType?data.items[0].openType:'navigate'}}">
+                <image src="{{data.items[0].image.src}}" mode="{{data.items[0].image.mode||'aspectFit'}}"/>
+            </navigator>
+        </view>
+        <view class="case-item case-2 {{data.has_gap?'has-gap':''}}">
+            <navigator url="{{data.items[1].url}}" open-type="{{data.items[1].openType?data.items[1].openType:'navigate'}}">
+                <image src="{{data.items[1].image.src}}" mode="{{data.items[1].image.mode||'aspectFit'}}"/>
+            </navigator>
+        </view>
+        <view class="case-item case-3 {{data.has_gap?'has-gap':''}}">
+            <navigator url="{{data.items[2].url}}" open-type="{{data.items[2].openType?data.items[2].openType:'navigate'}}">
+                <image src="{{data.items[2].image.src}}" mode="{{data.items[2].image.mode||'aspectFit'}}"/>
+            </navigator>
+        </view>
+    </view>
+    <view class="widget-showcase {{data.cols}}" style="height:{{data.systeminfo.windowWidth/3*2}}px" wx:else>
+        <view class="case-item case-1 {{data.has_gap?'has-gap':''}}">
+            <navigator url="{{data.items[0].url}}" open-type="{{data.items[0].openType?data.items[0].openType:'navigate'}}">
+                <image src="{{data.items[0].image.src}}" mode="{{data.items[0].image.mode||'aspectFit'}}"/>
+            </navigator>
+        </view>
+        <view class="case-item case-2 {{data.has_gap?'has-gap':''}}" wx:if="{{data.items[1] != undefined}}">
+            <navigator url="{{data.items[1].url}}" open-type="{{data.items[1].openType?data.items[1].openType:'navigate'}}">
+                <image src="{{data.items[1].image.src}}" mode="{{data.items[1].image.mode||'aspectFit'}}"/>
+            </navigator>
+        </view>
+        <view class="case-item case-3 {{data.has_gap?'has-gap':''}}" wx:if="{{data.items[2] != undefined}}">
+            <navigator url="{{data.items[2].url}}" open-type="{{data.items[2].openType?data.items[2].openType:'navigate'}}">
+                <image src="{{data.items[2].image.src}}" mode="{{data.items[2].image.mode||'aspectFit'}}"/>
+            </navigator>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,102 @@
+page{
+ background:#efefef;
+ padding-bottom: 55px;
+}
+.images-wrap{
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+button.select-image{
+    position: static;
+    border: none;
+    border-radius: 0;
+    margin:inherit;
+    font-size: 32px;
+    font-weight: bolder;
+    line-height: 70px;
+    padding: 0;
+    background: #efefef;
+    color: #ccc;
+    height: 70px;
+    width: 70px;
+    color:#ccc;
+    text-align: center;
+    margin: 0 0 5px 5px;
+}
+button.select-image:after{
+    border-radius: 0;
+    border-color:#efefef;
+}
+
+.selected-image{
+    width: 66px;
+    height: 66px;
+    padding: 1px;
+    border: 1px #ccc solid;
+    margin: 0 0 5px 5px;
+}
+
+.images-wrap.mini .selected-image{
+    width: 40px;
+    height: 40px;
+}
+.button-submit{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+.button-submit:after{
+    border-radius: 0;
+}
+.star-picker{
+    display: flex;
+}
+.star-picker .star{
+    color: #ccc;
+    padding: 4px;
+}
+
+.star-picker text{
+    font-size: 24px;
+    display: none;
+    text-shadow: 1px 0px 0px #FFF;
+}
+.star-picker.sp-mini .star{
+    padding: 1px;
+}
+.star-picker.sp-mini text{
+    font-size: 12px;
+}
+.star-picker text:last-child{
+    display: inline;
+}
+.star-picker .active{
+    color: #ffc926;
+}
+.star-picker .active text:last-child{
+    display: none;
+}
+.star-picker .active text:first-child{
+    display: inline;
+    text-shadow: 1px 0px 0px #B38600;
+}
+.comment-author{
+    text-align: center;
+    font-size: 12px;
+}
+.comment-content{
+    font-size: 12px;
+    color: #888;
+    padding: 2px 5px 5px 5px;
+}
+.comment-time{
+    font-size: 12px;
+    color: #999;
+    padding-left: 5px;
+}

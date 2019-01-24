@@ -1,0 +1,2 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<view class='agreement' wx:if="{{hideLoading}}">{{registration_protocol}}</view>

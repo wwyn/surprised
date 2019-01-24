@@ -1,0 +1,29 @@
+<form bindsubmit="evt_submit">
+    <view class="weui-cells__title">{{setting.recharge_rule}}</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">充值金额</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="money" bindinput="evt_moneyipt" type="number" placeholder="{{setting.recharge_limit.limit_minimum}}~{{setting.recharge_limit.limit_maximum}}"/>
+            </view>
+            <view>¥</view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">获得额度</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" value="{{update_ubalance_val||0}}" type="text" disabled="true"/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-footer">
+        人民币与{{setting.name}}的汇率1:{{setting.exchange_ratio}}
+    </view>
+
+    <view class="weui-btn-area">
+        <button class="weui-btn" disabled="{{!update_ubalance_val||update_ubalance_val == 0}}" type="warn" form-type="submit">确定充值</button>
+    </view>
+</form>

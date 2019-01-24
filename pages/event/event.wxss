@@ -1,0 +1,76 @@
+/* pages/brandevent/brandevent.wxss */
+page{
+  background:#efefef;
+}
+.brand-top{
+    background:#FC4773;
+    height:120rpx;
+    padding:30rpx 30rpx;
+    background-size:750rpx 180rpx;
+}
+.brand-top image{
+    width:112rpx;
+    height:112rpx;
+    float:left;
+    border:1rpx solid #D8D8D8;
+}
+.brand-top .brand-title{
+    font-size:34rpx;
+    line-height:48rpx;
+    color:#fff;
+    margin-left:144rpx;
+    margin-top:6rpx;
+}
+.brand-top .brand-desc{
+    font-size:24rpx;
+    color:#fff;
+    line-height:34rpx;
+    margin-left:144rpx;
+    margin-top:18rpx;
+}
+.brand-top .brand-desc label{
+    /* line-height:34rpx; */
+    background:rgba(255,255,255,0.3);
+    padding:5rpx 16rpx;
+    font-size:22rpx;
+    border-radius:4rpx;
+    margin-left:20rpx;
+}
+.index-tab{
+    line-height:80rpx;
+    display:flex;
+    background:#fff;
+}
+.index-tab .tab-item{
+    flex:1;
+    color:#333;
+    text-align:center;
+}
+.index-tab .tab-item view{
+    width:120rpx;
+    font-size:30rpx;
+    margin:0 auto;
+    
+}
+.index-tab .tab-item view.actived{
+    border-bottom:1rpx solid #FC4773;
+    color:#FC4773;
+}
+.go_cart{
+  position: fixed;
+  bottom: 94rpx;
+  right:30rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.go_cart image{
+  width: 100rpx;
+  height: 100rpx;
+  border:none;
+}
+.bottom{
+  color:#666;
+  line-height:100rpx;
+  font-size:24rpx;
+  text-align:center;
+}

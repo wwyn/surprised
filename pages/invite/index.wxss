@@ -1,0 +1,38 @@
+/* pages/member/myteam/index.wxss */
+.desc-image{
+  width:100%;
+  display:block;
+}
+.invite_btn{
+  width: 100%;
+  text-align: center;
+  height: 47px;
+  position: fixed;
+  bottom: 0;
+  background: rgb(252, 71, 115);
+  color: RGBA(255, 255, 255, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 30rpx;
+  line-height: 94rpx;
+}
+.team_all{
+  margin-top: 60rpx;
+  margin-left: 120rpx;
+  width: 246rpx;
+  height: 182rpx;
+}
+.product-quantity{
+  color: RGBA(51, 51, 51, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 34rpx;
+  /* line-height: 94rpx; */
+}
+.add-operate{
+  color: RGBA(255, 255, 255, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 30rpx;
+  line-height: 80rpx;
+}

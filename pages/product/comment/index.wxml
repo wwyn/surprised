@@ -1,0 +1,65 @@
+<wxs src="../../../utils/fmt.wxs" module="fmt" />
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:if="{{hideLoading}}">
+    <view class="comment-list">
+        <view class="weui-panel"  wx:for="{{comment_list}}" wx:for-item="comment_item" wx:for-index="comment_id">
+             <view class="weui-panel__bd">
+                 <view class="weui-media-box weui-media-box_text">
+                     <view class="weui-media-box__title comment-hd">
+                         <view class="comment-author comment-cell">
+                             <image class="author-avatar" mode="aspectFit" src="{{images[comment_item.author_avatar]?images[comment_item.author_avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{comment_item.author_avatar}}" bindload="load_image" />
+                             <view>{{fmt.pass(comment_item.author_name)}}</view>
+                         </view>
+                         <view class="comment-star comment-cell">
+                             <view class="star-picker sp-mini">
+                                 <view class="star {{(comment_item.mark.mark_star>0)?'active':''}}">
+                                     <text>★</text>
+                                     <text>☆</text>
+                                 </view>
+                                 <view class="star {{(comment_item.mark.mark_star>1)?'active':''}}">
+                                     <text>★</text>
+                                     <text>☆</text>
+                                 </view>
+                                 <view class="star {{(comment_item.mark.mark_star>2)?'active':''}}">
+                                     <text>★</text>
+                                     <text>☆</text>
+                                 </view>
+                                 <view class="star {{(comment_item.mark.mark_star>3)?'active':''}}">
+                                     <text>★</text>
+                                     <text>☆</text>
+                                 </view>
+                                 <view class="star {{(comment_item.mark.mark_star>4)?'active':''}}">
+                                     <text>★</text>
+                                     <text>☆</text>
+                                 </view>
+                             </view>
+                         </view>
+                          <!-- <view class="comment-time comment-cell">{{comment_item.createtime}}</view> -->
+                     </view>
+                     <view class="weui-media-box__desc">
+                         <view class="comment-content">{{comment_item.content}}</view>
+                         <view class="images-wrap mini">
+                             <block wx:for="{{comment_item.images}}" wx:for-item="ext_commentimage">
+                                 <image class="selected-image" bindload="load_image" src="{{images[ext_commentimage.image_id]?images[ext_commentimage.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{ext_commentimage.image_id}}"   mode="aspectFit" bindtap="evt_previewimage"/>
+                             </block>
+                         </view>
+                     </view>
+                 </view>
+                 <view class="weui-cell" wx:for="{{comment_item.reply}}" wx:for-item="reply">
+                     <view class="weui-cell__hd">
+                         <view class="comment-author comment-cell">{{reply.author_name}}</view>
+                          <!-- <view class="comment-time comment-cell">{{comment_item.createtime}}</view> -->
+                     </view>
+                     <view class="weui-cell__bd">
+                         <view class="comment-content">{{reply.content}}</view>
+                     </view>
+                 </view>
+             </view>
+
+        </view>
+    </view>
+    <view class="weui-loadmore" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+    <view class="weui-loadmore weui-loadmore_line" wx:if="{{pager.total>1 && pager.total == pager.current}}">
+        <view class="weui-loadmore__tips">共{{count}}条</view>
+    </view>
+</block>

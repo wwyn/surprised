@@ -1,0 +1,32 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../../utils/fmt.wxs" module="fmt" xmlns:wx="http://www.w3.org/1999/xhtml"/>
+<wxs src="../../../utils/date.wxs" module="date"/>
+<block wx:if="{{hideLoading}}">
+   <view class='empty_page' wx:if="{{newdata.empty_list=='YES'}}">
+      <image class='empty_img' mode="aspectFit" src='{{img_url}}/public/wechat/mall/groupbooking/list_null.png'></image>
+      <text class='empty_text'>暂时没有对账单哦～</text>
+   </view>
+   <view wx:else>
+      <view class='statement_all'>
+        <text>消费明细：全部</text>
+      </view>
+      <view class='statement_list'>
+       <scroll-view scroll-y="true" style="height:{{sv_height}}px;" bindscrolltolower="evt_scrolltolower">
+          <view class='statement_one' wx:for="{{newdata.bill_list}}">
+          <view class='left'>
+            <view class='order_number'>
+              <text class='order_number1'>订单编号:</text>
+              <text class='order_number2'>{{item.order_id}}</text>
+            </view>
+            <text class='date'>{{date.dateFormat(item.createtime*1000,'yy-MM-dd hh:mm')}}</text>
+          </view>
+          <view class='right'>
+              <text class='amount' wx:if="{{item.bill_type=='payment'}}">-{{item.money?fmt.price(item.money):'0.00'}}</text>
+              <text class='amount' wx:else>+{{item.money?fmt.price(item.money):'0.00'}}</text>
+              <text class='payment_method'>{{item.pay_app_name}}</text>
+          </view>
+        </view>
+       </scroll-view>
+      </view>
+   </view>
+</block>

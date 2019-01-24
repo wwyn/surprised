@@ -1,0 +1,219 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../../../utils/fmt.wxs" module="fmt" />
+<wxs src="../../../../utils/date.wxs" module="date" />
+<block wx:if="{{hideLoading}}">
+    <view class="weui-panel" style="font-size:14px;border-top:1rpx solid RGBA(235, 235, 235, 1);">
+            <view class="weui-panel__bd">
+                <view class="weui-cell" style="padding:5px 15px;">
+                    <view class="weui-cell__hd" style="font-size:24rpx;color:#333;">
+                        订单号：{{order.order_id}}
+                    </view>
+                    <view  class="weui-cell__bd">
+
+                    </view>
+                    <view class="weui-cell__ft" style="color:#FC4773;font-size:24rpx;" bindtap="copyTBL" data-content="{{order.order_id}}">
+                        复制
+                    </view>
+                    <!-- <view class="weui-cell__ft">
+                        {{status_kvmap.pay_status[order.pay_status]}}
+                        <text wx:if="{{order.pay_status!=5}}">{{status_kvmap.ship_status[order.ship_status]?'/'+status_kvmap.ship_status[order.ship_status]:''}}</text>
+                        {{status_kvmap.order_status[order.status]}}
+                    </view> -->
+                </view>
+                <view class="weui-cell" style="padding:5px 15px;">
+                    <view class="weui-cell__hd" style="font-size:24rpx;color:#333;">
+                        下单时间：{{date.dateFormat(order.createtime*1000,'YYYY年MM月dd hh:mm:ss')}}
+                    </view>
+                    <view class="weui-cell__bd">
+
+                    </view>
+                    <view class="weui-cell__ft">
+                    </view>
+                </view>
+                <!-- <view wx:if="{{order.ship_status>0}}" class="weui-cell" bindtap="evt_navigator" data-url="/pages/member/logistics/tracker/index?order_id={{order.order_id}}">
+                    <view class="weui-cell__hd">
+                        发货状态：{{status_kvmap.ship_status[order.ship_status]}}
+                    </view>
+                    <view class="weui-cell__bd">
+
+                    </view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access" wx:if="{{order.is_virtual !== 'true'}}">
+                        物流追踪
+                    </view>
+                </view> -->
+            </view>
+    </view>
+    <view class="weui-panel" style='border-top:1rpx solid RGBA(235, 235, 235, 1);margin-top:0;' wx:if="{{order.is_virtual !== 'true'}}">
+            <view class="weui-panel__bd">
+              <view class="weui-media-box weui-media-box_appmsg member-addr">
+                <!-- <view class="weui-media-box__hd weui-media-box__hd_in-appmsg location-box">
+                    <view class="icon icon-sm icon-location"></view>
+                </view> -->
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title name-and-mobile" >
+                        <view class="name">收货人：{{order.consignee.name}}  {{order.consignee.mobile}}</view>
+                        <view class="mobile" wx:if="{{order.ship_status>0&&order.is_virtual !== 'true'}}" bindtap="evt_navigator" data-url="/pages/member/logistics/tracker/index?order_id={{order.order_id}}">
+                            查看物流
+                        </view>
+                    </view>
+                    <view class="weui-media-box__desc area">{{order.consignee.area}}{{order.consignee.addr}}</view>
+                    <!-- <view class="weui-media-box__desc address">{{order.consignee.addr}}</view> -->
+                </view>
+              </view>
+            </view>
+    </view>
+
+    <view class="weui-panel">
+            <!-- 自营 //TODO 多商户-->
+            <view class="weui-cell" style="padding:5px 15px;border-bottom:1rpx solid RGBA(235, 235, 235, 1)">
+                <view class="weui-cell__hd" style="font-size:24rpx;color:#333;">
+                    {{merchant&&merchant.show_name?merchant.show_name:'自营商品'}}
+                </view>
+                <view class="weui-cell__bd">
+
+                </view>
+                <view class="weui-cell__ft"  style="color:#FC4773;font-size:24rpx;">
+                    {{status_kvmap.pay_status[order.pay_status]}}
+                    <text wx:if="{{order.pay_status!=5}}"  style="color:#FC4773;font-size:24rpx;">{{status_kvmap.ship_status[order.ship_status]?'/'+status_kvmap.ship_status[order.ship_status]:''}}</text>
+                    {{status_kvmap.order_status[order.status]}}
+                </view>
+            </view>
+            <view class="weui-panel__bd">
+                <block wx:for="{{order.items}}" wx:for-item="item" wx:key="index">
+                <!-- bindtap="evt_goto" -->
+                    <view  data-url="/pages/product/product?product_id={{item.product_id}}" data-mch="{{order.merchant_id}}" class="weui-media-box weui-media-box_appmsg co-item">
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                            <image mode="aspectFit" class="weui-media-box__thumb" bindload="load_image" src="{{images[item.image_id]?images[item.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.image_id}}" />
+                        </view>
+                        <view class="weui-media-box__bd">
+                            <view class="weui-media-box__desc co-name">{{item.name}}</view>
+                            <view class="weui-media-box__desc co-inline">
+                                <view class="co-spec">{{item.spec_info?item.spec_info:''}}</view>
+                                <view class="co-price">
+                                    <text>x {{item.nums}} </text>
+                                </view>
+                            </view>
+                             <view class="weui-media-box__desc co-inline" style="color:{{themecolor.price_text}}">
+                                <view>￥{{fmt.price(item.buy_price>0?item.buy_price:'0.00')}}</view>
+                                <view class="co-goodsId">ID:{{ item.goods_id }}</view>
+                            </view>
+                            <view class="weui-media-box__desc media-box-actions" wx:if="{{order.status!='dead' && order.is_virtual !== 'true'}}">
+                                <!-- <button size="mini" catchtap="evt_navigator" data-url="/pages/member/comment/index?order_id={{order.order_id}}" plain="true" wx:if="{{order.ship_status=='5'}}">评价商品</button> -->
+                                <!-- <button size="mini" catchtap="evt_navigator" data-url="/pages/member/aftersales/request/request?order_id={{order.order_id}}&product_id={{item.product_id}}" plain="true" wx:if="{{order.ship_status!='0'&&order.ship_status!='4'}}">售后服务</button> -->
+                            </view>
+                        </view>
+                    </view>
+                    <view class="cart-remark">
+                        <text>备注：</text>
+                        {{item.remark?item.remark:'暂无备注'}}
+                        <!-- <label>备注</label> -->
+                        <contact-button class='contact1' type="default-light" size="18" session-from="weapp"></contact-button>
+                        <contact-button class='contact2' type="default-light" size="18" session-from="weapp"></contact-button>
+                        <contact-button class='contact3' type="default-light" size="18" session-from="weapp"></contact-button>
+                        <view class='cart-remark_right' wx:if="{{order.pay_status>0}}">售后</view>
+                    </view>
+                </block>
+            </view>
+
+    </view>
+    <!-- <view class="weui-panel">
+        <view class="weui-panel__bd">
+            <view class="weui-cell payapp-cell" wx:if="{{order.is_virtual !== 'true'}}">
+                <view class="weui-cell__hd">
+                    配送方式
+                </view>
+                <view class="weui-cell__bd">
+                        {{order.dlytype.dt_name}}
+                </view>
+            </view>
+            <view class="weui-cell payapp-cell">
+                <view class="weui-cell__hd">
+                    支付方式
+                </view>
+                <view class="weui-cell__bd">
+                        {{payapp.display_name?payapp.display_name:payapp.name}}
+                </view>
+            </view>
+            <view class="weui-cell" wx:if="{{order.need_invoice!='false'}}">
+                <view class="weui-cell__hd">
+                    发票抬头
+                </view>
+                <view class="weui-cell__bd">
+                        {{order.invoice_title}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__bd">
+            <view class="weui-cell payapp-cell">
+                <view class="weui-cell__hd">
+                   赠送积分
+                </view>
+                <view class="weui-cell__bd">
+                        {{fmt.price(order.score_g)}}
+                </view>
+            </view>
+        </view>
+    </view> -->
+    <view class="weui-panel">
+        <view class="weui-panel__bd">
+            <view class="weui-cell payapp-cell">
+                <view class="weui-cell__hd">
+                    商品优惠后金额
+                </view>
+                <view class="weui-cell__bd">
+
+                </view>
+                <view class="weui-cell__ft">
+                        ￥{{fmt.price(order.finally_cart_amount)}}
+                </view>
+            </view>
+            <view class="weui-cell payapp-cell" wx:if="{{order.pmt_order}}">
+                <view class="weui-cell__hd">
+                   订单优惠
+                </view>
+                <view class="weui-cell__bd">
+
+                </view>
+                <view class="weui-cell__ft">
+                        -￥{{fmt.price(order.pmt_order)}}
+                </view>
+            </view>
+            <view class="weui-cell payapp-cell">
+                <view class="weui-cell__hd">
+                    快递费
+                </view>
+                <view class="weui-cell__bd">
+
+                </view>
+                <view class="weui-cell__ft">
+                        ￥{{fmt.price(order.cost_freight)}}
+                </view>
+            </view>
+            <view class="weui-cell payapp-cell" wx:if="{{order.cost_tax|int>0}}">
+                <view class="weui-cell__hd">
+                    税金
+                </view>
+                <view class="weui-cell__bd">
+
+                </view>
+                <view class="weui-cell__ft">
+                        ￥{{fmt.price(order.cost_tax)}}
+                </view>
+            </view>
+            <view class="weui-cell" style='border-top:1rpx solid RGBA(235, 235, 235, 1)'>
+                <view class="weui-cell__hd">
+                    实付款
+                </view>
+                <view class="weui-cell__bd">
+
+                </view>
+                <view class="weui-cell__ft"  style="color:{{themecolor.price_text}}">
+                        ￥{{fmt.price(order.order_total)}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <button type="warn" class="button-pay"  wx:if="{{order.status!='dead' && order.pay_status!='1' && order.pay_status!='2' && order.is_cod == 'N' && order.pay_status!='5' && order.pay_status!='4'}}" bindtap="evt_navigator" data-url="/pages/order/payment/payment?order_id={{order.order_id}}" style="background-color:{{themecolor.sure_submit_color}};color:{{themecolor.sure_submittext_color}}">立即支付</button>
+</block>

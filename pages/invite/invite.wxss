@@ -1,0 +1,118 @@
+/* pages/invite/invite.wxss */
+.page{
+  width: 100%;
+  height: 100%;
+  background: rgb(237, 62, 104);
+}
+.bg{
+  display: block;
+  width: 100%;
+  height: 450rpx;
+  /* border: none; */
+}
+.invite_info{
+  width: 620rpx;
+  height: 566rpx;
+  border-radius: 20rpx;
+  background:#fff;
+  margin: 66rpx 0 144rpx 66rpx;
+}
+.invite_x_info>image{
+  width: 172rpx;
+  height: 172rpx;
+  border-radius: 50%;
+  margin-left: 227rpx;
+  margin-top: -86rpx;
+}
+.invite_x_info>text{
+  display: block;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-weight: Regular;
+  color: RGBA(51, 51, 51, 1);
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.invite1{
+  margin-left: 78rpx;
+  margin-top: 30rpx;
+  width: 450rpx;
+}
+.invite1>text{
+  display: block;
+  text-align: center;
+  /* margin-left: 30rpx; */
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color: RGBA(51, 51, 51, 1);
+  font-size: 32rpx;
+  line-height: 50rpx;
+}
+.text1{
+  color: RGBA(252, 77, 119, 1);
+}
+.some{
+  display: block;
+  margin-left: 60rpx;
+}
+.button{
+  width: 480rpx;
+  height: 88rpx;
+  margin-top: 80rpx;
+  margin-left: 70rpx;
+  /* background: RGBA(253, 200, 35, 1); */
+  text-align: center;
+  line-height: 88rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: Medium;
+  color:RGBA(252, 71, 115, 1);
+  font-size: 32rpx;
+  /* box-shadow:6rpx 18% 16px RGBA(254, 198, 36, 0.49); */
+}
+.text22{
+  display: block;
+  width: 100%;  
+  line-height: 40rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:RGBA(51, 51, 51, 1);
+  font-size: 40rpx;
+}
+.text123{
+  line-height: 40rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  /* color:RGBA(51, 51, 51, 1); */
+  font-size: 32rpx;
+  color:RGBA(252, 77, 119, 1);
+}
+.content{
+  display: block;
+  width: 100%;
+  /* text-align: center; */
+  margin-top: 80rpx;
+  margin-left: 130rpx;
+  line-height: 38rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:RGBA(102, 102, 102, 1);
+  font-size: 26rpx;
+}
+.button1{
+  /* line-height: 38rpx; */
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:RGBA(255, 255, 255, 1);
+  font-size: 30rpx;
+}
+.button2{
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:RGBA(252, 71, 115, 1);
+  font-size: 30rpx;
+  background: RGBA(252, 71, 115, 0.1);
+  border:1rpx solid RGBA(252, 71, 115, 1);
+}
+.addprice{
+  padding-bottom:30rpx;
+}

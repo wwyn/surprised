@@ -1,0 +1,47 @@
+<wxs src="../../../utils/fmt.wxs" module="fmt" />
+<template name="goods-checkout">
+    <block wx:for="{{data_list.objects.goods}}" wx:for-item="cart_object_goods" wx:for-index="cart_object_index" wx:key="index">
+        <view  class="weui-media-box weui-media-box_appmsg co-item" wx:if="{{cart_object_goods.quantity && cart_object_goods.disabled!='true'}}">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image mode="aspectFit" class="weui-media-box__thumb" bindload="load_image" src="{{images[cart_object_goods.item.product.image_id]?images[cart_object_goods.item.product.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{cart_object_goods.item.product.image_id}}" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__desc co-name">{{cart_object_goods.item.product.name}}</view>
+                <view class="weui-media-box__desc co-inline">
+                    <view class="co-spec">{{cart_object_goods.item.product.spec_info?cart_object_goods.item.product.spec_info:''}}</view>
+                    <view class="co-price" style="color:{{themecolor.price_text}}">
+                        <text>x {{cart_object_goods.quantity}} </text>
+                    </view>
+                </view>
+                <view class="weui-media-box__desc co-inline">
+                    <view class="co-price" style="color:{{themecolor.price_text}}">
+                        ￥{{fmt.price(cart_object_goods.item.product.buy_price)}}
+                    </view>
+                    <view class="co-goodsId">ID:{{ cart_object_goods.item.product.goods_id }}</view>
+                </view>
+                <view class="promotion-list goods-promotion" wx:for="{{data_list.promotions.goods}}" wx:for-item="promotion" wx:key="ident" wx:for-index="ident">
+                    <block wx:if="{{ident == cart_object_goods.obj_ident}}">
+                        <view class="p-item" wx:for="{{promotion}}" wx:for-item="item" wx:key="index">
+                            <view class="p-tag" wx:if="{{item.tag!='送赠品'}}">{{item.tag}}</view>
+                            <view class="p-desc">
+                                <view wx:if="{{item.tag=='送赠品'}}">
+                                    <view class="git-item" wx:for="{{item.solution}}">
+                                        <block wx:if="{{item}}">[赠品] {{item}}</block>
+                                    </view>
+                                </view>
+                                <block wx:else>
+                                {{item.name}}<block wx:if="{{item.save&&item.save>0}}">,省 <text>¥</text>{{fmt.price(item.save)}}</block>
+                                </block>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="cart-remark"  wx:if="{{cart_object_goods.quantity && cart_object_goods.disabled!='true'}}">
+            <text>备注：</text>
+                            {{cart_object_goods.params.remark?cart_object_goods.params.remark:'暂无备注'}}
+                            <label catchtap="evt_remark" data-remark="{{cart_object_goods.params.remark?cart_object_goods.params.remark:''}}" data-first="{{object_index}}" data-second="{{cart_object_index}}" data-id="{{cart_object_goods.item.product.product_id}}">备注</label>
+        </view>
+    </block>
+</template>

@@ -1,0 +1,85 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+<view class="icon-section" wx:if="{{flow_success == '1'}}">
+    <image class="icon-success" src="{{img_url}}/public/wechat/mall/checkout/icon_success.png" mode="widthFix"></image>
+    <view class="text">订单创建成功</view>
+</view>
+<wxs src="../../../utils/fmt.wxs" module="fmt" />
+<view class="weui-form-preview" wx:if="{{order}}">
+    <view class="weui-form-preview__hd">
+        <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">应付款金额</label>
+            <text class="weui-form-preview__value" style="color:{{themecolor.price_text}}">¥{{fmt.price(order.order_total)}}</text>
+        </view>
+    </view>
+    <view class="weui-form-preview__bd">
+        <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">订单</label>
+            <text class="weui-form-preview__value">{{order.order_id}}</text>
+        </view>
+        <view class="weui-form-preview__item" wx:if="{{order.is_virtual == 'false'}}">
+            <label class="weui-form-preview__label">收货人</label>
+            <text class="weui-form-preview__value">{{order.consignee.name}}</text>
+        </view>
+        <view class="weui-form-preview__item" wx:if="{{order.is_virtual == 'false'}}">
+            <label class="weui-form-preview__label">手机</label>
+            <text class="weui-form-preview__value">{{order.consignee.mobile}}</text>
+        </view>
+        <view class="weui-form-preview__item" wx:if="{{order.is_virtual == 'false'}}">
+            <label class="weui-form-preview__label">收货地区</label>
+            <text class="weui-form-preview__value">{{fmt.region(order.consignee.area)}}</text>
+        </view>
+        <view class="weui-form-preview__item" wx:if="{{order.is_virtual == 'false'}}">
+            <label class="weui-form-preview__label">收货地址</label>
+            <text class="weui-form-preview__value">{{order.consignee.addr}}</text>
+        </view>
+    </view>
+
+</view>
+<view class="weui-panel" wx:if="{{order.is_cod=='Y'}}">
+    <view class="weui-panel__bd">
+        <view class="weui-cell payapp-cell">
+            <view class="weui-cell__hd">
+                支付方式
+            </view>
+            <view class="weui-cell__bd">
+                    货到付款
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-btn-area" wx:if="{{order.is_cod=='Y'}}">
+    <button form-type="button"  bindtap="evt_orderdetail" data-orderid="{{order.order_id}}" class="btn" type="primary" plain="true"  style="color:{{themecolor.success_icon_color}};border-color:{{themecolor.success_icon_color}}">查看订单详细</button>
+</view>
+<view class="weui-panel" wx:if="{{order.is_cod=='N'}}">
+    <view class="weui-panel__bd">
+        <view class="weui-cell payapp-cell" wx:if="{{selected_payapp}}" bindtap="evt_showmodal" data-modalname="payapp_panel">
+            <view class="weui-cell__hd">
+                支付方式
+            </view>
+            <view class="weui-cell__bd">
+                    {{selected_payapp.display_name?selected_payapp.display_name:selected_payapp.name}}
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">修改支付方式</view>
+        </view>
+    </view>
+</view>
+<view class="weui-btn-area" wx:if="{{order.is_cod=='N'}}">
+    <button form-type="button" wx:if="{{selected_payapp.app_id=='offline'}}" bindtap="evt_orderdetail" data-orderid="{{order.order_id}}" class="btn" type="primary" plain="true" style="color:{{themecolor.success_icon_color}};border-color:{{themecolor.success_icon_color}}">查看订单详细</button>
+    <button form-type="button" wx:else bindtap="evt_dopayment" class="btn" type="primary" style="background-color:{{themecolor.success_btn_color}}">立即支付</button>
+</view>
+
+
+<import src="/pages/checkout/tpl/payapp.wxml"/>
+<view animation="{{modal_animation_data}}" class="quick-modal {{active_payapp_panel?'active':''}}" bindtouchmove="evt_touchmovemodal" bindtap="evt_tapmodal" data-modalname="payapp_panel">
+    <view class="modal-section">
+        <view class="modal-hd">
+            <text>选择支付方式</text>
+            <icon type="cancel" size="16" color="blcak" data-modalname="payapp_panel"/>
+        </view>
+        <view class="modal-bd">
+            <template is="payapp-use-panel" data="{{payapps:payapps,themecolor:themecolor}}"/>
+        </view>
+    </view>
+</view>
+</block>

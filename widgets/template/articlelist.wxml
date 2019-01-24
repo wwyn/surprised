@@ -1,0 +1,41 @@
+
+<!--
+    widget-articlelist
+    文章列表
+-->
+<template name="widget-articlelist">
+    <view class="widget-articlelist weui-panel widget-articlelist-{{data.type}}">
+            <view class="articlelist-body weui-panel__bd">
+                <!--type:gallery-->
+                <navigator url="/pages/article/detail/detail?article_id={{item.article_id}}" class="card" wx:if="{{data.type=='gallery'}}" wx:for="{{data.items}}">
+                    <view class="g-image">
+                        <image src="{{item.src}}" mode="widthFix"/>
+                    </view>
+                    <view class="content">
+                      <view class="g-name" style="color:{{data.themecolor.text_primary}}">
+                          {{item.title}}
+                      </view>
+                      <view class="g-brief" style="color:{{data.themecolor.text_info}}" wx:if="{{item.seo_description}}">
+                          {{item.seo_description}}
+                      </view>
+                    </view>
+                </navigator>
+                <!--type:list-->
+                <navigator class="weui-media-box weui-media-box_appmsg co-item"  wx:if="{{data.type=='list'}}" wx:for="{{data.items}}" url="/pages/article/detail/detail?article_id={{item.article_id}}">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg g-image"  style="width:{{data.swiper_width}}px;height:auto;">
+                            <image src="{{item.src}}" mode="{{data.mode}}"  style="width:{{data.swiper_width}}px;height:{{data.swiper_height}}px;" />
+                    </view>
+                    <view class="weui-media-box__bd">
+                        <view class="weui-media-box__desc co-name">
+                            <view class="g-name" style="color:{{data.themecolor.text_primary}}">
+                                {{item.title}}
+                            </view>
+                            <view class="g-brief"  wx:if="{{item.seo_description}}" style="color:{{data.themecolor.text_info}}">
+                                {{item.seo_description}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+    </view>
+</template>

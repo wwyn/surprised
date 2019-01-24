@@ -1,0 +1,27 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<!--gallery.wxml-->
+<block wx:if="{{hideLoading}}">
+  <view class="search-bar">
+        <view class="search-bar__box">
+            <view class="weui-icon-search_in-box" type="search" style="background-image:url({{img_url}}/public/wechat/empty/search.png)"></view>
+            <input type="text" class="search-bar__input" value="{{input_val}}" placeholder="请输入商品名称/品牌名称" bindconfirm="confirmInput" bindinput="evt_input"/>
+            <view class="weui-icon-clear" wx:if="{{input_val.length > 0}}" bindtap="clearInput" style="background-image:url({{img_url}}/public/wechat/empty/close_img.png)">
+                <!-- <icon type="clear"></icon> -->
+            </view>
+        </view>
+        <view class="search-btn" bindtap="confirmInput">搜索</view>
+    </view>
+    <import src="tpl.wxml"/>
+    <view  wx:if="{{empty_list=='NO'}}">
+        <template is="goods-list" data="{{data_list:data_list,img_url:img_url,favs:favs,images:images}}"/>
+        <view class="bottom" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+        <view class="bottom" wx:if="{{pager.total == pager.current}}">~  共{{all_count}}件商品  ~</view>
+    </view>
+    <view class="prompt-panel" wx:if="{{empty_list=='YES'}}">
+        <image mode="widthFix" style="width:482rpx;" src="{{img_url}}/public/wechat/empty/list_empty.png" />
+        <view class="text" style="color:RGBA(252, 71, 115, 0.48);">没有找到你想要的商品～</view>
+    </view>
+    <addcart-component bindaddCart="evt_addCart" goods-detail="{{data_detail}}" show-spec="{{showSpec}}"  showFastBuy="true"></addcart-component>
+    <share-component  bindshareImg="evt_shareImg"  goods-detail="{{data_detail}}" show-share="{{showShare}}"></share-component>
+    <download-image img-url="{{imgUrl}}" show-img="{{showImg}}"></download-image>
+</block>

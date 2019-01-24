@@ -1,0 +1,32 @@
+<!--pages/brand/brand.wxml-->
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<block wx:if="{{hideLoading}}">
+    <!-- <view class="search_fix" bindtap="evt_link_search">
+        <view class="search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            {{keyword?keyword:'输入品牌名称/品牌关键字'}}
+        </view>
+    </view> -->
+    <view class="search-bar">
+        <view class="search-bar__box">
+            <view class="weui-icon-search_in-box" type="search" style="background-image:url({{img_url}}/public/wechat/empty/search.png)"></view>
+            <input type="text" class="search-bar__input" value="{{input_val}}" placeholder="请输入品牌名称/关键字" bindconfirm="evt_confirm" bindinput="evt_input"/>
+            <view class="weui-icon-clear" wx:if="{{input_val.length > 0}}"   bindtap="clearInput"style="background-image:url({{img_url}}/public/wechat/empty/close_img.png)">
+                <!-- <icon type="clear" size="14"></icon> -->
+            </view>
+        </view>
+        <view class="search-btn" bindtap="evt_confirm">搜索</view>
+    </view>
+    <view class="brand-list" wx:if="{{empty_list=='NO'}}">
+        <navigator class="brand-item" wx:for="{{data_list}}" url="/pages/brandevent/brandevent?merchant_id={{item.merchant_id}}" wx:key="{{item.merchant_id}}">
+            <image mode="aspectFill"  bindload="load_image" src="{{images[item.logo_image]?images[item.logo_image]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.logo_image}}"></image>
+            <view class="brand-title">{{item.show_name}}</view>
+            <view class="brand-desc">{{item.goods_count}}款商品</view>
+        </navigator>
+    </view>
+    <view class="prompt-panel" wx:if="{{empty_list=='YES'}}">
+        <image mode="widthFix" style="width:482rpx;" src="{{img_url}}/public/wechat/empty/brand_empty.png" />
+        <view class="text" style="color:#FC4773;font-size:28rpx;">我们正在努力，敬请期待～</view>
+    </view>
+</block>

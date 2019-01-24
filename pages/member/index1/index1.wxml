@@ -1,0 +1,251 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+    <view class="weui-panel member-top">
+        <image class="avatar-bg-nowx" src="{{bannerImg}}" mode="aspectFill"  wx:if="{{bannerImg}}"/>
+        <image class="avatar-bg" src="{{images[member.avatar]?images[member.avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{member.avatar}}" bindload="load_image" mode="aspectFill" wx:else/>
+        <navigator class="weui-media-box weui-media-box_appmsg" url="/pages/member/setting/index">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                <image class="weui-media-box__thumb avatar" mode="aspectFit" src="{{images[member.avatar]?images[member.avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{member.avatar}}" bindload="load_image" />
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title member-name">
+                    <view class="uname">{{member.name||member.nickName||member.uname}}</view>
+                    <view class="levelname" >
+                        {{member.levelname}}
+                    </view>
+                </view>
+                <view class="weui-media-box__desc member-vip-info"vx:if="{{member_vip && member_vip.status}}">
+                    {{member_vip.end_time_fmt}} 到期
+                </view>
+                <view class="weui-media-box__desc" wx:if="{{member.uname}}">{{member.uname}}</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <view class="weui-media-box__info member-benefit" style="background:{{bannerImg?'none':'linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3))'}}">
+            <navigator url="/pages/member/integral/integral">
+                <view class="label">积分</view>
+                <view class="val">{{member.integral?member.integral:0}}</view>
+            </navigator>
+            <!-- <navigator>
+                <view class="label">经验值</view>
+                <view class="val">{{member.experience?member.experience:0}}</view>
+            </navigator> -->
+            <navigator wx:if="{{balance_data}}" url="/pages/ubalance/index">
+                <view class="label">{{balance_data.name}}</view>
+                <view class="val">{{balance_data.user_balance}}{{balance_data.unit}}</view>
+            </navigator>
+        </view>
+    </view>
+    <block wx:if="{{version=='home'}}">
+            <view class="schedule-order-list"  wx:if="{{schedule_order_list.length>0}}" wx:for="{{schedule_order_list}}" wx:for-item="order" wx:if="{{schedule_list[order.schedule_id]}}">
+              <view  class="activecard has_radius has_gap">
+                  <!-- 图片标题文字上下排列 -->
+                  <navigator class="link" url="/pages/store/my/order/detail?order_id={{order.id}}">
+                      <view class="image-block">
+                          <image style="width:{{sysinfo.windowWidth-30}}px;height:{{(sysinfo.windowWidth-30)*0.5}}px" class="weui-media-box__thumb" mode="aspectFill"  src="{{images[subject_list[order.subject_id].default_image_id]?images[subject_list[order.subject_id].default_image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{subject_list[order.subject_id].default_image_id}}" bindload="load_image"/>
+                      </view>
+                      <view class="content">
+                        <view class="title">
+                            {{subject_list[order.subject_id].title}}
+                            <label class="activity_status">
+                                已报名<block wx:if="{{order.need_ticket && order.ticket_price>0}}">
+                                    <block wx:if="{{order.payed<order.ticket_price}}">,未付款</block>
+                                    <block wx:else>,已付款</block>
+                                </block>
+                            </label>
+                        </view>
+                        <view class="time">
+                                <view class="icon icon-sm icon-time"></view>
+                                {{schedule_list[order.schedule_id].from_time_fmt}}~{{schedule_list[order.schedule_id].to_time_fmt}}
+                        </view>
+                        <view class="address">
+                            <view class="icon icon-sm icon-location"></view>
+                            {{store_list[order.store_id].city}},{{store_list[order.store_id].address}}
+                        </view>
+                      </view>
+                  </navigator>
+              </view>
+            </view>
+            <view class="noActivityData"  wx:if="{{!schedule_order_list}}">
+                <image mode="widthFix" src="https://wx.vmcshop.com/public/images/b1/9f/ff/2f413b652c0a5b531b97a8caced18e3ff4c97279.png?87424_OW196_OH196"></image>
+                <view class="weui-msg">
+                  <view class="weui-msg__title">
+                      您还没有参加活动哟
+                  </view>
+                </view>
+            </view>
+    </block>
+    <block wx:else>
+        <!-- 订单 -->
+        <view class="weui-panel">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view class="weui-cells weui-cells_in-small-appmsg">
+                        <navigator url="/pages/member/order/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的订单
+                            </view>
+                            <view class="weui-cell__bd weui-media-box__desc text-right">
+                                查看全部订单
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-grids menu-order-groups">
+                  <navigator url="/pages/member/order/index?order_type=s1" class="weui-grid" hover-class="weui-grid_active">
+                      <view class="icon icon-sm icon-order1"></view>
+                      <view class="weui-grid__label">待付款</view>
+                      <view class="badge" wx:if="{{order_count_arr.s1}}" style="background-color:{{themecolor.popup_color}}">{{order_count_arr.s1>99?'99+':order_count_arr.s1}}</view>
+                  </navigator>
+                  <navigator url="/pages/member/order/index?order_type=s2" class="weui-grid" hover-class="weui-grid_active">
+                      <view class="icon icon-sm icon-order2"></view>
+                      <view class="weui-grid__label">待发货</view>
+                      <view class="badge" wx:if="{{order_count_arr.s2}}" style="background-color:{{themecolor.popup_color}}">{{order_count_arr.s2>99?'99+':order_count_arr.s2}}</view>
+                  </navigator>
+                  <navigator url="/pages/member/order/index?order_type=s3" class="weui-grid" hover-class="weui-grid_active">
+                      <view class="icon icon-sm icon-order3"></view>
+                      <view class="weui-grid__label">待收货</view>
+                      <view class="badge" wx:if="{{order_count_arr.s3}}" style="background-color:{{themecolor.popup_color}}">{{order_count_arr.s3>99?'99+':order_count_arr.s3}}</view>
+                  </navigator>
+                  <navigator url="/pages/member/order/index?order_type=s4" class="weui-grid" hover-class="weui-grid_active">
+                      <view class="icon icon-sm icon-order4"></view>
+                      <view class="weui-grid__label">待评价</view>
+                      <view class="badge" wx:if="{{order_count_arr.s4}}" style="background-color:{{themecolor.popup_color}}">{{order_count_arr.s4>99?'99+':order_count_arr.s4}}</view>
+                  </navigator>
+                  <navigator url="/pages/member/aftersales/index" class="weui-grid" hover-class="weui-grid_active">
+                      <view class="icon icon-sm icon-order5"></view>
+                      <view class="weui-grid__label">售后</view>
+                  </navigator>
+              </view>
+        </view>
+
+        <view class="weui-panel">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view  class="weui-cells weui-cells_in-small-appmsg">
+                        <navigator url="/pages/member/gborder/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的拼团
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                        <navigator url="/pages/member/presellingorder/index?order_type=all" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的预售
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                        <navigator url="/pages/vshop/my/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的微店
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-panel">
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view  class="weui-cells weui-cells_in-small-appmsg">
+			<navigator url="/pages/vip/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd weui-cell_primary">
+                            VIP会员
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </navigator>
+                        <navigator url="/pages/member/addr/addr" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的收货地址
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                        <navigator url="/pages/member/favorite/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的收藏
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                        <navigator url="/pages/member/coupons/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的优惠券
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-panel">
+            <!-- <view class="weui-panel__hd">
+                分销管理
+            </view> -->
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view  class="weui-cells weui-cells_in-small-appmsg">
+                        <navigator url="/pages/community/my/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的社区发布
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                        <navigator url="/pages/community/my/relation" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                我的社区关注
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-panel">
+            <!-- <view class="weui-panel__hd">
+                线下活动
+            </view> -->
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view  class="weui-cells weui-cells_in-small-appmsg">
+                        <navigator url="/pages/store/my/order/list" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                线下活动
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-panel">
+            <!-- <view class="weui-panel__hd">
+                分销管理
+            </view> -->
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_small-appmsg">
+                    <view  class="weui-cells weui-cells_in-small-appmsg">
+                        <navigator url="/pages/oshop/my/index" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                            <view class="weui-cell__bd weui-cell_primary">
+                                分销管理
+                            </view>
+                            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!--footer-->
+        <view class="weui-loadmore weui-loadmore_line" bindtap="evt_debugmode">
+            <view class="weui-loadmore__tips">
+                © vmcyun.com
+            </view>
+        </view>
+    </block>
+</block>

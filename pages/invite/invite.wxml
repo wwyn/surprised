@@ -1,0 +1,44 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<view class='page' wx:if="{{hideLoading}}">
+   <image class='bg' src='{{img_url}}/public/wechat/member/jxkbj.png'></image>
+   <view class='invite_info'>
+      <view class='invite_x_info'>
+        <image wx:if="{{avatar}}" src="{{images[avatar]?images[avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{avatar}}" bindload="load_image" mode="aspectFill"/>
+      <image mode="aspectFit" wx:else src='{{img_url}}/public/wechat/member/Group2.png'></image>
+        <text>{{name?name:mobile}}</text>
+      </view>
+      <view class='invite1'>
+         <text>您的好友</text>
+         <text>邀请您加入Ta的<text class='text123'>鲸喜库团队</text></text>
+        <text class='some'>名额有限，速去加入吧～</text>
+      </view>
+      <!-- <view class='button' style='background:url({{img_url}}/public/wechat/member/join.png) no-repeat center/cover' bindtap='evt_button'></view> -->
+      <image class='button' mode='aspectFill' bindtap='evt_button' src='{{img_url}}/public/wechat/member/join.png'></image>
+   </view>
+   <view class="position-fix" wx:if="{{showAdd}}" bindtap="closeAdd">
+    <view class="addprice" catchtap="showAdd">
+      <view class="title">
+        <block wx:if="{{is_teamed}}">
+        <text style='font-size:30rpx'>提示</text>
+        </block>
+        <image catchtap="closeAdd" mode="aspectFit" class="goods_close" src="{{img_url}}/public/wechat/empty/close.png"></image>
+      </view>
+      <block wx:if="{{!is_teamed}}">
+          <view class="content">
+            您当前登录的账号为：
+          </view>
+          <view class="product-quantity" style='text-align:center;margin-top:0'>
+            <text class='text22'>{{login_account}}</text>
+          </view>
+      </block>
+      <view wx:else class="content" style='margin-top:0;width:auto;text-align:center;margin-left:0'>
+        您已经加入到<text style='color:RGBA(252, 71, 115, 1)'>{{shopkeeper}}</text>团队
+      </view>
+      <block wx:if="{{!is_teamed}}">
+        <button class="add-operate button1" catchtap='can_join'>用新的手机号加入</button>
+        <button class="add-operate button2" catchtap='no_join'>不加入</button>
+      </block>
+      <button wx:else class="add-operate button1" catchtap='no_join'>立即进入鲸喜库</button>
+    </view>
+  </view>
+</view>

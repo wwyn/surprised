@@ -1,0 +1,22 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:if="{{hideLoading}}">
+<view class="article-list">
+    <view class="article-item"  wx:for="{{alist}}" wx:for-item="article" wx:key="article_id">
+        <navigator url="detail/detail?article_id={{article.article_id}}">
+            <view class="article-image">
+                <image style="height:{{auto_height}}px;"  mode="aspectFill" src="{{images[article.body.image_id]?images[article.body.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{article.body.image_id}}" bindload="load_image_m" />
+            </view>
+            <view class="article-title">
+                {{article.title}}
+            </view>
+            <view class="article-desc" wx:if="{{article.body.seo_description}}">
+                {{article.body.seo_description}}
+            </view>
+        </navigator>
+    </view>
+</view>
+<view class="weui-loadmore" wx:if="{{alist_pager.current && alist_pager.total>alist_pager.current}}">正在加载</view>
+<view class="weui-loadmore weui-loadmore_line" wx:if="{{alist_pager.total>1 && alist_pager.total == alist_pager.current}}">
+    <view class="weui-loadmore__tips">没有更多了</view>
+</view>
+</block>

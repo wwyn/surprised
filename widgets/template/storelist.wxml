@@ -1,0 +1,23 @@
+
+<!--
+    widget-activecard
+    活动卡片
+-->
+<template name="widget-storelist">
+    <view class="">
+        <view  class="storelist  {{data.display_type=='card'?'has_radius':''}} {{data.display_type=='card'?'has_gap':''}}" wx:for="{{data.items}}">
+            <!-- 图片标题文字上下排列 -->
+            <navigator class="link clearfix" url="/pages/store/detail/detail?store_id={{item.id}}">
+                <view class="image-block" wx:if="{{data.isShowImg}}">
+                    <image class="image" src="{{item.image_url}}" wx:if="{{item.image_url}}" mode="aspectFill"></image>
+                </view>
+                <view class="content" style="padding-left:{{(data.isShowImg?'20px':'')}}">
+                  <view class="storename">{{item.name}}<label>{{item.gpsdistance}}</label></view>
+                  <view class="tel" wx:if="{{data.isShowTel}}" style="background-image:url({{data.img_url}}/public/wechat/statics/image/template/tel.png)">{{item.phone}}</view>
+                  <view class="address" wx:if="{{data.isShowAddress}}"  style="background-image:url({{data.img_url}}/public/wechat/statics/image/template/address.png)">{{item.address}}</view>
+                  <view class="time" wx:if="{{data.isShowTime}}" style="background-image:url({{data.img_url}}/public/wechat/statics/image/template/time.png)">{{item.hours}}</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</template>

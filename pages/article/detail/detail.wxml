@@ -1,0 +1,9 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<view class="weui-article" wx:if="{{hideLoading}}">
+    <view class="article-title">{{detail.indexs.title}}</view>
+    <import src="/utils/wxParse/wxParse.wxml"/>
+    <view class="wxParse article-content">
+        <template is="wxParse" data="{{wxParseData:article_content.nodes}}"/>
+    </view>
+    <view class="article-pubtime">{{detail.indexs.pubtime}}</view>
+</view>

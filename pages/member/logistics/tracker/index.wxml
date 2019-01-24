@@ -1,0 +1,74 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:for="{{data}}" wx:for-item="item" wx:key="index">
+    <view class="weui-panel" wx:if="{{item.success}}" >
+            <view class="info-top">
+                <view class="info-head">
+                    <image mode="aspectFill" bindload="load_image" src="{{images[item.success.delivery_items[0].image_id]?images[item.success.delivery_items[0].image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.success.delivery_items[0].image_id}}"></image>
+                    <view class="num-total">共{{num_total}}件商品</view>
+                </view>
+                <view class="info-mess">
+                    <view>{{item.success.delivery_items[0].name}}</view>
+                    <view>快递公司：{{item.success.logi_name}}</view>
+                    <view>快递单号：{{item.success.logi_no}} <text class='copy' data-item="{{item.success.logi_no}}" catchtap='copyTBL'>复制</text></view>
+                </view>
+            </view>
+            <!-- <view class="weui-panel__bd">
+                <view class="weui-cell" data-code="{{item.success.logi_code}}" data-deliveryid="{{item.success.delivery_id}}">
+                    <view class="weui-cell__hd">
+                        物流公司
+                    </view>
+                    <view class="weui-cell__bd">
+                        <image src="https://cdn.kuaidi100.com/images/all/148x48/{{item.success.logi_py}}_logo.png" class="logi-logo" mode="aspectFit"/>
+                    </view>
+                    <view class="weui-cell__ft">
+                        {{item.success.logi_name}}
+                    </view>
+                </view>
+                <view class="weui-cell">
+                    <view class="weui-cell__hd">
+                        物流单号
+                    </view>
+                    <view class="weui-cell__bd">
+
+                    </view>
+                    <view class="weui-cell__ft">
+                        {{item.success.logi_no}}
+                    </view>
+                </view>
+            </view>
+            <view class="weui-panel__bd">
+                <scroll-view scroll-x="true">
+                    <view class="order-item-panel">
+                        <block wx:for="{{item.success.delivery_items}}" wx:for-item="item" wx:key="index">
+                            <view class="item-image">
+                                <image mode="aspectFit" bindload="load_image"  src="{{images[item.image_id]?images[item.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.image_id}}" />
+                                <view class="sendnum">x {{item.sendnum}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </scroll-view>
+            </view> -->
+            <view class="weui-panel__bd logistics-logs">
+                <view  wx:for="{{item.success.logi_log}}" wx:for-item="item" wx:key="index">
+                    <view class="weui-cell" wx:if="{{index!=0}}">
+                        <view class="weui-cell__hd">
+                            <view class="line" style="background-image:url({{img_url}}/public/wechat/member/line.png)">11</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            
+                        </view>
+                    </view>
+                    <view class="weui-cell {{index==0?'current-cell':''}}">
+                        <view class="weui-cell__hd">
+                            <view class="time">{{item.timer}}</view>
+                            <view class="time">{{item.date}}</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <view class="context">{{item.context}}</view>
+                        </view>
+                    </view>
+                </view>
+                
+            </view>
+    </view>
+</block>

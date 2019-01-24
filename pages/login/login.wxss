@@ -1,0 +1,198 @@
+/* pages/login/login.wxss */
+.logo{
+  position: relative;
+  left:50%  ;
+  margin-top:108rpx;
+  width: 130rpx;
+  height: 130rpx;
+  margin-left:-65rpx;
+  /* border: 1rpx solid #000; */
+}
+.logo>image{
+  width: 130rpx;
+  height: 130rpx;
+  border: none;
+}
+.input_box{
+  width: 600rpx;
+  height: 240rpx;
+  /* border: 1rpx solid #000; */
+  margin:0 auto;
+}
+.getCode{
+  position: absolute;
+  height: 80rpx;
+  right:0;
+  top: 40rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:#FC4773;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  display:block;
+  z-index:9999;
+}
+.code_error{
+  position: absolute;
+  left: 0;
+  right:0;
+  text-align:center;
+  top: 520rpx;
+  height: 38rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:#F5A623;
+  font-size: 26rpx;
+  line-height: 38rpx;
+}
+.countdown{
+  position: absolute;
+  height: 40rpx;
+  text-align: center;
+  right: 0;
+  top: 60rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:#9B9B9B;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.input_box_phone{
+  /* position: absolute; */
+  /* top: 508rpx; */
+  border: 1rpx solid rgb(248,248,248);
+  width: 600rpx;
+  height: 120rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color: #9B9B9B;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  border-bottom: 2rpx solid #D8D8D8;
+}
+.input_box_phone>input{
+   height: 80rpx;
+   width: 80%;
+   margin-top: 40rpx;
+   color:RGBA(51, 51, 51, 1);
+}
+.input_box_pwd{
+  width: 600rpx;
+  height: 120rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  border: 1rpx solid rgb(248,248,248);
+  color: #9B9B9B;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  border-bottom: 2rpx solid #D8D8D8;
+  position:relative;
+}
+.input_box_pwd>input{
+   height: 80rpx;
+   width: 65%;
+   margin-top: 40rpx;
+   color:RGBA(51, 51, 51, 1);
+}
+.login{
+  width: 690rpx;
+  height: 88rpx;
+  background: rgb(194,194,194);
+  margin-top:104rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:#fff;
+  font-size: 34rpx;
+  line-height: 88rpx;
+  padding:0;
+}
+.login1{
+  background: rgb(252,71,115);
+}
+.register{
+  text-align:right;
+  height: 40rpx;
+  margin-right:30rpx;
+  margin-top:30rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:#333;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.login_else{
+  /* position: fixed; */
+  /* width: 400rpx; */
+  height: 100rpx;
+  margin-top:140rpx;
+  position:relative;
+}
+.login_else>.login_else1{
+  display: block;
+  position: relative;
+  left: 298rpx;
+  /* top: 1092rpx; */
+  top:31rpx;
+  width: 156rpx;
+  height: 38rpx;
+  float: left;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color: #9B9B9B;
+  font-size: 26rpx;
+  line-height: 38rpx;
+}
+.auxiliary_line1{
+  position: absolute;
+  /* top: 1110rpx; */
+  top:49rpx;
+  left:52rpx;
+  /* display: block; */
+  width: 220rpx;
+  height: 1rpx;
+  background-color: #D8D8D8;
+}
+.auxiliary_line2{
+  position: absolute;
+  top:49rpx;
+  right:52rpx;
+  /* float: left; */
+  /* display: block; */
+  width: 220rpx;
+  height: 1rpx;
+  margin-left: 52rpx;
+  background-color: #D8D8D8;
+}
+.wxlogin{
+  /* position: absolute; */
+  width: 90rpx;
+  height: 90rpx;
+  /* margin-left: 330rpx; */
+  margin:0 auto;
+  left: 332rpx;
+  top: 1154rpx;
+  margin-bottom: 90rpx;
+}
+.wxlogin>image{
+  width: 90rpx;
+  height: 90rpx;
+  border: none
+}
+.error_x1{
+  position: absolute;
+  left: 610rpx;
+  top: 306rpx;
+  width: 32rpx;
+  height: 32rpx;
+  float: right;
+  z-index: 9999;
+}
+.error_x2{
+ position: absolute;
+  left: 410rpx;
+  top: 70rpx;
+  width: 32rpx;
+  height: 32rpx;
+  float: right;
+  z-index: 9999;
+}

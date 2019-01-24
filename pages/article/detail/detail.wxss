@@ -1,0 +1,64 @@
+.article-title{
+    font-size: 22px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px #e9e9e9 solid;
+}
+
+.article-pubtime{
+    font-size: 12px;
+    padding-top: 10px;
+    margin-top: 10px;
+    color: #ccc;
+    border-top: 1px #efefef solid;
+}
+.wxParse-table{
+    width: 100%;
+    height: auto;
+}
+.wxParse-thead,.wxParse-tfoot,.wxParse-tr{
+    display: flex;
+    flex-direction: row;
+}
+.wxParse-th,.wxParse-td{
+    display: flex;
+    width: 580px;
+    overflow: auto;
+}
+
+.wxParse-u {
+  text-decoration: underline;
+}
+.wxParse-hide{
+    display: none;
+}
+.WxEmojiView{
+    align-items: center;
+}
+.wxEmoji{
+    width: 16px;
+    height:16px;
+}
+.wxParse-tr{
+	display: flex;
+	border-right:1px solid #e0e0e0;
+	border-bottom:1px solid #e0e0e0;
+}
+.wxParse-tr:nth-child(1){
+  border-top:1px solid #e0e0e0;
+}
+.wxParse-th,
+.wxParse-td{
+	flex:1;
+	padding:5px;
+	font-size:28rpx;
+	border-left:1px solid #e0e0e0;
+	word-break: break-all;
+}
+.wxParse-td:last{
+	border-top:1px solid #e0e0e0;
+}
+.wxParse-th{
+	background:#f0f0f0;
+	border-top:1px solid #e0e0e0;
+}

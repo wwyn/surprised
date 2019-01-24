@@ -1,0 +1,46 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:if="{{hideLoading}}">
+    <view class="weui-form-preview" wx:for="{{order_list}}">
+        <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">付款金额</label>
+                <text class="weui-form-preview__value">¥ {{fmt.price(item.finally_total)}}</text>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">订单号</label>
+                <text class="weui-form-preview__value">{{item.order_id}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">当前状态</label>
+                <text class="weui-form-preview__value">{{item.pay_status}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">订单金额</label>
+                <text class="weui-form-preview__value">¥ {{fmt.price(item.order_total)}}</text>
+            </view>
+            <view class="weui-form-preview__item" wx:if="{{item.discount>0}}">
+                <label class="weui-form-preview__label">订单优惠金额</label>
+                <text class="weui-form-preview__value">¥ {{fmt.price(item.discount)}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">创建时间</label>
+                <text class="weui-form-preview__value">{{item.createtime}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">更新时间</label>
+                <text class="weui-form-preview__value">{{item.last_modified}}</text>
+            </view>
+            <view class="weui-form-preview__item" wx:if="{{item.score_g>0}}">
+                <label class="weui-form-preview__label">获得积分</label>
+                <text class="weui-form-preview__value">{{item.score_g}}</text>
+            </view>
+            <view class="weui-form-preview__item" wx:if="{{item.memo!=''}}">
+                <label class="weui-form-preview__label">备注</label>
+                <text class="weui-form-preview__value">{{item.memo}}</text>
+            </view>
+        </view>
+    </view>
+</block>

@@ -1,0 +1,18 @@
+<view class="weui-msg">
+    <view class="weui-msg__text-area">
+        <view class="weui-msg__title">
+            微信授权登录
+        </view>
+        <view class="weui-msg__desc">
+            使用当前微信账号登录
+        </view>
+    </view>
+</view>
+<view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+        <button type="primary" bindgetuserinfo="evt_getuserinfo" open-type="getUserInfo"  style="background-color:{{themecolor.form_submit_color}};color:{{themecolor.form_submittext_color}};">确认登录</button>
+    </view>
+</view>
+<view class="weui-msg__extra-area">
+    登录操作将仅使用到您微信的头像、昵称等信息
+</view>

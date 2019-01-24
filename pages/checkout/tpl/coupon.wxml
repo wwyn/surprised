@@ -1,0 +1,38 @@
+<wxs src="../../../utils/fmt.wxs" module="fmt" />
+<template name="coupon-use-panel">
+    <scroll-view scroll-y="true" class="coupon-scroll-view" scroll-into-view="">
+        <!-- <view class="weui-cells__title">我的优惠券</view> -->
+        <view class="wui-cells">
+            <block wx:for="{{coupons}}" wx:for-item="item" wx:key="index">
+                <view class="weui-cell" bindtap="evt_couponcheck" data-nextact="{{(item.in_use&&item.in_use.code)?'remove':'use'}}" data-coupon="{{index}}" >
+                    <view class="weui-cell__hd">
+                        <block wx:if="{{item.in_use && item.in_use.code}}">
+                            <icon type="success" size="20" color="{{themecolor.checkbox_checked_color}}"/>
+                        </block>
+                        <block wx:else>
+                            <icon type="circle" size="20" />
+                        </block>
+                    </view>
+                    <view class="weui-cell__bd">
+                        {{item.cpns_name}}
+                        <view class="weui-cell__desc coupon-desc">{{item.description}}</view>
+                    </view>
+                    <view class="weui-cell__ft" wx:if="{{item.in_use.save}}">省{{fmt.price(item.in_use.save)}}</view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+    <view class="weui-cells weui-cells_form" style="margin:0;">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                优惠码
+            </view>
+            <view class="weui-cell__bd">
+                <input type="text" value="{{coupon_input}}" class="weui-input" bindinput="evt_setpagedata" data-key="coupon_input" placeholder="输入或扫描优惠码" bindconfirm="evt_couponiptsubmit"/>
+            </view>
+            <view class="weui-cell__ft">
+                    <image bindtap="evt_scancoupon" class="scan-icon" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNDgyMzc0ODUxNzQ4IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM2NTYiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTkyOCA1NDQgOTYgNTQ0Yy0xNy42NjQgMC0zMi0xNC4zMzYtMzItMzJzMTQuMzM2LTMyIDMyLTMybDgzMiAwYzE3LjY5NiAwIDMyIDE0LjMzNiAzMiAzMlM5NDUuNjk2IDU0NCA5MjggNTQ0eiIgcC1pZD0iMzY1NyIgZmlsbD0iIzcwNzA3MCI+PC9wYXRoPjxwYXRoIGQ9Ik04MzIgOTI4bC0xOTIgMGMtMTcuNjk2IDAtMzItMTQuMzA0LTMyLTMyczE0LjMwNC0zMiAzMi0zMmwxOTIgMGMxNy42NjQgMCAzMi0xNC4zMzYgMzItMzJsMC0xNjBjMC0xNy42OTYgMTQuMzA0LTMyIDMyLTMyczMyIDE0LjMwNCAzMiAzMmwwIDE2MEM5MjggODg0LjkyOCA4ODQuOTI4IDkyOCA4MzIgOTI4eiIgcC1pZD0iMzY1OCIgZmlsbD0iIzcwNzA3MCI+PC9wYXRoPjxwYXRoIGQ9Ik0zNTIgOTI4IDE5MiA5MjhjLTUyLjkyOCAwLTk2LTQzLjA3Mi05Ni05NmwwLTE2MGMwLTE3LjY5NiAxNC4zMzYtMzIgMzItMzJzMzIgMTQuMzA0IDMyIDMybDAgMTYwYzAgMTcuNjY0IDE0LjM2OCAzMiAzMiAzMmwxNjAgMGMxNy42NjQgMCAzMiAxNC4zMDQgMzIgMzJTMzY5LjY2NCA5MjggMzUyIDkyOHoiIHAtaWQ9IjM2NTkiIGZpbGw9IiM3MDcwNzAiPjwvcGF0aD48cGF0aCBkPSJNMTI4IDM4NGMtMTcuNjY0IDAtMzItMTQuMzM2LTMyLTMyTDk2IDE5MmMwLTUyLjkyOCA0My4wNzItOTYgOTYtOTZsMTYwIDBjMTcuNjY0IDAgMzIgMTQuMzM2IDMyIDMycy0xNC4zMzYgMzItMzIgMzJMMTkyIDE2MEMxNzQuMzY4IDE2MCAxNjAgMTc0LjM2OCAxNjAgMTkybDAgMTYwQzE2MCAzNjkuNjY0IDE0NS42NjQgMzg0IDEyOCAzODR6IiBwLWlkPSIzNjYwIiBmaWxsPSIjNzA3MDcwIj48L3BhdGg+PHBhdGggZD0iTTg5NiAzODRjLTE3LjY5NiAwLTMyLTE0LjMzNi0zMi0zMkw4NjQgMTkyYzAtMTcuNjMyLTE0LjMzNi0zMi0zMi0zMmwtMTkyIDBjLTE3LjY5NiAwLTMyLTE0LjMzNi0zMi0zMnMxNC4zMDQtMzIgMzItMzJsMTkyIDBjNTIuOTI4IDAgOTYgNDMuMDcyIDk2IDk2bDAgMTYwQzkyOCAzNjkuNjY0IDkxMy42OTYgMzg0IDg5NiAzODR6IiBwLWlkPSIzNjYxIiBmaWxsPSIjNzA3MDcwIj48L3BhdGg+PC9zdmc+" />
+            </view>
+        </view>
+    </view>
+</template>

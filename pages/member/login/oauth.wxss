@@ -1,0 +1,9 @@
+.weui-label{
+    width: 80px;
+}
+.weui-vcode-btn{
+    margin-left: 0;
+}
+.vcode-sending{
+    color: #666;
+}

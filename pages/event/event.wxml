@@ -1,0 +1,62 @@
+<!--pages/brandevent/brandevent.wxml-->
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/date.wxs" module="date" />
+<!--gallery.wxml-->
+<block wx:if="{{hideLoading}}">
+    <view class="brand-top" style="background-image:url({{img_url}}/public/wechat/active/brand_bg.png)">
+        <image mode="aspectFill"  bindload="load_image" src="{{images[activity.merchant.logo_image]?images[activity.merchant.logo_image]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{activity.merchant.logo_image}}"></image>
+        <view class="brand-title">{{activity.merchant.show_name}}</view>
+        <view class="brand-desc">{{activity.goods_count?activity.goods_count:0}}款商品<label wx:if="{{activity.mtag}}">{{activity.mtag}}</label></view>
+    </view>
+    <view class="active-list">
+        <view class="active-item">
+            <view class="active-detail">
+                <view class="active-title">{{activity.name}}</view>
+                <view class="active-time"  wx:if="{{activity.activity_type=='hot'}}"><view class="flag">进行中</view>距离活动结束仅{{date.count(activity.to_time,current_time)}}</view>
+                <view class="active-time advance"  wx:if="{{activity.activity_typeype=='advance'}}"><view class="flag">预告</view>{{date.dateFormat(activity.from_time*1000,'MM月dd hh:mm')}}开抢</view>
+                <view class="active-desc" data-item="{{activity.description}}" catchtap="copyTBL">{{activity.description}}</view>
+                <view class="active-img">
+                    <image wx:for="{{activity.images}}" wx:for-item="img"  wx:for-index="index" mode="aspectFill" bindload="load_image" src="{{images[img.image_id]?images[img.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{img.image_id}}"  data-index="{{index}}" data-imgs="{{activity.images}}"  bindtap="evt_previewimage"></image>
+                </view>
+                <view class="active-time" wx:if="{{activity.tag_description}}"><view class="flag flag-active">{{activity.active_tag}}</view>{{activity.tag_description}}</view>
+                <!-- <view class="active-time"><view class="flag flag-active">满减</view>品牌专场满599返100，仅一次</view> -->
+                <view class="end_time" wx:if="{{activity.activity_type=='hot'}}">结束时间：{{date.dateFormat(activity.to_time*1000,'MM月dd日 hh:mm')}}
+                    <label bindtap="showAdd" data-id="{{activity.activity_id}}">分享活动</label>
+                </view>
+                <view class="end_time advance"  wx:if="{{activity.activity_type=='advance'}}">开始时间：{{date.dateFormat(activity.from_time*1000,'MM月dd日 hh:mm')}}
+                    <label  bindtap="showAdd"  data-id="{{activity.activity_id}}">分享活动</label>
+                </view>
+            </view>
+        </view>
+    </view>
+    <import src="../gallery/tpl.wxml"/>
+    <view>
+        <template is="goods-list" data="{{data_list:data_list,img_url:img_url,favs:favs,images:images}}"/>
+        <view class="bottom" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+        <view class="bottom" wx:if="{{pager.total == pager.current}}">~  共{{all_count}}件商品  ~</view>
+    </view>
+    <view class='go_cart' catchtap='go_cart'>
+        <image src='{{img_url}}/public/wechat/active/go_cart.png'></image>
+    </view>
+    
+    <addcart-component bindaddCart="evt_addCart" goods-detail="{{data_detail}}" show-spec="{{showSpec}}" showFastBuy="true"></addcart-component>
+    <share-component bindshareImg="evt_shareImg" goods-detail="{{data_detail}}" show-share="{{showShare}}"></share-component>
+    <load-image img-url="{{imgUrl}}" show-img="{{showactiveImg}}"></load-image>
+    <download-image img-url="{{imgUrl}}" show-img="{{showImg}}"></download-image>
+</block>
+<view class="position-fix" wx:if="{{addshow}}" bindtap="closeAdd" catchtouchmove="true">
+    <view class="addprice"  catchtap="showAdd">
+        <view class="title">品牌活动加价 <image  catchtap="closeAdd" mode="aspectFit" class="goods_close" src="{{img_url}}/public/wechat/empty/close.png"></image></view>
+        <view class="content">
+          对此品牌活动内的所有商品，在默认代购价的基础上再进行加价，不填写不加价。
+        </view>
+        <view class="product-quantity">
+            <button class="pq-minus" plain="true" disabled="{{quantityVal<1}}" bindtap="tappqminus">-</button>
+	            <input type="digit" bindfocus="evt_focus" value="{{quantityVal}}" class="pq-ipt" bindinput="evt_quantityval"/>
+	            <button class="pq-minus" plain="true" bindtap="tappqplus">+</button>
+        </view>
+        <view class="add-operate" catchtap="evt_active_image">
+            确认分享
+        </view>
+    </view>
+</view>

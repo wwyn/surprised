@@ -1,0 +1,88 @@
+/* pages/brand/brand.wxss */
+page{
+    background:#fff;
+}
+.search-bar{
+	background-color: #ffffff;
+	border:none;
+  display:flex;
+  padding:30rpx;
+}
+.cancel-index{
+	font-size:12px;
+	line-height: 30px;
+	color: #999;
+	display:flex;
+	align-items:center;
+	flex-direction:row;
+	justify-content:flex-start;
+	width: 30px;
+}
+.search-bar__box{
+  /* padding-left:10px; */
+  width:600rpx;
+  height:60rpx;
+  background:#eee;
+  border-radius:30rpx;
+  position:relative;
+}
+.search-bar__box .weui-icon-search_in-box{
+  /* margin-left:26rpx; */
+  width:40rpx;
+  height:40rpx;
+  left:10px;
+  background-size:cover;
+  top:12rpx;
+}
+.search-bar__box .weui-icon-clear{
+  /* margin-left:26rpx; */
+  width:30rpx;
+  height:30rpx;
+  top:17rpx;
+  right:10rpx;
+  background-size:cover;
+  padding:0;
+}
+.search-bar__box input{
+  font-size:28rpx;
+  margin-left:80rpx;
+  line-height:60rpx;
+  height:60rpx;
+}
+.weui-icon-clear{
+  z-index:9999;
+}
+.search-btn{
+  font-size:28rpx;
+  color:#333;
+  line-height:60rpx;
+  margin-left:30rpx;
+}
+.brand-list{
+  background:#fff;
+}
+.brand-item{
+  padding:20rpx 30rpx;
+  height:112rpx;
+  border-bottom:1rpx solid #efefef;
+}
+.brand-item image{
+    width:112rpx;
+    height:112rpx;
+    float:left;
+    border:1rpx solid #D8D8D8;
+}
+.brand-item .brand-title{
+    font-size:28rpx;
+    line-height:40rpx;
+    color:#333;
+    margin-left:144rpx;
+    margin-top:16rpx;
+}
+.brand-item .brand-desc{
+    font-size:24rpx;
+    color:#999;
+    line-height:34rpx;
+    margin-left:144rpx;
+    margin-top:6rpx;
+}

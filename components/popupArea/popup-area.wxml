@@ -1,0 +1,26 @@
+<popup-area>
+	<view>
+	  <view class="weui-mask" id="goods_mask" hidden="{{!showArea}}" bindtap="closeArea"></view>
+	  <view class="{{showArea?'weui-actionsheet weui-actionsheet_toggle goods_actionsheet':'weui-actionsheet goods_actionsheet'}}" id="goods_actionsheet">
+	      <view class="popup-opreate">
+            <view catchtap="closeArea">取消</view>
+            <view bindtap="sureArea">确定</view>
+        </view>
+        <view class="weui-cell">
+              <view class="weui-cell__bd" wx:if="{{selected_region}}">
+                  <picker-view  class="region-picker-view" indicator-style="height: 88rpx;" value="{{selected_region}}" bindchange="evt_regionchange">
+                      <picker-view-column class="column">
+                        <view wx:for="{{region_data.first}}" wx:for-item="item" wx:key="index"  style="text-align:{{isAddress?'center':'left'}};padding-left:{{isAddress?'':'30rpx'}};">{{item.text}}</view>
+                      </picker-view-column>
+                      <picker-view-column class="column">
+                        <view wx:for="{{region_data.second}}" wx:for-item="item" wx:key="index"  style="text-align:{{isAddress?'center':'right'}};padding-right:{{isAddress?'':'30rpx'}};">{{item.text}}</view>
+                      </picker-view-column>
+                      <picker-view-column class="column" wx:if="{{isAddress}}">
+                        <view wx:for="{{region_data.third}}" wx:for-item="item" wx:key="index">{{item.text}}</view>
+                      </picker-view-column>
+                  </picker-view>
+              </view>
+      </view>
+	  </view>
+	</view>
+</popup-area>

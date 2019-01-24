@@ -1,0 +1,123 @@
+/* pages/member/information/information.wxss */
+.userid{
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  border: 1rpx solid #fff;
+}
+.left{
+  margin-left: 30rpx;
+  margin-top: 24rpx;
+  float: left;
+}
+.left>text{
+  color: RGBA(51, 51, 51, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.right{
+  float: right;
+  margin-top: 24rpx;
+ margin-right: 30rpx;
+}
+.right>text{
+  color: RGBA(51, 51, 51, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.right>input{
+  /* display: inline; */
+  color: RGBA(51, 51, 51, 1);
+  width: 260rpx;
+  height: 60rpx;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  text-align: right;
+}
+.tavar{
+  width: 100%;
+  height: 180rpx;
+  
+  background: #fff;
+  margin-top: 20rpx;
+  border: 1rpx solid #fff;
+  border-bottom: 1rpx solid RGBA(235, 235, 235, 1);
+}
+.tavar_img{
+  width: 118rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+.tavar>.left{
+  margin-top: 60rpx;
+}
+.tavar>.right{
+  display: block;
+  width: 118rpx;
+  height: 120rpx;
+  border: 100%;
+}
+.nike{
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+  border: 1rpx solid #fff;
+  border-bottom: 1rpx solid RGBA(235, 235, 235, 1);
+  /* margin-top: 20rpx; */
+}
+.phone{
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+  border: 1rpx solid #fff;
+}
+.address{
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  border: 1rpx solid #fff;
+}
+.aboutus{
+  width: 100%;
+  height: 88rpx;
+  background: #fff;
+  margin-top: 20rpx;
+  border: 1rpx solid #fff;
+}
+.address_img{
+  width: 16rpx;
+  height: 28rpx;
+}
+.logout{
+  width: 690rpx;
+  height: 88rpx;
+  /* border: none; */
+  border: 1rpx solid RGBA(252, 71, 115, 0.5);
+  background-color: RGBA(252, 71, 115, 0.1);
+  color: RGBA(252, 71, 115, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  margin-top: 58rpx;
+}
+.save{
+  width: 690rpx;
+  height: 88rpx;
+  border: none;
+  background-color: rgb(252,71,115);
+  color: RGBA(255, 255, 255, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  margin-top: 250rpx;
+}

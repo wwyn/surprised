@@ -1,0 +1,107 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../../utils/fmt.wxs" module="fmt" xmlns:wx="http://www.w3.org/1999/xhtml"/>
+<wxs src="../../../utils/date.wxs" module="date"/>
+<import src="../../../utils/dateformat.js"/>
+<block wx:if="{{hideLoading}}">
+  <view class='tip'>
+    <text>提示：销售业绩会随着商品取消或售后产生退款而变划，数据仅供参考。</text>
+  </view>
+  <view class="weui-tab">
+        <view class="weui-navbar">
+            <navigator open-type="redirect" url="/pages/member/performance/index?performance_type=today" class="weui-navbar__item">
+                <view class="weui-navbar__title {{performance_type=='today'?'weui-bar__item_on':''}}">日销售业绩</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/performance/index?performance_type=week" class="weui-navbar__item">
+                <view class="weui-navbar__title {{performance_type=='week'?'weui-bar__item_on':''}}">周销售业绩</view>
+            </navigator>
+            <navigator open-type="redirect" url="/pages/member/performance/index?performance_type=month" class="weui-navbar__item">
+                <view class="weui-navbar__title {{performance_type=='month'?'weui-bar__item_on':''}}">月销售业绩</view>
+            </navigator>
+        </view>
+  </view>
+<view class="weui-search-bar">
+    <view class='date_interval'>日期区间：</view>
+     <block wx:if="{{performance_type=='today'}}">
+        <picker mode="date" bindchange="evt_changefilter_from" start="{{se_start}}" end="{{se_end}}" value="{{filter_data['from']?filter_data['from']:se_start}}" >
+          <view class="picker">
+              {{filter_data['from']?filter_data['from']:se_start}}
+          </view>
+      </picker>
+      <view class='date_zhi'>至</view>
+      <picker mode="date" bindchange="evt_changefilter_to" start="{{se_start}}" end="{{se_end}}" value="{{filter_data['to']?filter_data['to']:se_end}}" disabled='true'>
+          <view class="picker">
+              {{filter_data['to']?filter_data['to']:se_end}}
+          </view>
+        </picker>
+     </block>
+     <block wx:if="{{performance_type=='week'}}">
+        <picker mode="date" bindchange="evt_changefilter_from" start="{{se_start}}" end="{{se_end}}" value="{{filter_data['from']?filter_data['from']:se_start}}" >
+          <view class="picker">
+              {{filter_data['from']?filter_data['from']:se_start}}
+          </view>
+      </picker>
+      <view class='date_zhi'>至</view>
+      <picker mode="date" bindchange="evt_changefilter_to" start="{{se_start}}" end="{{se_end}}" value="{{filter_data['to']?filter_data['to']:se_end}}">
+          <view class="picker">
+              {{filter_data['to']?filter_data['to']:se_end}}
+          </view>
+        </picker>
+     </block>
+     <block wx:if="{{performance_type=='month'}}">
+        <picker mode="date" fields="month" bindchange="evt_changefilter_from" start="{{se_start}}" end="{{se_end}}" value="{{filter_data['from']?filter_data['from']:se_start}}" >
+          <view class="picker">
+              {{filter_data['from']?filter_data['from']:se_start}}
+          </view>
+      </picker>
+      <view class='date_zhi'>至</view>
+      <picker mode="date" bindchange="evt_changefilter_to" start="{{se_start}}" end="{{se_end}}" value="{{filter_data['to']?filter_data['to']:se_end}}" disabled='true'>
+          <view class="picker">
+              {{filter_data['to']?filter_data['to']:se_end}}
+          </view>
+        </picker>
+     </block>
+    
+</view>
+<scroll-view scroll-y="true" style="height:{{sv_height}}px;" bindscrolltolower="evt_scrolltolower">
+        <view class="per_top">
+            <view class='per_x_top'>
+               <text class='text1 per_x_all'></text>
+               <text class='text2 per_x_all'>合计:</text>
+            </view>
+            <view class='per_x_top'>
+               <text class='text1'>销售量</text>
+               <text class='text2'>{{newdata.amount.quantity?newdata.amount.quantity:0}}件</text>
+            </view>
+            <view class='per_x_line1'></view>
+            <view class='per_x_top'>
+               <text class='text1'>销售额</text>
+               <text class='text2'>{{newdata.amount.order_total?'￥'+fmt.price(newdata.amount.order_total):'￥0.00'}}</text>
+            </view>
+            <view class='per_x_line2'></view>
+            <view class='per_x_top'>
+               <text class='text1'>代购费</text>
+               <text class='text2'>{{newdata.amount.order_purchase_fee?'￥'+fmt.price(newdata.amount.order_purchase_fee):'￥0.00'}}</text>
+            </view>
+        </view>
+        <view class='empty_list' wx:if="{{newdata.order_list==false}}">
+          <text>暂无任何数据</text>
+        </view>
+        <view wx:else class='per_main'>
+            <view class='per_x_main' wx:for="{{newdata.order_list}}">
+                <text class='text1' wx:if='{{performance_type=="today"}}'>
+                  {{date.dateFormat(item.createtime * 1000, 'hh:mm')}}
+                </text>
+                <text class='text1' wx:else>
+                  {{date.dateFormat(item.createtime * 1000, 'MM-dd')}}
+                </text>
+                <text class='text2'>{{item.quantity}}件</text>
+                <text class='text3'>{{item.order_total?'￥'+fmt.price(item.order_total):'￥0.00'}}</text>
+                <text class='text4'>{{item.order_purchase_fee?'￥'+fmt.price(item.order_purchase_fee):'￥0.00'}}</text>
+            </view>
+        </view>
+        <view class="weui-loadmore" wx:if="{{newdata.pager.current && newdata.pager.total>newdata.pager.current}}">正在加载</view>
+        <view class="weui-loadmore weui-loadmore_line" wx:if="{{newdata.pager.total>1 && newdata.pager.total == newdata.pager.current}}">
+            <!-- <view class="weui-loadmore__tips">共{{newdata.order_count}}单</view> -->
+        </view>
+    </scroll-view>
+</block>

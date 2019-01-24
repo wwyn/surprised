@@ -1,0 +1,24 @@
+
+<!--
+    widget-activecard
+    活动卡片
+-->
+<template name="widget-activecard">
+    <view class="">
+        <view  class="activecard {{data.isShowRadius?'has_radius':''}} {{data.isShowGap?'has_gap':''}}" wx:for="{{data.items}}">
+            <!-- 图片标题文字上下排列 -->
+            <navigator class="link" url="/pages/store/subject/index?store_id={{item.store.id}}&subject_id={{item.subject.id}}">
+                <view class="image-block">
+                    <image class="image" src="{{item.subject.src}}" wx:if="item.subject.src" mode="widthFix"></image>
+                    <image mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                </view>
+                <view class="content"  wx:if="{{(data.isShowTitle&&item.subject.title!='')||(data.isShowTime&&item.begin_time!='')||(data.isShowAddress&&item.store.name!='')||(data.isShowBrief&&item.subject.intro!='')}}">
+                  <view class="title" wx:if="{{data.isShowTitle}}">{{item.subject.title}}<label>{{item.store.gpsdistance}}</label></view>
+                  <view class="brief" wx:if="{{data.isShowBrief}}">{{item.subject.intro}}</view>
+                  <view class="time" wx:if="{{data.isShowTime}}" style="background-image:url({{data.img_url}}/public/wechat/statics/image/template/time.png)">{{item.from_time}}</view>
+                  <view class="address" wx:if="{{data.isShowAddress}}"  style="background-image:url({{data.img_url}}/public/wechat/statics/image/template/address.png)">{{item.store.name}}</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</template>

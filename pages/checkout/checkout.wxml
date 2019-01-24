@@ -1,0 +1,340 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<form bindsubmit="evt_submit_order" wx:if="{{cart_result}}" report-submit="true">
+<view class="weui-panel" style='border-top:1rpx solid #ebebeb' wx:if="{{!cart_result.is_virtual}}">
+        <!-- <view class="weui-panel__hd">收货人</view> -->
+        <view class="weui-panel__bd check_add">
+            <block wx:if="{{member_addrs}}">
+                <navigator url="../member/addr/addr?select={{addr.addr_id}}&callback=true" wx:for="{{member_addrs}}" wx:for-item="addr" wx:key="index">
+                    <view class="weui-media-box weui-media-box_appmsg member-addr" wx:if="{{addr.selected == 'true'}}">
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg location-box">
+                            <image  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNDgxMzY4NjAxNjU4IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM5NjYiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiA2MDhjLTEwNS44ODggMC0xOTItODYuMTEyLTE5Mi0xOTJzODYuMTEyLTE5MiAxOTItMTkyIDE5MiA4Ni4xMTIgMTkyIDE5MlM2MTcuODg4IDYwOCA1MTIgNjA4ek01MTIgMjg4Yy03MC41OTIgMC0xMjggNTcuNDA4LTEyOCAxMjhzNTcuNDA4IDEyOCAxMjggMTI4YzcwLjU5MiAwIDEyOC01Ny40MDggMTI4LTEyOFM1ODIuNTkyIDI4OCA1MTIgMjg4eiIgcC1pZD0iMzk2NyI+PC9wYXRoPjxwYXRoIGQ9Ik01MTIgOTYwYy03LjkzNiAwLTE1LjkwNC0yLjk0NC0yMi4wOC04LjgzMi0xMi43NjgtMTIuMjI0LTEzLjI0OC0zMi40OC0xLjA1Ni00NS4yNDhDNTc1LjM5MiA4MTUuMiA4MDAgNTUwLjMzNiA4MDAgNDE2YzAtMTU4Ljc4NC0xMjkuMTg0LTI4OC0yODgtMjg4LTE1OC43ODQgMC0yODggMTI5LjIxNi0yODggMjg4IDAgNzUuNjE2IDcyLjU0NCAyMDYuMDggMjA0LjI1NiAzNjcuNDI0IDExLjIgMTMuNzI4IDkuMTUyIDMzLjg4OC00LjU0NCA0NS4wMjQtMTMuNjk2IDExLjE2OC0zMy44ODggOS4xNTItNDUuMDI0LTQuNTQ0QzIzMy41NjggNjQ2LjE3NiAxNjAgNTA4LjkyOCAxNjAgNDE2IDE2MCAyMjEuOTIgMzE3LjkyIDY0IDUxMiA2NHMzNTIgMTU3LjkyIDM1MiAzNTJjMCAxODcuMzYtMzE1LjQyNCA1MjAuMDMyLTMyOC44MzIgNTM0LjA4QzUyOC44NjQgOTU2LjY3MiA1MjAuNDQ4IDk2MCA1MTIgOTYweiIgcC1pZD0iMzk2OCI+PC9wYXRoPjwvc3ZnPg=="/>
+                        </view>
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__title name-and-mobile" >
+                                <view class="name">{{addr.name}}</view>
+                                <view class="mobile" >
+                                    {{addr.mobile}}
+                                </view>
+                            </view>
+                            <view class="weui-media-box__desc area">{{fmt.region(addr.area)}}</view>
+                            <view class="weui-media-box__desc address">{{addr.addr}}</view>
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                    </view>
+                </navigator>
+            </block>
+            <block wx:else>
+                <navigator url="../member/addr/edit/edit?fromcheckout=true&callback=true">
+                    <view class="weui-media-box weui-media-box_appmsg member-addr">
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg location-box">
+                            <image class="icon-local" mode='aspectFit' src="{{img_url}}/public/wechat/mall/addr/icon_local.png"/>
+                        </view>
+                        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                            <view class="weui-media-box__title" >
+                                请添加收货地址
+                            </view>
+                        </view>
+                        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg location-box">
+                            <image class="icon-add" src="{{img_url}}/public/wechat/mall/addr/icon_add.png"/>
+                        </view>
+                    </view>
+                </navigator>
+            </block>
+            <image class="icon-add-bg" src="{{img_url}}/public/wechat/mall/addr/icon_add_bg.png" />
+        </view>
+</view>
+
+<view class="weui-panel" wx:if="{{is_merchant}}">
+    <block wx:for="{{cart_result.objects}}" wx:for-item="cart_merchant_object" wx:for-index="checkoutindex" wx:key="checkoutindex">
+        <!-- 自营 //TODO 多商户-->
+        <view class="weui-cell" style="background:#f4f4f4;padding:5px 0;" wx:if="{{checkoutindex!=0}}"></view>
+        <view class="weui-panel__bd">
+                <view class="merchant-name">{{cart_merchant_object.merchant.show_name}}</view>
+                <import src="tpl/mchtpl.wxml"/>
+                <template is="goods-checkout" data="{{data_list:cart_merchant_object,themecolor:themecolor,images:images,object_index:checkoutindex}}"/>
+            
+        </view>
+        <view class="weui-panel__ft">
+            <!-- <view class="weui-cell"></view> -->
+            <view class="weui-cell  order-promotion" wx:if="{{cart_merchant_object.promotions.order}}">
+                    <view class="promotion-list">
+                            <view class="p-item" wx:for="{{cart_merchant_object.promotions.order}}" wx:for-item="item" wx:key="index">
+                                <block wx:if="{{item.rule_type=='coupon'}}">
+                                    <view class="p-tag" bindtap="evt_couponcheck" data-nextact="remove" data-coupon="{{item.coupon_code}}">
+                                        {{item.tag}}券
+                                        <icon type="cancel" color="#ccc" size="13"/>
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <view wx:if="{{item.tag!='送赠品'}}" class="p-tag">{{item.tag}}</view>
+                                </block>
+                                <view class="p-desc">
+                                    <view wx:if="{{item.tag=='送赠品'}}">
+                                        <view class="git-item" wx:for="{{item.solution}}">
+                                            <block wx:if="{{item}}">[赠品] {{item}}</block>
+                                        </view>
+                                    </view>
+                                    <block wx:else>
+                                    {{item.name}}<block wx:if="{{item.save&&item.save>0}}">,省 <text>¥</text>{{fmt.price(item.save)}}</block>
+                                    </block>
+                                </view>
+                            </view>
+                    </view>
+            </view>
+            <view class="checkout-list">
+            <!-- 区别于标准bbc -->
+                <!-- <block wx:if="{{cart_merchant_object.dlytypes}}" wx:for="{{cart_merchant_object.dlytypes}}" wx:for-item="dlytype" wx:key="dlyindex" wx:if="{{!cart_merchant_object.is_virtual}}">
+                    <view class="weui-cell dlytype-cell" wx:if="{{dlytype.selected}}" bindtap="evt_showmodal" data-modalname="dlytype_panel" data-index="{{checkoutindex}}" data-mch="{{cart_merchant_object.merchant.merchant_id}}">
+                        <view class="weui-cell__hd">
+                            配送方式
+                        </view>
+                        <view class="weui-cell__bd">
+                                {{dlytype.dt_name}}
+                        </view>
+                        <view class="weui-cell__ft weui-cell__ft_in-access">{{dlytype.firstprice>0?dlytype.firstprice:'免邮'}}</view>
+                    </view>
+                </block> -->
+                <block wx:if="{{cart_merchant_object.dlytypes}}" wx:for="{{cart_merchant_object.dlytypes}}" wx:for-item="dlytype">
+                   <view class="weui-cell">
+                      <view class="weui-cell__hd">
+                          快递费
+                      </view>
+                      <view class="weui-cell__bd">
+                      </view>
+                      <view class="weui-cell__ft">￥{{dlytype.firstprice}}</view>
+                  </view>
+                </block>
+                <view class="weui-cell">
+                    <view class="weui-cell__hd">
+                        商品总价
+                    </view>
+                    <view class="weui-cell__bd">
+                    </view>
+                    <view class="weui-cell__ft">￥{{cart_merchant_object.cart_amount}}</view>
+                </view>
+                <view class="weui-cell">
+                    <view class="weui-cell__hd">
+                        订单优惠
+                    </view>
+                    <view class="weui-cell__bd">
+                    </view>
+                    <view class="weui-cell__ft">-￥{{cart_merchant_object.order_promotion_discount_amount}}</view>
+                </view>
+                <view class="weui-cell">
+                    <view class="weui-cell__hd"  style="color:#333;">
+                        实付款
+                    </view>
+                    <view class="weui-cell__bd">
+                    </view>
+                    <view class="weui-cell__ft" style="color:#FC4773;">￥{{cart_merchant_object.finally_cart_amount}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<!-- <view class="weui-panel">
+    <view class="weui-cell cart-total"   wx:if="{{is_merchant}}">
+            共 {{cart_result.goods_count}} 件商品 <block wx:if="{{total.cost_tax>0}}">含税</block>小计: <text class="price" style="color:{{themecolor.price_text}}">¥ {{fmt.price(total.order_total)}}</text>
+    </view>
+</view> -->
+
+<view class="weui-panel"  wx:if="{{!is_merchant}}">
+        <view class="weui-panel__bd">
+                <import src="tpl/mchtpl.wxml"/>
+                    <template is="goods-checkout" data="{{data_list:cart_result,themecolor:themecolor,images:images}}"/>
+        </view>
+        <view class="weui-panel__ft">
+            <view class="weui-cell"></view>
+            <view class="weui-cell  order-promotion" wx:if="{{cart_result.promotions.order}}">
+                    <view class="promotion-list">
+                            <view class="p-item" wx:for="{{cart_result.promotions.order}}" wx:for-item="item" wx:key="index">
+                                <block wx:if="{{item.rule_type=='coupon'}}">
+                                    <view class="p-tag" bindtap="evt_couponcheck" data-nextact="remove" data-coupon="{{item.coupon_code}}">
+                                        {{item.tag}}券
+                                        <icon type="cancel" color="#ccc" size="13"/>
+                                    </view>
+                                </block>
+                                <block wx:else>
+                                    <view wx:if="{{item.tag!='送赠品'}}" class="p-tag">{{item.tag}}</view>
+                                </block>
+                                <view class="p-desc">
+                                    <view wx:if="{{item.tag=='送赠品'}}">
+                                        <view class="git-item" wx:for="{{item.solution}}">
+                                            <block wx:if="{{item}}">[赠品] {{item}}</block>
+                                        </view>
+                                    </view>
+                                    <block wx:else>
+                                    {{item.name}}<block wx:if="{{item.save&&item.save>0}}">,省 <text>¥</text>{{fmt.price(item.save)}}</block>
+                                    </block>
+                                </view>
+                            </view>
+                    </view>
+            </view>
+            <view class="weui-cell cart-total">
+                    共 {{cart_result.goods_count}} 件商品 <block wx:if="{{total.cost_tax>0}}">含税</block>小计: <text class="price" style="color:{{themecolor.price_text}}">¥ {{fmt.price(total.order_total)}}</text>
+            </view>
+            <block wx:if="{{dlytypes}}" wx:for="{{dlytypes}}" wx:for-item="dlytype" wx:key="index" wx:if="{{!cart_result.is_virtual}}">
+            <view class="weui-cell dlytype-cell" wx:if="{{dlytype.selected}}" bindtap="evt_showmodal" data-modalname="dlytype_panel">
+                <view class="weui-cell__hd">
+                    配送方式
+                </view>
+                <view class="weui-cell__bd">
+                        {{dlytype.dt_name}}
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">{{total.cost_freight>0?total.cost_freight:'免邮'}}</view>
+            </view>
+            </block>
+        </view>
+</view>
+
+<view class="weui-panel" style="display:none;">
+    <view class="weui-panel__bd">
+        <view class="weui-cell order-memo" >
+                <view class="weui-cell__hd">
+                    买家留言
+                </view>
+                <view class="weui-cell__bd">
+                        <input class="weui-input" bindinput="evt_setpagedata" data-key="memo" placeholder="选填:对本次交易的说明" />
+                </view>
+            </view>
+        <view class="weui-cell order-memo" bindtap="evt_chooseinvoice" wx:if="{{order_invoice_enabled == 'true'}}">
+            <view class="weui-cell__hd">
+                发票
+            </view>
+            <view class="weui-cell__bd">
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+                {{invoice_title?invoice_title:'不需要发票'}}
+            </view>
+        </view>
+        <view class="weui-cell" bindtap="evt_showmodal" data-modalname="coupon_panel">
+            <view class="weui-cell__hd">
+                优惠券
+            </view>
+            <view class="weui-cell__bd">
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+                <view class="promotion-list plist-mini">
+                    <block wx:if="{{!cart_result.objects.coupon[0]}}">
+                        使用优惠券
+                    </block>
+                    <block wx:else>
+                    <block wx:for="{{cart_result.promotions.order}}" wx:for-item="pitem" wx:key="index">
+                        <view class="p-tag" wx:if="{{pitem.rule_type=='coupon'}}">
+                            {{pitem.tag}}
+                        </view>
+                    </block>
+                    </block>
+                </view>
+
+            </view>
+        </view>
+        <view class="weui-cell" bindtap="evt_showmodal" data-modalname="integral_panel">
+            <view class="weui-cell__hd">
+                积分抵扣
+            </view>
+            <view class="weui-cell__bd">
+
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">
+                <block wx:if="{{cart_result.integraldeduction}}">
+                    <!-- 使用{{cart_result.integraldeduction.score_u}} -->
+                    积分抵扣 ¥ {{cart_result.integraldeduction.deduction}}
+                </block>
+                <block wx:else>
+                    未使用积分
+                </block>
+            </view>
+        </view>
+        <block wx:for="{{paymentapps}}" wx:for-item="payapp" wx:key="index">
+        <view class="weui-cell payapp-cell" wx:if="{{payapp.selected}}" bindtap="evt_showmodal" data-modalname="payapp_panel">
+            <view class="weui-cell__hd">
+                支付方式
+            </view>
+            <view class="weui-cell__bd">
+                    {{payapp.display_name?payapp.display_name:payapp.name}}
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access">{{total.cost_payment>0?total.cost_payment:''}}</view>
+        </view>
+        </block>
+    </view>
+</view>
+
+
+<view class="checkout-footer" wx:if="{{cart_result.objects}}">
+    <view class="checkout-total">
+            应付金额：<text>¥ {{fmt.price(total.order_total)}}</text>（含运费）
+    </view>
+    <button form-type="submit" type="warn" class="submit-order">
+        提交订单
+    </button>
+</view>
+</form>
+
+<!--TEMPLATE IMPORT -->
+<import src="tpl/dlytype.wxml"/>
+<view animation="{{modal_animation_data}}" class="quick-modal {{active_dlytype_panel?'active':''}}" bindtouchmove="evt_touchmovemodal" bindtap="evt_tapmodal" data-modalname="dlytype_panel" wx:if="{{!cart_result.is_virtual}}">
+    <view class="modal-section">
+        <view class="modal-hd">
+            <text>选择配送方式</text>
+            <icon type="cancel" size="16" color="blcak" data-modalname="dlytype_panel"/>
+        </view>
+        <view class="modal-bd">
+            <template is="dlytype-use-panel" data="{{dlytypes:checkdlytypes,themecolor:themecolor}}"/>
+        </view>
+    </view>
+</view>
+
+<import src="tpl/payapp.wxml"/>
+<view animation="{{modal_animation_data}}" class="quick-modal {{active_payapp_panel?'active':''}}" bindtouchmove="evt_touchmovemodal" bindtap="evt_tapmodal" data-modalname="payapp_panel">
+    <view class="modal-section">
+        <view class="modal-hd">
+            <text>选择支付方式</text>
+            <icon type="cancel" size="16" color="blcak" data-modalname="payapp_panel"/>
+        </view>
+        <view class="modal-bd">
+            <template is="payapp-use-panel" data="{{payapps:paymentapps,themecolor:themecolor}}"/>
+        </view>
+    </view>
+</view>
+
+<import src="tpl/coupon.wxml"/>
+<view animation="{{modal_animation_data}}" class="quick-modal {{active_coupon_panel?'active':''}}" bindtouchmove="evt_touchmovemodal" bindtap="evt_tapmodal" data-modalname="coupon_panel">
+    <view class="modal-section">
+        <view class="modal-hd">
+            <text>使用优惠券</text>
+            <icon type="cancel" size="16" color="blcak" data-modalname="coupon_panel"/>
+        </view>
+        <view class="modal-bd">
+            <template is="coupon-use-panel" data="{{coupons:my_av_coupons,coupon_input:coupon_input,themecolor:themecolor}}"/>
+        </view>
+    </view>
+</view>
+
+<import src="tpl/integral.wxml"/>
+<view animation="{{modal_animation_data}}" class="quick-modal {{active_integral_panel?'active':''}}" bindtouchmove="evt_touchmovemodal" bindtap="evt_tapmodal" data-modalname="integral_panel">
+    <view class="modal-section">
+        <view class="modal-hd">
+            <text>积分抵扣</text>
+            <icon type="cancel" size="16" color="blcak" data-modalname="integral_panel"/>
+        </view>
+        <view class="modal-bd">
+            <template is="integral-use-panel" data="{{integral:cart_result.integraldeduction,themecolor:themecolor}}"/>
+        </view>
+    </view>
+</view>
+<view class="position-fix" wx:if="{{remarkShow}}" catchtouchmove='true'>
+    <view class="remark">
+        <view class="title">添加备注信息</view>
+        <view class="content">
+          <textarea placeholder='请输入商品备注信息' value="{{remarkContent}}" bindinput="insertContent">
+          
+          </textarea>
+        </view>
+        <view class="cart-operate">
+            <view class="cart-cancel" bindtap="closeMark">点错了</view>
+            <view class="cart-confirm" bindtap="submitMark">确定</view>
+        </view>
+    </view>
+</view>

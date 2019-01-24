@@ -1,0 +1,239 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<block wx:if="{{hideLoading}}">
+    <view class="product-container">
+        <swiper class="slider" style="height:{{windowWidth}}px" indicator-dots="{{slide_images.length>1}}" autoplay="true" interval="5000" duration="1000" circular="true" current="{{swiperCurrent}}">
+          <block wx:for="{{slide_images}}" wx:for-item="item" wx:key="*this">
+            <swiper-item>
+              <image bindtap="tapslide" data-src="{{item}}" class="slide" src="{{item}}" mode="aspectFit" />
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="product-actions" style="top:{{windowWidth-45}}px">
+            <view catchtap="evt_showshare" class="action-item">
+                <view class="icon icon-sm icon-qrcode"></view>
+            </view>
+            <view catchtap="evt_favorite" data-favstatus="{{isfav}}" class="action-item">
+                <view class="icon icon-sm {{isfav=='NO'?'icon-star-off':'icon-star-on'}}"></view>
+            </view>
+        </view>
+        <view class="adjustprice" wx:if="{{is_adjust&&countdown&&(countdown.days>0 || countdown.hours>0 || countdown.minutes>0 || countdown.seconds>0)}}">
+            <view class="ap-plan" style="width:{{windowWidth-130}}px;">
+                <view class="end-price">
+                    <text>¥</text>{{fmt.price(adjustprice.end_price)}}
+                </view>
+                <view class="begin-price-wrap">
+                    <view class="begin-price"><text>¥</text>{{fmt.price(adjustprice.begin_price)}}</view>
+                    <navigator wx:if="{{windowWidth>350}}" class="plan-name" url="/pages/limitimepurchase/index">{{adjustprice.plan_name}}</navigator>
+                </view>
+            </view>
+            <view class="countdown">
+                <view class="countdown-tip">距{{time_flag}}仅剩</view>
+                <view class="countdown-timer">
+                    <view wx:if="{{countdown.days>0}}"> <text>{{ countdown.days }}</text>天</view>
+                    <view><text>{{ countdown.hours }}</text>:</view>
+                    <view><text>{{ countdown.minutes }}</text>:</view>
+                    <view><text>{{ countdown.seconds }}</text></view>
+                </view>
+            </view>
+        </view>
+        <view class="defaultprice" wx:else>
+            <view class="price" style="color:{{themecolor.price_text}}">
+                <text>￥</text>{{fmt.price(data_detail.product.buy_price)}}
+                <text class="mktprice" wx:if="{{data_detail.product.mktprice>data_detail.product.buy_price}}" style="color:{{themecolor.text_info}}" >
+                    <text>￥</text>{{fmt.price(data_detail.product.mktprice)}}
+                </text>
+            </view>
+        </view>
+        <view class="weui-panel">
+                <view class="weui-panel__hd">
+                    <view class="product-name" style="color:{{themecolor.text_primary}}">
+                        <view class="pn-left">
+                            <text class="p-name">{{data_detail.product.name}}</text>
+                            <text class="product-sepc-info" wx:if="{{data_detail.product.spec_info}}">
+                                {{data_detail.product.spec_info}}
+                            </text>
+                        </view>
+                        <view class="product-brand" wx:if="{{data_detail.brand && data_detail.brand.brand_logo}}" bindtap="evt_goto" data-url="/pages/gallery/gallery?brand_id={{data_detail.brand.brand_id}}" >
+                            <image class="weui-media-box__hd" mode="aspectFit" src="{{images[data_detail.brand.brand_logo]?images[data_detail.brand.brand_logo]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{data_detail.brand.brand_logo}}"  bindload="load_image"/>
+                        </view>
+                    </view>
+                    <view class="intro" style="color:{{themecolor.text_info}}">
+                        {{data_detail.brief}}
+                    </view>
+                    <view class="profit-tip" wx:if="{{pickout_data[data_detail.product.product_id]&&!fromother}}">
+                        <view class="profit" data-productid="{{data_detail.product.product_id}}" catchtap="evt_pickout" data-goodsid="{{data_detail.goods_id}}" style="border-color:{{themecolor.price_text}}">
+                            <view class="profit-label" style="background-color:{{themecolor.price_text}}">分享赚</view>
+                            <view class="profit-val">{{fmt.price(pickout_data[data_detail.product.product_id]['s_price'])}}
+                            </view>
+                            <view class="recommend {{pickout_data[data_detail.product.product_id]['pickout']?'active':''}}">
+                                荐
+                            </view>
+                        </view>
+                    </view>
+                </view>
+               <view class="weui-panel_bd">
+                  <view class="weui-media-box promotion-list " wx:if="{{promotion_list}}">
+                     <view class="p-item" wx:for="{{promotion_list}}" wx:for-item="promotion" wx:key="*this">
+                         <view class="p-tag">{{promotion.tag}}</view>
+                         <view class="p-desc">{{promotion.description}}</view>
+                     </view>
+                  </view>
+                  <view class="weui-media-box product-spec" wx:if="{{data_detail.spec_desc.t}}">
+                      <view class="spec-select" wx:for="{{data_detail.spec_desc.t}}" wx:for-index="idx"  wx:for-item="item" wx:key="idx">
+                          <view class="spec-title" style="color:{{themecolor.text_primary}}">{{item}}</view>
+                          <view class="spec-options">
+                              <block wx:for="{{data_detail.spec_desc.v[idx]}}"  wx:for-item="option"  wx:key="index">
+                                      <view class="spec-item disabled" wx:if="{{option.marketable == 'false'}}">
+                                          <image mode="aspectFit" src="{{images[option.p_image_id]?images[option.p_image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" wx:if="{{option.p_image_id}}" data-ident="{{option.p_image_id}}"  bindload="load_image"/>
+                                          <text>{{option.label}}</text>
+                                      </view>
+                                      <view bindtap="tapspecitem" data-productid="{{option.product_id}}" wx:if="{{option.marketable == 'true'}}" class="spec-item {{option.current?' active':''}}">
+                                          <image src="{{images[option.p_image_id]?images[option.p_image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}"  mode="aspectFit" wx:if="{{option.p_image_id}}" data-ident="{{option.p_image_id}}" bindload="load_image"/>
+                                          <text>{{option.label}}</text>
+                                      </view>
+                              </block>
+                          </view>
+                      </view>
+                      <view class="weui-media-box__info">已选择:{{data_detail.product.spec_info}}</view>
+                  </view>
+                  <view class="weui-media-box product-buycount" wx:if="{{stock[data_detail.product.bn].num>0}}">
+                      <view class="pb-label" style="color:{{themecolor.text_primary}}">数量</view>
+                      <view class="product-quantity">
+                          <button class="pq-minus" plain="true" disabled="{{quantityVal<2}}" bindtap="tappqminus">-</button>
+                          <input type="number" bindblur="evt_quantityblur" value="{{quantityVal}}" class="pq-ipt"/>
+                          <button class="pq-minus" plain="true" bindtap="tappqplus">+</button>
+                      </view>
+                      <!-- <view class="product-stock">
+                          {{stock[data_detail.product.bn].num<1?'库存不足':'库存:'+stock[data_detail.product.bn].num}}
+                      </view> -->
+                  </view>
+               </view>
+        </view>
+    </view>
+    <view class="weui-panel merchant" wx:if="{{merchant}}" bindtap="evt_go_shop" data-sno="{{merchant.sno}}" data-mch="{{merchant.merchant_id}}">
+      <image mode="aspectFit" wx:if="{{merchant.logo_image}}" src="{{images[merchant.logo_image]?images[merchant.logo_image]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{merchant.logo_image}}"  bindload="load_image"></image>
+      <view class="merchant_name">{{merchant.merchant_name}}</view>
+      <view class="go_shop">进入店铺</view>
+    </view>
+    <view class="weui-panel" wx:if="{{comment.comment_count>0}}">
+        <view class="weui-panel__hd">商品评论</view>
+        <view class="weui-panel__bd goods-recomment">
+             <view class="weui-cell comment-item" wx:for="{{comment.comment_list}}" wx:for-item="comment_item" wx:for-index="comment_id">
+                 <view class="comment-hd">
+                     <view class="comment-author">
+                        <image class="author-avatar" mode="aspectFit" src="{{images[comment_item.author_avatar]?images[comment_item.author_avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{comment_item.author_avatar}}" bindload="load_image" /> <view class="author-name">{{fmt.pass(comment_item.author_name)}}</view>
+                     </view>
+                     <view class="comment-star">
+                         <view class="star-picker sp-mini">
+                             <view class="star {{(comment_item.mark.mark_star>0)?'active':''}}">
+                                 <text>★</text>
+                                 <text>☆</text>
+                             </view>
+                             <view class="star {{(comment_item.mark.mark_star>1)?'active':''}}">
+                                 <text>★</text>
+                                 <text>☆</text>
+                             </view>
+                             <view class="star {{(comment_item.mark.mark_star>2)?'active':''}}">
+                                 <text>★</text>
+                                 <text>☆</text>
+                             </view>
+                             <view class="star {{(comment_item.mark.mark_star>3)?'active':''}}">
+                                 <text>★</text>
+                                 <text>☆</text>
+                             </view>
+                             <view class="star {{(comment_item.mark.mark_star>4)?'active':''}}">
+                                 <text>★</text>
+                                 <text>☆</text>
+                             </view>
+                         </view>
+                     </view>
+                     <!-- <view class="comment-time comment-cell">{{comment_item.createtime}}</view> -->
+                 </view>
+                 <view class="comment-bd">
+                     <view class="comment-content">{{comment_item.content}}</view>
+                     <view class="images-wrap mini">
+                         <block wx:for="{{comment_item.images}}" wx:for-item="ext_commentimage">
+                             <image class="selected-image" bindload="load_image" src="{{images[ext_commentimage.image_id]?images[ext_commentimage.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{ext_commentimage.image_id}}"   mode="aspectFit" bindtap="evt_previewimage"/>
+                         </block>
+                     </view>
+                 </view>
+             </view>
+        </view>
+        <view class="weui-panel__ft">
+            <navigator open-type="navigate" class="weui-cell weui-cell_access weui-cell_link" wx:if="{{comment.comment_count>0}}" url="/pages/product/comment/index?goods_id={{data_detail.goods_id}}">
+                <view class="weui-cell__bd">共{{comment.comment_count}}条评论</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access">查看全部</view>
+            </navigator>
+        </view>
+    </view>
+    <view class="product-desc-loader" bindtouchstart="evt_loaddesc" wx:if="{{desc_loaded=='NO'}}">
+        <icon type="download" size="32" color="#999" />
+        <view>加载商品详情</view>
+    </view>
+    <view class="weui-panel product-desc" wx:if="{{desc_loaded=='YES'}}">
+            <view class="weui-panel__hd">商品详情</view>
+            <view class="weui-panel__bd" style="padding:0 15px;">
+                <view class="product-params" wx:if="{{data_detail.params}}">
+                    <view class="weui-form-preview" wx:for="{{data_detail.params}}" wx:for-item="p_group" >
+                        <view class="weui-form-preview__hd"  style="color:{{themecolor.text_primary}}">
+                                {{index}}
+                        </view>
+                        <view class="weui-form-preview__bd" wx:for="{{p_group}}">
+                            <view class="weui-form-preview__item">
+                                <label class="weui-form-preview__label">{{index}}</label>
+                                <text class="weui-form-preview__value">{{item}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <import src="/utils/wxParse/wxParse.wxml"/>
+                <view class="wxParse">
+                    <template is="wxParse" data="{{wxParseData:product_desc.nodes}}"/>
+                </view>
+            </view>
+    </view>
+    <view class="weui-panel product-related" wx:if="{{desc_loaded=='YES' && related && related.length>0}}">
+           <view class="weui-panel__hd" style="color:{{themecolor.text_primary}};">
+                <view style="border-left:2px solid {{themecolor.price_text}};padding-left:10px;font-size:14px;">相关商品</view>
+            </view>
+            <view class="weui-panel__bd">
+                <import src="/pages/gallery/tpl.wxml"/>
+                <template is="goods-grid" data="{{data_list:related,open_type:'redirect'}}"/>
+            </view>
+    </view>
+
+    <view class="side-tools">
+        <button type="default" plain="true" bindtap="evt_gohome"><view class="icon icon-home icon-sm"></view></button>
+        <button type="default" plain="true" bindtap="evt_gotop"><view class="icon icon-top icon-sm"></view></button>
+    </view>
+<!--foot bar begin-->
+<view class="fix-foot-bar" style="background-color:{{themecolor.foot_bar_bg}}">
+    <view class="foot-left">
+        <navigator class="cart-quick-view" hover-class="cart-quick-view-active" open-type="switchTab" url="/pages/cart/cart" >
+            <view class="icon icon-sm {{cartCount>0?'icon-cart-fill':'icon-cart-empty'}}"></view>
+            <view wx:if="{{cartCount>0}}" class="weui-badge cartcount" style="background-color:{{themecolor.popup_color}}">{{cartCount>99?'99+':cartCount}}</view>
+            <view class="icon-tip" style="color:{{themecolor.foot_bar_icon_text}}">购物车</view>
+        </navigator>
+    </view>
+    <view class="foot-left">
+        <button class="product-online-comment" show-message-card="true" open-type="contact" session-from="vmcwapp-product-{{data_detail.product.product_id}}">
+            <view class="icon icon-comment-fill icon-sm"></view>
+        </button>
+        <view class="icon-tip" style="color:{{themecolor.foot_bar_icon_text}}">客服</view>
+    </view>
+    <view class="foot-right buy-area" wx:if="{{stock[data_detail.product.bn].num<1}}">
+        <button class="weui-btn" type="warn" disabled="true" style="background-color:{{themecolor.storerare_color}};color:{{themecolor.storerare_text_color}};">库存不足</button>
+    </view>
+    <view class="foot-right buy-area" wx:else>
+        <button class="weui-btn" type="primary" bindtap="addcart" style="background-color:{{themecolor.addcart_color}};color:{{themecolor.addcart_text_color}};" wx:if="{{!data_detail.is_virtual}}">加入购物车</button>
+        <button class="weui-btn" type="warn" bindtap="addcart" data-fastbuy="true" style="background-color:{{themecolor.buynow_color}};margin-top:0px;color:{{themecolor.buynow_text_color}};width:{{data_detail.is_virtual?'100%':'50%'}};">立即购买</button>
+    </view>
+</view>
+</block>
+<view class="poster-canvas-mask" data-hideposter="true" bindtap="evt_hideposter" style="top:0;left:0;width:{{windowWidth}}px;height:{{windowHeight}}px;display:{{canvas_poster_show?'flex':'none'}}">
+    <view class="poster-canvas-box" style="width:{{ctx_img_rect_w}}px;height:{{ctx_img_rect_h+150}}px;">
+        <canvas canvas-id="poster_canvas" bindtap="evt_previewposter" class="poster-canvas" style="width:{{ctx_img_rect_w}}px;height:{{ctx_img_rect_h+150}}px;"></canvas>
+        <button type="primary" bindtap="evt_downloadposter">保存到手机</button>
+    </view>
+</view>

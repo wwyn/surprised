@@ -1,0 +1,168 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:if="{{hideLoading}}">
+  <wxs src="../../utils/fmt.wxs" module="fmt" xmlns:wx="http://www.w3.org/1999/xhtml"/>
+  <view class='page'>
+<view class='header' style='background:url({{img_url}}/public/wechat/member/bg.png) no-repeat center/cover'>
+  <view class='member_info'>
+    <view class='member_avatar'>
+       <image wx:if="{{pagedata.member.avatar}}" src="{{images[pagedata.member.avatar]?images[pagedata.member.avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{pagedata.member.avatar}}" bindload="load_image" mode="aspectFill"/>
+      <image mode="aspectFit" wx:else src='{{img_url}}/public/wechat/member/Group2.png'></image>
+    </view>
+    <text class='member_nike'>{{pagedata.member.name?pagedata.member.name:pagedata.member.uname}}</text>
+    <navigator class='person_info' url='information/information' style='background:url({{img_url}}/public/wechat/member/Bitma.png) no-repeat center/cover'>
+      <text>个人信息</text>
+    </navigator>
+    <!-- <navigator class='member_vip' url='viprules/viprules'>
+       <image mode="aspectFit" src='{{img_url}}/public/wechat/member/vip.png'></image>
+      <text class='text1'>VIP1</text>
+      <text class='text2'>(查看权益)</text>
+    </navigator> -->
+  </view>
+</view>
+<view class="slider">
+    <navigator url="/pages/article/detail/detail?article_id=9" open-type="navigate">
+          <image class="slide" mode="aspectFill"  src="{{img_url}}/public/wechat/member/week.png"/>
+    </navigator>
+    <navigator url="/pages/invite/index" open-type="navigate">
+      <image class="slide" mode="aspectFill"  src="{{img_url}}/public/wechat/member/invite.png"/>
+    </navigator>
+</view>
+<!-- 余额 -->
+<view class='balance'>
+  <view class='balance_left'>
+    <text class='text1'>余额</text>
+    <text class='text2'>{{pagedata.balance_data.user_balance?'￥'+fmt.price(pagedata.balance_data.user_balance):'￥0.00'}}</text>
+  </view>
+  <navigator url="/pages/ubalance/index" class='balance_recharge'>充值</navigator>
+</view>
+<!-- 销售业绩 -->
+<view class='performance'>
+  <view class='performance_top'>
+     <text>销售业绩</text><image mode="aspectFit" bindtap='showDetails' src="{{img_url}}/public/wechat/member/details.png"></image>
+    <navigator class='performance_detail' url='/pages/member/performance/index'>
+        <text>明细</text>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/icon2.png'></image>
+      </navigator>
+  </view>
+  <swiper class='performance_main' indicator-dots="true" indicator-color="#CCCCCC" indicator-active-color="#FC4773" >
+    <swiper-item class="performance_x">
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=today'>
+        <text class='text1'>{{amount1.quantity?amount1.quantity:'0'}}件</text>
+        <text class='text2'>今日销售量</text>
+      </navigator>
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=today'>
+        <text class='text1'>{{amount1.order_total?'￥'+fmt.price(amount1.order_total):'￥0.00'}}</text>
+        <text class='text2'>今日销售额</text>
+      </navigator>
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=today'>
+        <text class='text1'>{{amount1.order_purchase_fee?'￥'+fmt.price(amount1.order_purchase_fee):'￥0.00'}}</text>
+        <text class='text2'>今日代购费</text>
+      </navigator>
+    </swiper-item>
+    <swiper-item class="performance_x">
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=week'>
+        <text class='text1'>{{amount2.quantity?amount2.quantity:'0'}}件</text>
+        <text class='text2'>本周销售量</text>
+      </navigator>
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=week'>
+        <text class='text1'>{{amount2.order_total?'￥'+fmt.price(amount2.order_total):'￥0.00'}}</text>
+        <text class='text2'>本周销售额</text>
+      </navigator>
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=week'>
+        <text class='text1'>{{amount2.order_purchase_fee?'￥'+fmt.price(amount2.order_purchase_fee):'￥0.00'}}</text>
+        <text class='text2'>本周代购费</text>
+      </navigator>
+    </swiper-item>
+    <swiper-item class="performance_x">
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=month'>
+        <text class='text1'>{{amount3.quantity?amount3.quantity:'0'}}件</text>
+        <text class='text2'>本月销售量</text>
+      </navigator>
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=month'>
+        <text class='text1'>{{amount3.order_total?'￥'+fmt.price(amount3.order_total):'￥0.00'}}</text>
+        <text class='text2'>本月销售额</text>
+      </navigator>
+      <navigator class='performance_today' hover-class='none'  url='/pages/member/performance/index?performance_type=month'>
+        <text class='text1'>{{amount3.order_purchase_fee?'￥'+fmt.price(amount3.order_purchase_fee):'￥0.00'}}</text>
+        <text class='text2'>本月代购费</text>
+      </navigator>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- 我的订单 -->
+<view class='my_order'>
+  <view class='order_top'>
+    <text>我的订单</text>
+    <navigator url='order/index' class='order_detail'>
+      <text>查看全部</text>
+      <image mode='aspectFit' src='{{img_url}}/public/wechat/member/icon2.png'></image>
+    </navigator>
+  </view>
+  <view class='order_main'>
+      <navigator class='order_main1' url='order/index?order_type=s1'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/daifukuan.png'></image>
+        <view class='order_number' wx:if="{{pagedata.order_count_arr.s1}}">{{pagedata.order_count_arr.s1}}</view>
+        <text>待付款</text>
+      </navigator>
+      <navigator class='order_main1' url='order/index?order_type=s2'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/qianbao.png'></image>
+        <view class='order_number' wx:if="{{pagedata.order_count_arr.s2}}">{{pagedata.order_count_arr.s2}}</view>
+        <text>待发货</text>
+      </navigator>
+      <navigator class='order_main1' url='order/index?order_type=s3'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/wuliu.png'></image>
+        <view class='order_number' wx:if="{{pagedata.order_count_arr.s3}}">{{pagedata.order_count_arr.s3}}</view>
+        <text>待收货</text>
+      </navigator>
+      <!-- <view class='order_main1'>
+        <image></image>
+        <text></text>
+      </view> -->
+      <navigator class='order_main1' url='order/index?order_type=s5'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/tuihuo.png'></image>
+        <view class='order_number' style='right:16rpx' wx:if="{{pagedata.order_count_arr.s5}}">{{pagedata.order_count_arr.s5}}</view>
+        <text>退款/售后</text>
+      </navigator>
+  </view>
+</view>
+<!-- 工具箱 -->
+<view class='toolbox'>
+  <view class='toolbox_top'>
+    <text>工具箱</text>
+  </view>
+  <view class='toolbox_main'>
+      <navigator class='toolbox_main1' url='statement/index'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/Group11.png'></image>
+        <text>对账单</text>
+      </navigator>
+     <!-- <view class='toolbox_main1' bindtap='evt_scan'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/scan.png'></image>
+        <text>扫码分拣</text>
+     </view> -->
+     <view class='toolbox_main1' bindtap='showDetails'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/question.png'></image>
+        <text>常见问题</text>
+     </view>
+     <view class='toolbox_main1'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/Group13.png'></image>
+        <text>客服咨询</text>
+        <button class="contact" open-type='contact'></button>
+     </view>
+     <navigator  class='toolbox_main1' url='myteam/index'>
+        <image mode="aspectFit" src='{{img_url}}/public/wechat/member/team.png'></image>
+        <text>我的团队</text>
+     </navigator>
+  </view>
+</view>
+</view>
+<view wx:if="{{ isShow }}" class="show-details">
+  <view class="details-box">
+    <view class="details-title">关于销售业绩详解</view>
+    <view class="datails-content">
+      <view>客户看到的价格是<text>结算价+代购费</text>，例如下面这款鞋，结算价是61，代购费10元，转发出去客户看到的价61+10=71元。所以只要客户购买代购即可赚到10元代购费。</view>
+      <view>所以，<text>系统显示的代购费只是起到统计作用，不可以提现</text>。因为你的代购费在客户支付的时候你就已经拿到了。</view>
+    </view>
+    <button bindtap='affirmDetails' class="datails-btn">知道了</button>
+  </view>
+</view>
+</block>

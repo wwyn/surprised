@@ -1,0 +1,27 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+<view class="weui-panel">
+        <view class="prompt-panel" wx:if="{{!data}}"> 
+            <view class="icon-empty-list" style="background-image:url({{img_url}}/public/wechat/statics/image/xcxicon/favorite_empty.png)"></view>
+            <view class="text" style="color:#999;">还没有任何收藏哦</view>
+        </view>
+        <view class="weui-panel__bd" wx:else>
+            
+            <block wx:for="{{data}}" wx:for-item="item" wx:key="index">
+                <view bindtap="evt_goto" data-url="/pages/product/product?product_id={{item.product_id}}" class="weui-media-box weui-media-box_appmsg co-item" data-mch="{{item.merchant_id}}">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image mode="aspectFit" class="weui-media-box__thumb" bindload="load_image" src="{{images[item.image_default_id]?images[item.image_default_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.image_default_id}}" />
+                    </view>
+                    <view class="weui-media-box__bd">
+                        <view class="weui-media-box__desc co-name">{{item.goods_name}}</view>
+                        <view class="weui-media-box__desc co-inline">
+                            <view class="co-price">
+                                   {{item.goods_price}}
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+</view>
+</block>

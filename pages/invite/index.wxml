@@ -1,0 +1,22 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/date.wxs" module="date" />
+<block wx:if="{{hideLoading}}">
+  <scroll-view scroll-y="true" style="height:{{sv_height}}px;">
+    <image class="desc-image" mode="widthFix" src="{{img_url}}/public/wechat/member/invitedesc.png"></image>
+  </scroll-view>
+  <view class='invite_btn' bindtap='invite_more'>邀请好友加入</view>
+  <view class="position-fix" wx:if="{{showAdd}}" bindtap="closeAdd">
+    <view class="addprice" catchtap="showAdd">
+      <view class="title">
+        <image catchtap="closeAdd" mode="aspectFit" class="goods_close" src="{{img_url}}/public/wechat/empty/close.png"></image>
+      </view>
+      <view class="content">
+        <image class='team_all' mode='aspectFit' src='{{img_url}}/public/wechat/member/team_all.png'></image>
+      </view>
+      <view class="product-quantity" style='text-align:center'>
+        今天还能邀请<text style='color:RGBA(252, 71, 115, 1)'>{{invitation_num}}</text>个人
+      </view>
+      <button class="add-operate" open-type="share">发送邀请链接给好友</button>
+    </view>
+  </view>
+</block>

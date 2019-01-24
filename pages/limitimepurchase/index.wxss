@@ -1,0 +1,108 @@
+/* pages/limitimepurchase/index.wxss */
+.banner-image image{
+  display:block;
+  width:100%;
+}
+.banner image{
+    height: 150px;
+    width: 100%;
+    display: block;
+}
+.time-list{
+  /* overflow: hidden; */
+  background-color: #f0f0f0;
+  min-width: 100%;
+  /* height: 50px; */
+  display:flex;
+  flex-wrap:nowrap;
+  flex-direction: row;
+  align-items: center;
+  overflow-x:auto;
+}
+.time-item{
+  font-size:14px;text-align:center;
+  min-width:100px;
+  height:100%;
+}
+
+.time-item.active{
+  background-color: #fff;
+  color:#EC5428;
+}
+.time{
+  border-right:1px solid #dfdfdf;padding:0 5px;margin:5px 0;
+}
+.time-item.active .time{
+  border-right:0;
+}
+.time-list  .time-item:last-child .time{
+  border-right:0;
+}
+.countdown{
+  display:block;
+  font-size: 15px;
+  color: #000;
+  font-weight: 700;
+  line-height: 30px;
+  margin: 10px auto;
+  text-align:center;
+}
+.countdown text{
+    margin: 0 5px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #ec5428;
+}
+.adjust-list .link{
+  display:flex;
+  align-items: center;
+  padding:10px 15px;
+  border-top:1px solid #efefef;
+}
+.adjust-list .link image{
+  width:100px;
+  height: 100px;
+}
+.adjust-list .link .content{
+  flex:1;
+  overflow:hidden;
+  padding-left:20px;
+}
+.adjust-list .link .content .name{
+  color: #000;
+  font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.adjust-list .link .content .price text{
+  color: #EC5428;
+  font-size: 16px;
+  margin-right:5px;
+}
+.adjust-list .link .content .price text:nth-child(2){
+  text-decoration: line-through;
+  color:#666;
+  font-size: 13px;
+}
+.adjust-list .link .content .stock{
+  line-height: 30px;
+    color: #666;
+    font-size: 12px;
+}
+button{
+    display: block;
+    width: 85px;
+    text-align: center;
+    background-color: #f08300;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    float:right;
+}
+button.havenone{
+  background-color: #bababa;
+}

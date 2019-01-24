@@ -1,0 +1,42 @@
+/* components/download-image.wxss */
+.position-fix{
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  display:flex;
+  align-items: center;
+  vertical-align: middle;
+  background:rgba(0,0,0,0.3);
+  z-index:99999999;
+}
+.position-fix .download{
+  position:relative;
+  display:inline-block;
+  margin:0 auto;
+  background-size:100% auto;
+  background-repeat:no-repeat;
+  background-position:center center;
+  min-width:340rpx;
+  min-height:150rpx;
+  background-color:#fff;
+}
+.download-img{
+  /* width:690rpx; */
+}
+.download-icon{
+  position:absolute;
+  bottom:-60rpx;
+  width:140rpx;
+  height:140rpx;
+  left:50%;
+  margin-left:-60rpx;
+}
+.download-close{
+    position:absolute;
+    right:14rpx;
+    width:40rpx;
+    height:40rpx;
+    top:14rpx;
+}

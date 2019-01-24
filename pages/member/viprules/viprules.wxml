@@ -1,0 +1,4 @@
+<!-- <view class="page-loading" wx:if="{{!hideLoading}}"></view> -->
+<view class='page'>
+<image mode="aspectFit" src='{{img_url}}/public/wechat/member/Group_vip.png'></image>
+</view>

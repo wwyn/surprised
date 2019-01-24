@@ -1,0 +1,21 @@
+<!--
+    widget-searchbar
+    搜索框
+-->
+<template name="widget-searchbar">
+    <view class="widget-searchbar-fixed-box" wx:if="{{data.fixed}}"></view>
+    <view class="widget-searchbar {{data.fixed?'position-fix':''}}" bindtap="widget_event_delegate" data-widget-name="searchbar" data-widget-index="{{data.widget_index}}">
+        <view class="weui-search-bar" style="background-color:{{data.background}}">
+            <view class="weui-search-bar__form" style="background-color:{{data.ipt_background}};display:block;">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="{{data.placeholder||'搜索'}}" value="{{data.input_val}}" data-event-confirm="evt_confirm" data-event-input="evt_input" bindinput="widget_event_delegate" bindconfirm="widget_event_delegate" data-widget-name="searchbar" data-widget-index="{{data.widget_index}}"/>
+                    <view class="weui-icon-clear" wx:if="{{data.input_val.length > 0}}" data-event-tap="evt_clear">
+                        <icon type="clear" size="14" data-event-tap="evt_clear" bindtap="widget_event_delegate" data-widget-name="searchbar" data-widget-index="{{data.widget_index}}"></icon>
+                    </view>
+                </view>
+            </view>
+            <view class="icon-scan" data-event-tap="evt_scan" bindtap="widget_event_delegate" data-widget-name="searchbar" data-widget-index="{{data.widget_index}}" wx:if="{{data.show_scan}}"></view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,101 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<form bindsubmit="evt_editaddrsubmit" wx:if="{{hideLoading}}">
+    <view class="address-desc">
+        <text>智能解析</text>
+        <textarea placeholder='请输入或粘贴地址文本，可自动识别姓名，电话和地址，如：某某某，188****0000,XX省XX市XX区XX街道' bindinput="evt_input_addr">
+
+        </textarea>
+        <view class="desc-btn" bindtap="descAddr">地址解析</view>
+    </view>
+    <view class="weui-panel">
+        <view class="weui-panel__bd">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <text></text>收货人：
+                </view>
+                <view class="weui-cell__bd">
+                    <input  type="text" name="name" value="{{maddr.name}}"  placeholder="请输入联系人姓名" />
+                </view>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <text></text>联系方式：
+                </view>
+                <view class="weui-cell__bd">
+                    <input type="text" name="mobile" value="{{maddr.mobile}}"   placeholder="请输入有效联系方式" />
+                </view>
+            </view>
+            <view class="weui-cell" bindtap="evt_showPopup" data-type="area">
+                <!-- <view class="weui-cell__hd">
+                    <text>*</text>地区
+                </view> -->
+                <!-- <view class="weui-cell__bd" wx:if="{{selected_region}}">
+                    <text class="red"></text>所在地区：
+                    <view class="choose" wx:if="{{choose}}" bindtap="chooseFun">请选择地址</view>
+                    <picker-view wx:if="{{!choose}}" class="region-picker-view" indicator-style="height: 30px;" style="height: 100px;" value="{{selected_region}}" bindchange="evt_regionchange">
+                        <picker-view-column class="column">
+                            <view wx:for="{{region_data.first}}" wx:for-item="item" wx:key="index">{{item.text}}</view>
+                        </picker-view-column>
+                        <picker-view-column class="column">
+                            <view wx:for="{{region_data.second}}" wx:for-item="item" wx:key="index">{{item.text}}</view>
+                        </picker-view-column>
+                        <picker-view-column class="column">
+                            <view wx:for="{{region_data.third}}" wx:for-item="item" wx:key="index">{{item.text}}</view>
+                        </picker-view-column>
+                    </picker-view>
+                </view> -->
+                <view class="weui-cell__hd">
+                    收货地区选择
+                </view>
+                <view class='area weui-cell__bd' style="text-align:right;">{{displayArea?displayArea:'请选择区域'}}</view>
+                <image class='area-image' src="{{img_url}}/public/wechat/empty/arrow-right.png" />
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <text></text>详细地址：
+                </view>
+                <view class="weui-cell__bd">
+                    <input type="text" name="addr" value="{{maddr.addr}}"  placeholder="街道、楼牌号等" />
+                </view>
+            </view>
+            <!--<view class="weui-cell">-->
+                <!--<view class="weui-cell__hd">-->
+                    <!--邮编-->
+                <!--</view>-->
+                <!--<view class="weui-cell__bd">-->
+                    <!--<input type="text" name="zip"  value="{{maddr.zip}}"  placeholder="邮编" />-->
+                <!--</view>-->
+            <!--</view>-->
+            <!-- <view class="weui-cell">
+                    <view class="weui-cell__hd">
+                        固定电话
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input type="text" name="tel" value="{{maddr.tel}}"   placeholder="收货人固定电话" />
+                    </view>
+            </view>
+            <view class="weui-cell">
+                    <view class="weui-cell__hd">
+                        邮箱
+                    </view>
+                    <view class="weui-cell__bd">
+                        <input type="text" name="email" value="{{maddr.email}}"   placeholder="收货人Email" />
+                    </view>
+            </view> -->
+            <view class="weui-cell weui-flex">
+                <view class="weui-cell__hd weui-cell__bd">
+                    <view>设为默认地址</view>
+                    <view class="label-text">注:每次下单时会使用该地址</view>
+                </view>
+                <view class="">
+                    <switch color="{{themecolor.price_text}}"  name="is_default" checked="{{maddr.is_default}}" value="{{maddr.is_default}}"/>
+                </view>
+            </view>
+        </view>
+    </view>
+    
+    <view class="weui-btn-area">
+        <button form-type="submit" type="primary" style="background:{{themecolor.price_text}}" >保存</button>
+    </view>
+    <popup-area bindchooseArea="evt_chooseArea"  show-area="{{showArea}}" is-address="true" area="{{editarea}}"></popup-area>
+</form>

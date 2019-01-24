@@ -1,0 +1,40 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../../utils/date.wxs" module="date" />
+<block wx:if="{{hideLoading}}">
+  <view class='no_team' wx:if="{{count==0}}">
+    <image mode="widthFix" src="{{img_url}}/public/wechat/member/no_group.png"></image>
+    <text>你还没有团员哦，快去邀请小伙伴吧～</text>
+  </view>
+  <scroll-view scroll-y="true" style="height:{{sv_height}}px;" bindscrolltolower="evt_scrolltolower" wx:else>
+    <view class='team_one' wx:for="{{group_list}}">
+      <view class='team_one_left'>
+        <image wx:if="{{item.member.avatar}}" src="{{images[item.member.avatar]?images[item.member.avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.member.avatar}}" bindload="load_image" mode="aspectFill"
+        />
+        <image mode="aspectFit" wx:else src='{{img_url}}/public/wechat/member/Group2.png'></image>
+        <text>{{item.member.name?item.member.name:item.member.mobile}}</text>
+      </view>
+      <view class='team_one_right'>
+        <text>{{date.dateFormat(item.member.regtime*1000, '20Yy-MM-dd')}}加入</text>
+      </view>
+    </view>
+    <view class="weui-loadmore" wx:if="{{pager.current && pager.total>pager.current}}">正在加载</view>
+    <view class="weui-loadmore weui-loadmore_line" wx:if="{{pager.total>1 && pager.total == pager.current}}">
+      <view class="weui-loadmore__tips">共{{count}}人</view>
+    </view>
+  </scroll-view>
+  <view class='invite_btn' bindtap='invite_more'>邀请更多人加入</view>
+  <view class="position-fix" wx:if="{{showAdd}}" bindtap="closeAdd">
+    <view class="addprice" catchtap="showAdd">
+      <view class="title">
+        <image catchtap="closeAdd" mode="aspectFit" class="goods_close" src="{{img_url}}/public/wechat/empty/close.png"></image>
+      </view>
+      <view class="content">
+        <image class='team_all' mode='aspectFit' src='{{img_url}}/public/wechat/member/team_all.png'></image>
+      </view>
+      <view class="product-quantity" style='text-align:center'>
+        今天还能邀请<text style='color:RGBA(252, 71, 115, 1)'>{{invitation_num}}</text>个人
+      </view>
+      <button class="add-operate" open-type="share">发送邀请链接给好友</button>
+    </view>
+  </view>
+</block>

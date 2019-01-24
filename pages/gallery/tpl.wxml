@@ -1,0 +1,62 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<template name="goods-list">
+    <view class="goods-list">
+        <view class="goods-item" wx:for="{{data_list}}" wx:for-index="index" wx:key="{{item.gid}}">
+            <image wx:if="{{!item.is_stock}}" class="no_stock" src="{{img_url}}/public/wechat/empty/no_stock.png"></image>
+            <view data-item="{{item.desc}}" catchtap="copyTBL">
+            <view class="goods-title">{{item.product.name}}</view>
+            <view class="goods-spec">
+                <label style='font-size:28rpx;'>{{item.goods_id}}</label>
+                <text style="float:right;color:#999;font-size:24rpx;">货号：{{item.product.bn}}</text>
+            </view>
+            <view class="goods-spec" wx:for="{{item.spec_desc.t}}" wx:for-item="lab" wx:for-index="idx" wx:key="idx">
+                <label>{{lab}}：</label>
+                <text wx:for="{{item.spec_desc.v[idx]}}" wx:for-item="spec" wx:for-index="index" wx:key="index">{{index==0?'':'/'}}{{spec.label}}</text>
+            </view>
+            </view>
+            <view class="goods-img {{!item.is_stock?'dead':''}}">
+                <image mode="aspectFill" wx:for="{{item.images}}" wx:for-item="img" wx:for-index="index"  wx:if="{{index<9}}" bindload="load_image" src="{{images[img.image_id]?images[img.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{img.image_id}}"  data-index="{{index}}" data-imgs="{{item.images}}"  bindtap="evt_previewimage" wx:key="{{img.image_id}}"></image>
+                <!-- <image mode="aspectFit" src="../../statics/image/tabbar/home_fill.png"></image>
+                <image mode="aspectFit" src="../../statics/image/tabbar/home_fill.png"></image>
+                <image mode="aspectFit" src="../../statics/image/tabbar/home_fill.png"></image>
+                <image mode="aspectFit" src="../../statics/image/tabbar/home_fill.png"></image>
+                <image mode="aspectFit" src="../../statics/image/tabbar/home_fill.png"></image> -->
+            </view>
+            <view class="goods-price">
+                <label class="new-price">
+                    ¥{{fmt.price(item.product.buy_price)}}
+                </label>
+                <label class="old-price" wx:if="{{fmt.num(item.product.mktprice)>fmt.num(item.product.buy_price)}}">
+                    ¥{{fmt.price(item.product.mktprice)}}
+                </label>
+                <label class="fare" style='line-height:56rpx'>
+                    代购费：￥{{fmt.price(item.product.purchase_fee)}}
+                </label>
+            </view>
+            <view class="goods-operate clearfix">
+                <label class="collection has_collection" catchtap="evt_fav" data-status="YES" data-id="{{item.goods_id}}" data-index="{{index}}" wx:if="{{favs[item.goods_id].is_fav||is_cart}}">
+                    已收藏
+                </label>
+                <label class="collection" catchtap="evt_fav" data-status="NO" data-id="{{item.goods_id}}" wx:else>
+                    + 收藏
+                </label>
+                <label class="contact">
+                    咨询
+                    <button open-type='contact'></button>
+                </label>
+                <label  wx:if="{{item.is_stock}}" class="share" bindtap="clickShare" data-item="{{item}}" style="background-image:url({{img_url}}/public/wechat/active/share.png);background-color:{{item.product.activity_type=='hot'?'#FC4773':'#F5A623'}}">
+                    转发
+                </label>
+                <label  wx:if="{{!item.is_stock}}" class="share" style="background-image:url({{img_url}}/public/wechat/active/share.png);background-color:#C3C3C3;">
+                    转发
+                </label>
+                 <label class="in-stock" wx:if="{{item.product.activity_type=='hot'&&item.is_stock}}" bindtap="addcart" data-item="{{item}}"  style="background-image:url({{img_url}}/public/wechat/active/cart.png);">
+                    进货
+                </label>
+                <label class="in-stock" wx:if="{{item.product.activity_type=='hot'&&!item.is_stock}}" style="background-image:url({{img_url}}/public/wechat/active/cart.png);background-color:#C3C3C3;">
+                    进货
+                </label>
+            </view>
+        </view>
+    </view>
+</template>

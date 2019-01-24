@@ -1,0 +1,26 @@
+page{
+    background: #efefef;
+}
+.article-item{
+    background: #fff;
+    width: 95%;
+    margin: 10px auto;
+    border-radius: 4px;
+}
+.article-title,.article-desc{
+    padding: 5px 15px;
+    font-size: 14px;
+}
+.article-title{
+    font-weight: 500;
+}
+.article-desc{
+    padding: 0 15px 5px 15px;
+    font-size: 12px;
+    color: #999;
+}
+image{
+    width: 100%;
+    display: block;
+    border-radius: 4px 4px 0 0;
+}

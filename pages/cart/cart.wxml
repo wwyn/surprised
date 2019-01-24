@@ -1,0 +1,123 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+
+<block  wx:if="{{hideLoading}}">
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<view class="cart-objects" wx:if="{{cart_empty=='false'}}">
+    <!-- 自营 //TODO 多商户 循环weui-panel -->
+    <view class="weui-panel">
+            <view class="weui-panel__bd" wx:if="{{!is_merchant}}">
+                <import src="tpl.wxml"/>
+                <template is="goods-cart" data="{{data_list:objects.goods,themecolor:themecolor,coitem_transform_dis:coitem_transform_dis,images:images,img_url:img_url}}"/>
+                <view class="weui-panel__ft order-promotion" wx:if="{{promotions.order}}">
+                <view class="weui-cell weui-cell_link">
+
+                        <view class="promotion-list">
+                                <view class="p-item" wx:for="{{promotions.order}}" wx:for-item="item" wx:key="index">
+                                    <view class="p-tag" wx:if="{{item.tag!='送赠品'}}">{{item.tag}}<block wx:if="{{item.rule_type=='coupon'}}">券</block></view>
+                                    <view class="p-desc">
+                                        <view wx:if="{{item.tag=='送赠品'}}">
+                                            <view class="git-item" wx:for="{{item.solution}}">
+                                                <block wx:if="{{item}}">[赠品] {{item}}</block>
+                                            </view>
+                                        </view>
+                                        <block wx:else>
+                                        {{item.name}}<block wx:if="{{item.save&&item.save>0}}">,优惠 <text>¥</text>{{fmt.price(item.save)}}</block>
+                                        </block>
+                                    </view>
+                                </view>
+                        </view>
+
+                </view>
+            </view>
+            </view>
+            <view class="weui-panel__bd"  wx:if="{{is_merchant}}">
+                <block wx:for="{{objects}}" wx:for-item="object_cart" wx:for-index="object_index" wx:key="object_index">
+                    <view class="merchant_shop">
+                        <view class="co-check" style="float:left;">
+                            <icon type="circle" size="18" color="#ccc" wx:if="{{object_cart.object_count!=object_cart.objects.goods.length}}" bindtap="check_all" data-index="{{object_index}}" data-status="enabled"/>
+                            <icon type="success" size="18" wx:if="{{object_cart.object_count==object_cart.objects.goods.length}}" data-index="{{object_index}}" bindtap="check_all" data-status="disabled" color="{{themecolor.cart_checkouticon_color}}"/>
+                        </view>
+                        <text>{{object_cart.merchant.show_name}}</text>
+                    </view>
+                    <import src="tpl.wxml"/>
+                    <template is="goods-cart" data="{{data_list:object_cart.objects.goods,themecolor:themecolor,coitem_transform_dis:coitem_transform_dis,images:images,img_url:img_url,object_index:object_index}}"/>
+                    <view class="weui-panel__ft order-promotion" wx:if="{{object_cart.promotions.order}}">
+                <view class="weui-cell weui-cell_link">
+
+                        <view class="promotion-list">
+                                <view class="p-item" wx:for="{{object_cart.promotions.order}}" wx:for-item="item" wx:key="index">
+                                    <view class="p-tag" wx:if="{{item.tag!='送赠品'}}">{{item.tag}}<block wx:if="{{item.rule_type=='coupon'}}">券</block></view>
+                                    <view class="p-desc">
+                                        <view wx:if="{{item.tag=='送赠品'}}">
+                                            <view class="git-item" wx:for="{{item.solution}}">
+                                                <block wx:if="{{item}}">[赠品] {{item}}</block>
+                                            </view>
+                                        </view>
+                                        <block wx:else>
+                                        {{item.name}}<block wx:if="{{item.save&&item.save>0}}">,优惠 <text>¥</text>{{fmt.price(item.save)}}</block>
+                                        </block>
+                                    </view>
+                                </view>
+                        </view>
+
+                </view>
+            </view>
+                </block>
+            </view>
+            
+    </view>
+</view>
+<view class="cart-footer weui-flex" wx:if="{{objects && cart_empty=='false'}}">
+    <view class="cart_all" catchtap="is_checkAll">
+        <icon type="{{is_check_sty[is_check].type}}" size="18" color="{{is_check_sty[is_check].color}}" style="border-radius:100%;" />
+        <text>全选</text>
+    </view>
+    <view class="cart-total weui-flex__item">
+        <view class="total">
+            合计:<text style="color:{{themecolor.price_text}}">¥ {{fmt.price(finally_cart_amount)}}</text>
+            <text>({{fmt.num(goods_count)}}件)</text>
+        </view>
+    </view>
+    <navigator open-type="navigate" class="go-checkout"
+               style="backgroundColor: {{themecolor.price_text}}"
+               ver-class="go-checkout-active" url="/pages/checkout/checkout" wx:if="{{goods_count>0 && cart_empty=='false'}}">
+        去结算
+    </navigator>
+    <view wx:else class="go-checkout" bindtap="checkAll_msg">去结算</view>
+</view>
+
+<view class="prompt-panel" wx:if="{{cart_empty=='true'}}">
+    <image mode="widthFix" src="{{img_url}}/public/wechat/empty/cart_empty.png" />
+    <view class="text" >购物车空空，快去逛一逛～</view>
+    <navigator class="navigator" open-type="switchTab" url="/pages/index/index">去逛逛</navigator>
+</view>
+
+
+<view class="fav-popup">
+    <view class="fav-title">收藏商品</view>
+    <import src="../gallery/tpl.wxml"/>
+    <view wx:if="{{empty_fav == 'NO'}}">
+        <template is="goods-list" data="{{data_list:fav_list,img_url:img_url,is_cart:true,images:images}}"/>
+    </view>
+    <view wx:if="{{empty_fav == 'YES'}}">
+        <view class="no-data">还没有任何收藏商品哦</view>
+    </view>
+</view>
+
+<view class="position-fix" wx:if="{{remarkShow}}" catchtouchmove='true'>
+    <view class="remark">
+        <view class="title">添加备注信息</view>
+        <view class="content">
+          <textarea placeholder='请输入商品备注信息' value="{{remarkContent}}" bindinput="insertContent">
+          </textarea>
+        </view>
+        <view class="cart-operate">
+            <view class="cart-cancel" bindtap="closeMark">点错了</view>
+            <view class="cart-confirm" bindtap="submitMark">确定</view>
+        </view>
+    </view>
+</view>
+<addcart-component bindaddCart="evt_addCart" goods-detail="{{data_detail}}" show-spec="{{showSpec}}" showFastBuy="true"></addcart-component>
+<share-component bindshareImg="evt_shareImg" goods-detail="{{data_detail}}" show-share="{{showShare}}"></share-component>
+<download-image   img-url="{{imgUrl}}" show-img="{{showImg}}"></download-image>
+</block>

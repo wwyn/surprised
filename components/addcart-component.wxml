@@ -1,0 +1,55 @@
+<addcart-component>
+	<view>
+	  <view class="weui-mask" id="goods_mask" hidden="{{!showSpec}}" bindtap="closeSpec"></view>
+	  <view class="{{showSpec?'weui-actionsheet weui-actionsheet_toggle goods_actionsheet':'weui-actionsheet goods_actionsheet'}}" id="goods_actionsheet">
+	      <view class="goods_spec">
+	        <view class="goods_infor">
+	          <view class="goods_pic">
+	              <image mode="aspectFit" src="{{images[goodsDetail.image_default_id]?images[goodsDetail.image_default_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" wx:if="{{goodsDetail.image_default_id}}" data-ident="{{goodsDetail.image_default_id}}" bindload="load_image" class="goods_image"></image>
+	          </view>
+	          <view class="price_stock">
+              <view class="name">{{goodsDetail.product.name}}</view>
+	            <view class="pri">￥{{goodsDetail.product.buy_price}}<text>ID:{{goodsDetail.product.goods_id}}</text></view>
+	          </view>
+	          <view class="goods_close" bindtap="closeSpec" style="background-image:url({{img_url}}/public/wechat/empty/close.png)"></view>
+	        </view>
+	        <view class="goods_choice" wx:for="{{goodsDetail.spec_desc.t}}" wx:for-index="idx"  wx:for-item="item" wx:key="idx">
+	          <view class="title">{{item}}</view>
+	          <view class="colors">
+	            <block wx:for="{{goodsDetail.spec_desc.v[idx]}}"  wx:for-item="option"  wx:key="index">
+	                <text class="spec-item disabled" wx:if="{{option.marketable == 'false'||stock[option.sku_bn].num=='0'}}">{{option.label}}</text>
+	                <text bindtap="tapspecitem" data-productid="{{option.product_id}}" wx:elif="{{option.marketable == 'true'}}" class="spec-item {{option.current == 'true'?' choosed':''}}">{{option.label}}</text>
+	            </block>
+	          </view>
+	        </view>
+	        <view class="goods_amount">
+	          <view class="label">购买数量</view>
+            <view wx:if="{{isGb&&current_product.member_restrict_number}}" class="limit">单个ID限购{{current_product.member_restrict_number}}件</view>
+	          <view class="product-quantity">
+	            <button class="pq-minus" plain="true" disabled="{{quantityVal<2}}" bindtap="tappqminus">-</button>
+	            <input type="number" value="{{quantityVal}}" class="pq-ipt" bindchange="evt_quantityval"/>
+	            <button class="pq-minus" plain="true" bindtap="tappqplus">+</button>
+	          </view>
+	        </view>
+          <view class="goods_remark">
+	          <view class="label">备注：</view>
+            <view class="textarea"  hidden="{{!showSpec}}">
+                <input value="{{remark}}"  bindinput="evt_remark" placeholder='请输入备注信息'></input>
+            </view>
+            
+	        </view>
+	        <view class="goods_sure" wx:if="{{!showFastBuy}}">
+	          <!-- <view class="a" style="background-color: #c3c3c3;display: none;">已售罄</view> -->
+	          <view class="a" bindtap="linkTo" wx:if="{{isGb}}">确定</view>
+            <view class="a" bindtap="addcart" wx:else>确定</view>
+	        </view>
+	        <view class="goods_sure two-button" wx:else>
+	          <!-- <view class="a" style="background-color: #c3c3c3;display: none;">已售罄</view> -->
+	          
+	          <view class="a" bindtap="addcart" data-stock="{{stock[goodsDetail.product.bn].num}}" data-fastbuy="true">一键订购</view>
+            <view class="a buynow" data-stock="{{stock[goodsDetail.product.bn].num}}" bindtap="addcart">加入购物车</view>
+	        </view>
+	      </view>
+	  </view>
+	</view>
+</addcart-component>

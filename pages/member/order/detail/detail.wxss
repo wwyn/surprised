@@ -1,0 +1,294 @@
+page {
+  background: #fafafa;
+  padding-bottom: 55px;
+}
+
+.weui-media-box__hd_in-appmsg {
+  line-height: 1;
+}
+
+.location-box {
+  width: 20px;
+  margin-top: 10px;
+}
+
+.location-box {
+  width: 20px;
+}
+
+.location-box image {
+  width: 20px;
+  height: 20px;
+}
+
+.name-and-mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.name-and-mobile .mobile {
+  margin-left: 10px;
+  display: inline-block;
+  color: #fc4773;
+  font-size: 24rpx;
+  position: relative;
+  padding-right: 10px;
+}
+
+.name-and-mobile .mobile:after {
+  content: " ";
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-width: 1.5px 1.5px 0 0;
+  border-color: #c8c8cd;
+  border-style: solid;
+  -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 50%;
+  margin-top: -4px;
+  right: 2px;
+}
+
+.area {
+  margin-top: 19rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.name-and-mobile .name text {
+  color: #666;
+}
+
+.weui-cell__ft_in-access {
+  font-size: 14px;
+}
+
+.co-item {
+  padding-right: 25px;
+}
+
+.co-name {
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  line-height: 34rpx;
+  height: 68rpx;
+  font-size: 26rpx;
+}
+
+.goods-name {
+  width: 70%;
+}
+
+.goods-price {
+  color: #333;
+}
+
+.co-price {
+  line-height: 22px;
+  color: #f60;
+  font-weight: lighter;
+  font-stretch: ultra-condensed;
+}
+
+.co-price text {
+  color: #999;
+}
+
+.co-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.goods-promotion {
+  line-height: 25px;
+}
+
+.order-promotion .weui-cell_link {
+  color: #666;
+}
+
+.cart-total {
+  font-size: 12px;
+  text-align: right;
+  display: block;
+}
+
+.cart-total .price {
+  color: #f60;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.co-item .weui-media-box__hd {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.co-item .weui-media-box__bd {
+  /* width: 80%; */
+  flex: auto;
+}
+
+/* .co-inline{
+    justify-content: flex-start;
+} */
+
+.co-spec {
+  width: 60%;
+  font-size: 24rpx;
+}
+
+.co-price {
+  width: 40%;
+  text-align: right;
+}
+
+.co-goodsId {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+}
+
+.button-pay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  background-color: #fc4773 !important;
+}
+
+.button-pay:after {
+  border-radius: 0;
+}
+
+.weui-panel:before {
+  border: none;
+}
+
+.weui-media-box_appmsg:before {
+  border: none;
+}
+
+.weui-cell:before, .weui-panel:after {
+  border: none;
+}
+
+.weui-cell__hd {
+  font-size: 14px;
+  color: #333;
+}
+
+.order-status {
+  color: #fc4773;
+  font-size: 14px;
+}
+
+.payapp-cell {
+  padding: 10px 15px 5px 15px;
+}
+
+.payapp-cell .weui-cell__hd {
+  font-size: 14px;
+  color: #999;
+}
+
+.payapp-cell .weui-cell__ft {
+  font-size: 14px;
+  color: #666;
+}
+
+.total-price {
+  color: #fc4773;
+}
+
+.aftersales-btn {
+  border-color: #fc4773 !important;
+  color: #fc4773 !important;
+  width: 70px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  padding: 0 !important;
+}
+
+.wallet, .nothing {
+  width: 32rpx;
+  margin-right: 0.8em;
+}
+
+.nothing {
+  height: 13rpx;
+  display: inline-block;
+}
+
+.cart-remark {
+  line-height: 40rpx;
+  color: #999;
+  font-size: 24rpx;
+  padding: 12rpx 0;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  position: relative;
+}
+
+.cart-remark:before {
+  content: " ";
+  position: absolute;
+  left: 30rpx;
+  top: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1rpx solid #ebebeb;
+  color: #ebebeb;
+}
+
+.cart-remark text {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.cart-remark_right {
+  float: right;
+  width: 80rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border: 1rpx solid RGBA(252, 71, 115, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color: RGBA(252, 71, 115, 1);
+  font-size: 24rpx;
+}
+
+.contact1 {
+  position: absolute;
+  left: 635rpx;
+  opacity: 0;
+  /* z-index: -1; */
+}
+
+.contact2 {
+  position: absolute;
+  left: 660rpx;
+  opacity: 0;
+  /* z-index: -1; */
+}
+
+.contact3 {
+  position: absolute;
+  left: 680rpx;
+  opacity: 0;
+  /* z-index: -1; */
+}

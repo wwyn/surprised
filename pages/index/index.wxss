@@ -1,0 +1,86 @@
+page{
+    background:#efefef;
+}
+swiper{
+  height:300rpx;
+}
+swiper image{
+  width:100%;
+  height:300rpx;
+}
+.search_fix{
+    height:60rpx;
+    background:RGBA(250, 250, 250, 1);
+    padding:14rpx 30rpx;
+}
+.search-bar__box{
+    width:602rpx;
+    line-height:60rpx;
+    height:60rpx;
+    border-radius:30rpx;
+    background:#EEEEEE;
+    color:#999;
+    font-size:28rpx;
+    padding-left:88rpx;
+    position:relative;
+}
+.weui-icon-search_in-box{
+    left:24rpx;
+    width:40rpx;
+    height:40rpx;
+    top:12rpx;
+    background-size:cover;
+}
+.index-tab{
+    line-height:80rpx;
+    display:flex;
+    background:#fff;
+}
+.index-tab .tab-item{
+    flex:1;
+    color:#333;
+    text-align:center;
+}
+.index-tab .tab-item view{
+    width:180rpx;
+    font-size:30rpx;
+    margin:0 auto;
+    
+}
+.index-tab .tab-item view.actived{
+    border-bottom:4rpx solid #FC4773;
+    color:#FC4773;
+}
+.active-desc{
+  position:relative;
+}
+.active-display{
+  /* position:absolute;
+  bottom:0;
+  right:0; */
+  line-height:36rpx;
+  background:#fff;
+  color:rgb(59,159,255);
+  font-size:28rpx;
+}
+.active-display2{
+  color:rgb(59,159,255);
+  font-size:28rpx;
+}
+.study{
+  position:fixed;
+  left:18rpx;
+  bottom:18rpx;
+  width:128rpx;
+  height:128rpx;
+}
+.study image{
+  width:100%;
+  height:100%;
+}
+.bottom{
+  color:#666;
+  line-height:100rpx;
+  font-size:24rpx;
+  text-align:center;
+}

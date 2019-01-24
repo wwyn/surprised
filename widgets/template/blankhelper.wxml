@@ -1,0 +1,8 @@
+
+<!--
+    widget-blankhelper
+    空白辅助
+-->
+<template name="widget-blankhelper">
+    <view wx:if="{{data.height}}" class="widget-blankhelper" style="height:{{data.height}}px"></view>
+</template>

@@ -1,0 +1,15 @@
+<!--components/download-image.wxml-->
+<view class="position-fix" wx:if="{{showImg}}" catchtouchmove='true'>
+    <view class="download">
+        
+        <scroll-view scroll-y="true" class="download-img" style="background-image:url({{img_url}}/public/wechat/empty/img_loading.png);">
+            <image data-img="{{imgUrl}}" catchtap="preview_img" src="{{imgUrl}}" mode="widthFix"></image>
+        </scroll-view>
+        <view class="download-btn" bindtap="evt_download">
+            <button><image src="{{img_url}}/public/wechat/empty/share.png"></image>分享给好友</button>
+        </view>
+        <view class='download-close1' bindtap="evt_close">
+           <image class="download-close" src="{{img_url}}/public/wechat/empty/close_img.png" mode="widthFix"></image>
+        </view>
+    </view>
+</view>

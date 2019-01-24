@@ -1,0 +1,49 @@
+form{
+    font-size: 28rpx;
+}
+form .weui-cell__hd{
+    width: 100px;
+}
+form .weui-cell__hd text,text.red{
+    color: #f00;
+}
+form button{
+    width: 100%;
+}
+.label-text{
+    font-size: 26rpx;
+    color: #999;
+}
+.choose{
+    padding:10px;
+}
+form .weui-cell__bd input{
+  text-align:right;
+}
+.area-image{
+  width: 20rpx !important;
+  height: 30rpx !important;
+}
+.address-desc{
+  width:100%;
+  background:#fff;
+  margin:0 auto;
+  padding:30rpx;
+  border-radius:6rpx;
+  font-size:26rpx;
+  color:#333;
+}
+.address-desc textarea{
+  width:690rpx;
+  height:150rpx;
+  font-size:26rpx;
+}
+.desc-btn{
+  width:200rpx;
+  height:60rpx;
+  line-height:60rpx;
+  text-align:center;
+  background:#FC4773;
+  color:#fff;
+  border-radius:30rpx;
+}

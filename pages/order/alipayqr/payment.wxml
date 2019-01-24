@@ -1,0 +1,17 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+    <view class="QRcode">
+        <view class="order-id">订单号:{{pay.order_id}}</view>
+        <view class="order-total">¥{{pay.total_fee}}</view>
+        <view class="order-pay-qrcode">
+            <image src="{{qrcode_api+'?txt='+pay.qr_code}}" mode="widthFix"/>
+        </view>   
+        <view class="tips">打开支付宝[扫一扫]</view>     
+    </view>
+    <view class="step-list">
+        <view class="step-item">1.截屏保存图片</view>
+        <view class="step-item">2.打开支付宝扫一扫</view>
+        <view class="step-item">3.选择相册中的二维码</view>
+        <view class="step-item">4.付款成功</view>
+    </view>
+</block>

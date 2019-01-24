@@ -1,0 +1,10 @@
+{
+    "enablePullDownRefresh":true,
+    "backgroundTextStyle":"light",
+    "backgroundColor":"#666666",
+    "usingComponents": {
+      "addcart-component": "/components/addcart-component",
+      "share-component": "/components/share-component",
+      "download-image": "/components/download-image"
+    }
+}

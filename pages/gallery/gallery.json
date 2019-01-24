@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "搜索",
+  "usingComponents": {
+    "addcart-component": "/components/addcart-component",
+    "share-component": "/components/share-component",
+    "download-image": "/components/download-image"
+  }
+}

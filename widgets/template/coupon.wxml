@@ -1,0 +1,40 @@
+<!-- 视频组件 -->
+<template name="widget-coupon">
+    <view class="widget-coupon">
+        <view class=""  wx:if="{{data.items.length>0&&data.display_type=='img'&&data.imgSrc!=''}}">
+            <view class="coupon-item-img" wx:for="{{data.items[0].cpns_list}}" wx:for-item="coupon"  data-cpnurl="a/{{data.items[0].activity.activity_id}}/c/{{coupon.cpns_id}}/k/{{coupon.cpns_key}}" bindtap="widget_event_delegate" data-event-tap="evt_achievecoupon" data-widget-name="coupon" data-widget-index="{{data.widget_index}}">
+                <image src="{{data.imgSrc}}" mode="widthFix"/>
+            </view>
+        </view>
+        <view class=""  wx:elif="{{data.items.length>0}}">
+            <view class="{{coupon.is_buy == 'true'?'weui-panel__bd coupon-item':'weui-panel__bd coupon-item disabled-coupons'}}" wx:for="{{data.items[0].cpns_list}}" wx:for-item="coupon" data-cpnurl="a/{{data.items[0].activity.activity_id}}/c/{{coupon.cpns_id}}/k/{{coupon.cpns_key}}" bindtap="widget_event_delegate" data-event-tap="evt_achievecoupon" data-widget-name="coupon" data-widget-index="{{data.widget_index}}">
+                <view class="coupon-detail">
+                    <view class="cpnname">{{coupon.cpns_name}}</view>
+                    <view class="cpnrule">{{coupon.description}}</view>
+                    <view class="cpntime">有效期:{{coupon.from_time}}至{{coupon.to_time}}</view>
+                </view>
+                <view class="line-block">
+                    <view class="top-cricle"></view>
+                    <view class="line-through"></view>
+                    <view class="bottom-cricle"></view>
+                </view>
+                <view class="get-coupon">
+                    <view class="progress-text">
+                        <text> 已抢{{coupon.bought}}% </text>
+                    </view>
+                    <view class="weui-progress">
+                        <view class="weui-progress__bar">
+                            <view class="weui-progress__inner-bar js_progress" style="width: {{coupon.bought}}%"></view>
+                        </view>
+                    </view>
+                    <view class="get-btn" wx:if="{{coupon.is_buy == 'true'}}">
+                        领取
+                    </view>
+                    <view class="get-btn" wx:else>
+                        已领完
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

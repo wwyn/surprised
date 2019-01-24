@@ -1,0 +1,135 @@
+
+<!--
+    widget-imagetext
+    图文混合
+-->
+<template name="widget-imagetext">
+    <view class="">
+        <block wx:if="{{data.isScroll == 'noscroll'}}">
+            <view wx:if="{{data.type == 'type_1'}}">
+                <!-- 标题图片文字上下排列 -->
+                <view class="imagetext imageNoScroll {{data.type}}"   wx:for="{{data.items}}" wx:for-item="item" wx:key="index">
+                    <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                        <view class="image-block">
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%;"></image>
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                        </view>
+                        <view class="title" style="color:{{data.themecolor.text_primary}}">{{item.title}}</view>
+                        <text class="content" style="color:{{data.themecolor.text_info}}">{{item.content}}</text>
+                    </navigator>
+                </view>
+            </view>
+            <view wx:if="{{data.type == 'type_2'}}">
+                <!-- 左小图右文字 -->
+                <view class="imagetext clearfix {{data.type}}"   wx:for="{{data.items}}" wx:for-item="item" wx:key="index">
+                    <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                        <view class="image-block" style="width:120px;height:75px;line-height: 75px;">
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%"></image>
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                        </view>
+                        <view class="" style="padding-left:137.5px">
+                            <view class="title" style="color:{{data.themecolor.text_primary}}">{{item.title}}</view>
+                            <text class="content" style="color:{{data.themecolor.text_info}}">{{item.content}}</text>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view wx:if="{{data.type == 'type_3'}}">
+                <!-- 左边大图片右边文字 -->
+                <view class="imagetext clearfix {{data.type}}"  wx:for="{{data.items}}" wx:for-item="item" wx:key="index">
+                    <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                        <view class="image-block" style="width:170px;height:125px;line-height: 125px;">
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%"></image>
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                        </view>
+                        <view class="" style="padding-left:187.5px">
+                            <view class="title" style="color:{{data.themecolor.text_primary}}">{{item.title}}</view>
+                            <text class="content" style="color:{{data.themecolor.text_info}}">{{item.content}}</text>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view wx:if="{{data.type == 'type_4'}}">
+                <!-- 左边文字右边图片 -->
+                <view class="imagetext clearfix {{data.type}}"  wx:for="{{data.items}}" wx:for-item="item" wx:key="index">
+                    <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                        <view class="image-block" style="width:170px;height:125px;line-height: 125px;">
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%"></image>
+                            <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                        </view>
+                        <view class="" style="padding-right:187.5px">
+                            <view class="title" style="color:{{data.themecolor.text_primary}}">{{item.title}}</view>
+                            <text class="content" style="color:{{data.themecolor.text_info}}">{{item.content}}</text>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <scroll-view scroll-x="true" wx:if="{{data.isScroll}}">
+                <view style="display: flex;padding:0 15px;background-color: #ffffff">
+                    <view class="imagetext-slider-item" wx:for="{{data.items}}" wx:for-item="item" wx:key="index">
+                        <view style="width:{{data.systeminfo.windowWidth * 0.8}}px" wx:if="{{data.type == 'type_1'}}">
+                            <!-- 标题图片文字上下排列 -->
+                            <view class="imagetext {{data.type}}">
+                                <navigator open-type="{{item.url.openType}}" class="link" url="{{item.url?item.url.url:''}}">
+                                    <view class="image-block">
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%;"></image>
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                                    </view>
+                                    <view class="title">{{item.title}}</view>
+                                    <text class="content">{{item.content}}</text>
+                                </navigator>
+                            </view>
+                        </view>
+                        <view wx:if="{{data.type == 'type_2'}}">
+                            <!-- 左小图右文字 -->
+                            <view class="imagetext clearfix {{data.type}}">
+                                <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                                    <view class="image-block" style="width:120px;height:75px;line-height: 75px;">
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%"></image>
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                                    </view>
+                                    <view class="" style="padding-left:137.5px">
+                                        <view class="title" style="width:{{data.systeminfo.windowWidth * 0.22}}px">{{item.title}}</view>
+                                        <text class="content" style="width:{{data.systeminfo.windowWidth * 0.22}}px">{{item.content}}</text>
+                                    </view>
+                                </navigator>
+                            </view>
+                        </view>
+                        <view wx:if="{{data.type == 'type_3'}}">
+                            <!-- 左边大图片右边文字 -->
+                            <view class="imagetext clearfix {{data.type}}">
+                                <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                                    <view class="image-block" style="width:170px;height:125px;line-height: 125px;">
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%"></image>
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                                    </view>
+                                    <view class="" style="padding-left:187.5px">
+                                        <view class="title" style="width:{{data.systeminfo.windowWidth * 0.22}}px">{{item.title}}</view>
+                                        <text class="content" style="width:{{data.systeminfo.windowWidth * 0.22}}px">{{item.content}}</text>
+                                    </view>
+                                </navigator>
+                            </view>
+                        </view>
+                        <view wx:if="{{data.type == 'type_4'}}">
+                            <!-- 左边文字右边图片 -->
+                            <view class="imagetext clearfix {{data.type}}">
+                                <navigator open-type="{{item.url.openType}}" class="link" url="{{data.items.length > 0?item.url.url:''}}">
+                                    <view class="image-block" style="width:170px;height:125px;line-height: 125px;">
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" src="{{item.image.src}}" wx:if="{{data.items.length > 0}}" mode="widthFix"  style="width:100%"></image>
+                                        <image class="{{data.borderRadius == 'radius'?'image image-radius':'image'}}" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                                    </view>
+                                    <view class="" style="padding-right:187.5px">
+                                        <view class="title" style="width:{{data.systeminfo.windowWidth * 0.22}}px">{{item.title}}</view>
+                                        <text class="content" style="width:{{data.systeminfo.windowWidth * 0.22}}px">{{item.content}}</text>
+                                    </view>
+                                </navigator>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </block>
+    </view>
+</template>

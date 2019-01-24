@@ -1,0 +1,80 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:if="{{hideLoading}}">
+    <block wx:if="{{!pay_success}}">
+        <view class="payfee-top" wx:if="{{setting.quickpay_logo}}">
+            <image class="payfee-logo" src="{{images[setting.quickpay_logo]?images[setting.quickpay_logo]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{setting.quickpay_logo}}" bindload="load_image" mode="aspectFill"/>
+            <view class="payfee-tip" wx:if="{{setting.quickpay_payee}}">向<text class="payfee-name">{{setting.quickpay_payee}}</text>付款</view>
+            <view class="payfee-warning" wx:if="{{setting.quickpay_payee_warning}}">{{setting.quickpay_payee_warning}}</view>
+        </view>
+    </block>
+    <form bindsubmit="evt_submit_order" bindreset="evt_reset" report-submit="true">
+        <block wx:if="{{!pay_success}}">
+            <view class="weui-cells weui-cells_form">
+                <view class="weui-cell wc-lg" >
+                  <view class="weui-cell__bd">
+                        <input class="weui-input" show-confirm-bar="true" adjust-position="false"  auto-focus="true" bindinput="evt_realcal" data-name="order_total" name="order_total" type="digit" placeholder="输入金额"/>
+                  </view>
+                </view>
+                <block wx:if="{{setting.quickpay_discount_rate>0 && setting.quickpay_discount_rate<1}}">
+                    <view class="weui-cell discount-cell">
+                      <view class="weui-cell__bd">
+                            <input class="weui-input" placeholder-style="color:red"  type="digit" placeholder="{{setting.quickpay_discount_rate*10}}" disabled="true"/>
+                      </view>
+                      <view class="weui-cell__ft">
+                          折
+                      </view>
+                    </view>
+                    <view class="weui-cell out-discount" wx:if="{{setting.quickpay_out_discount_enabled == 'yes'}}">
+                      <view class="weui-cell__bd">
+                            <input bindinput="evt_realcal" name="out_discount" show-confirm-bar="true" data-name="out_discount" adjust-position="false" class="weui-input" type="digit" placeholder="0.0"/>
+                      </view>
+                      <view class="weui-cell__ft">
+                          不参加折扣
+                      </view>
+                    </view>
+                </block>
+                <view class="weui-cell" >
+                  <view class="weui-cell__bd">
+                        <textarea class="weui-textarea" name="memo" auto-height="true" show-confirm-bar="true" adjust-position="false" placeholder="留言、备注" maxlength="300"></textarea>
+                  </view>
+                </view>
+            </view>
+            <view class="weui-btn-area">
+                <button type="primary"  form-type="submit" disabled="{{paying ||!finally_total||finally_total<=0}}">立即支付
+                    <block wx:if="{{finally_total && finally_total>0}}"> <text>¥</text>{{fmt.price(finally_total)}}</block>
+                </button>
+            </view>
+        </block>
+        <block wx:if="{{pay_success}}">
+            <view class="weui-msg">
+                <view class="weui-msg__icon-area">
+                    <icon type="success" size="64"/>
+                </view>
+                <view class="weui-msg__text-area">
+                    <view class="weui-msg__title">
+                        成功支付 <text>¥</text>{{fmt.price(finally_total)}}
+                    </view>
+                    <view class="weui-msg__desc">
+                        我们已经收到您的付款
+                    </view>
+                </view>
+                <view class="weui-msg__opr-area">
+                    <view class="weui-btn-area">
+                        <button form-type="reset" type="primary">确认</button>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </form>
+    <view class="weui-footer">
+        <view class="weui-footer__text" wx:if="{{score_g>0}}">本次支付可得积分:<text class="score-g">{{fmt.price(score_g||0)}}</text></view>
+        <view class="weui-footer__links">
+            <navigator url="/pages/quickpay/order"  class="weui-footer__link">
+                查看快捷付款记录
+            </navigator>
+            <view wx:if="{{!pay_success}}" bindtap="evt_showqrcode" class="weui-footer__link">查看该页二维码</view>
+        </view>
+
+    </view>
+</block>

@@ -1,0 +1,67 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<!--通过微信小程序getPhoneNumber快速绑定手机
+    https://mp.weixin.qq.com/debug/wxadoc/dev/api/getPhoneNumber.html
+-->
+<block  wx:if="{{hideLoading}}">
+<view class="weui-msg">
+    <view class="weui-msg__text-area">
+        <view class="weui-msg__title">
+            绑定手机
+        </view>
+        <view class="weui-msg__desc">
+            保护账户安全
+        </view>
+    </view>
+</view>
+<view class="weui-msg__opr-area">
+    <view class="weui-btn-area">
+        <button type="primary" open-type="getPhoneNumber" bindgetphonenumber="evt_getphonenumber" style="background-color:{{themecolor.form_submit_color}};color:{{themecolor.form_submittext_color}};">立即绑定</button>
+    </view>
+    <view class="weui-btn-area">
+        <button bindtap="evt_goback" type="dedault">跳过</button>
+    </view>
+</view>
+<view class="weui-msg__extra-area">
+    将使用您当前微信认证手机号绑定
+</view>
+<!--绑定手机并设置密码
+    未启用
+-->
+<form bindsubmit="evt_submit" wx:if="{{false}}">
+    <view class="weui-cells__title">绑定手机</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="mobile" bindinput="evt_mobileipt" type="number" placeholder="请输入手机号" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input  weui-cell_vcode">
+            <view class="weui-cell__hd">
+                <view class="weui-label">验证码</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="vcode" type="number" placeholder="输入验证码"/>
+            </view>
+            <view class="weui-cell__ft">
+                <view class="weui-vcode-btn {{vcode_percent && vcode_percent>0?'vcode-sending':''}}" bindtap="evt_getcode" >{{vcode_percent && vcode_percent>0?"验证码已发送":"发送验证码"}}</view>
+                <progress percent="{{vcode_percent||0}}" stroke-width="2" />
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">设置密码</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="password" placeholder="请设置密码"/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" form-type="submit"  style="background-color:{{themecolor.form_submit_color}};color:{{themecolor.form_submittext_color}};">确定</button>
+        <button class="weui-btn" plain="true" type="default" bindtap="evt_goback">跳过</button>
+    </view>
+</form>
+</block>

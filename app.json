@@ -1,0 +1,90 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/scene/redirect",
+    "pages/gallery/gallery",
+    "pages/invite/invite",
+    "pages/invite/index",
+    "pages/product/product",
+    "pages/register/register",
+    "pages/register/agreement/index",
+    "pages/login/login",
+    "pages/product/comment/index",
+    "pages/cart/cart",
+    "pages/brand/brand",
+    "pages/member/index",
+    "pages/member/signup/mobile",
+    "pages/member/myteam/index",
+    "pages/member/information/information",
+    "pages/member/login/oauth",
+    "pages/member/statement/index",
+    "pages/member/viprules/viprules",
+    "pages/member/setting/index",
+    "pages/member/performance/index",
+    "pages/member/order/index",
+    "pages/member/order/detail/detail",
+    "pages/member/comment/index",
+    "pages/member/addr/addr",
+    "pages/member/favorite/index",
+    "pages/member/addr/edit/edit",
+    "pages/member/logistics/tracker/index",
+    "pages/ubalance/index",
+    "pages/ubalance/recharge",
+    "pages/ubalance/pay",
+    "pages/ubalance/cash/out",
+    "pages/ubalance/cash/status",
+    "pages/quickpay/index",
+    "pages/quickpay/order",
+    "pages/checkout/checkout",
+    "pages/order/payment/payment",
+    "pages/order/alipayqr/payment",
+    "pages/common/noconnect",
+    "pages/limitimepurchase/index",
+    "pages/fastbuy/fastbuy",
+    "pages/search/search",
+    "pages/brandsearch/brandsearch",
+    "pages/event/event",
+    "pages/brandevent/brandevent",
+    "pages/article/index",
+    "pages/article/detail/detail",
+    "pages/index/page/page"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#FC4773",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "statics/image/tabbar/home.png",
+        "selectedIconPath": "statics/image/tabbar/home_fill.png"
+      },
+      {
+        "pagePath": "pages/brand/brand",
+        "text": "品牌",
+        "iconPath": "statics/image/tabbar/brand.png",
+        "selectedIconPath": "statics/image/tabbar/brand_fill.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "购物车",
+        "iconPath": "statics/image/tabbar/cart.png",
+        "selectedIconPath": "statics/image/tabbar/cart_fill.png"
+      },
+      {
+        "pagePath": "pages/member/index",
+        "text": "我的",
+        "iconPath": "statics/image/tabbar/my.png",
+        "selectedIconPath": "statics/image/tabbar/my_fill.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+page{
+ background:#efefef;
+}
+.weui-label{
+    width: 60px;
+}
+.weui-vcode-btn{
+    margin-left: 0;
+}

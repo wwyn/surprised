@@ -1,0 +1,129 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block  wx:if="{{hideLoading}}">
+<form bindsubmit="evt_submit">
+    <block wx:for="{{order.items}}" wx:for-item="item" wx:key="index">
+        <view class="weui-panel" wx:if="{{item.item_type=='product'}}">
+                <view class="weui-panel__bd">
+                        <view class="weui-media-box weui-media-box_appmsg co-item">
+                            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                                <image mode="aspectFit" class="weui-media-box__thumb" bindload="load_image" src="{{images[item.image_id]?images[item.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.image_id}}" />
+                            </view>
+                            <view class="weui-media-box__bd">
+                                <view class="weui-media-box__desc co-name">{{item.name}}</view>
+                            </view>
+                        </view>
+                        <block wx:if="{{exits_comment && exits_comment[item.product_id]}}">
+                            <block wx:for="{{exits_comment[item.product_id]}}" wx:for-item="comment" wx:for-index="comment_id" wx:key="comment_id">
+                                <view class="weui-cell">
+                                    <view class="weui-cell__hd">
+                                        <view class="comment-author">{{comment.author_name}}</view>
+                                        <view class="star-picker sp-mini">
+                                            <view class="star {{(comment.mark.mark_star>0)?'active':''}}">
+                                                <text>★</text>
+                                                <text>☆</text>
+                                            </view>
+                                            <view class="star {{(comment.mark.mark_star>1)?'active':''}}">
+                                                <text>★</text>
+                                                <text>☆</text>
+                                            </view>
+                                            <view class="star {{(comment.mark.mark_star>2)?'active':''}}">
+                                                <text>★</text>
+                                                <text>☆</text>
+                                            </view>
+                                            <view class="star {{(comment.mark.mark_star>3)?'active':''}}">
+                                                <text>★</text>
+                                                <text>☆</text>
+                                            </view>
+                                            <view class="star {{(comment.mark.mark_star>4)?'active':''}}">
+                                                <text>★</text>
+                                                <text>☆</text>
+                                            </view>
+                                        </view>
+                                    </view>
+                                    <view class="weui-cell__bd">
+                                        <view class="comment-time">{{comment.createtime}}</view>
+                                        <view class="comment-content">{{comment.content}}</view>
+                                        <view class="images-wrap mini">
+                                            <block wx:for="{{comment.images}}" wx:for-item="ext_commentimage">
+                                                <image class="selected-image" bindload="load_image" src="{{images[ext_commentimage.image_id]?images[ext_commentimage.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{ext_commentimage.image_id}}"   mode="aspectFit" bindtap="evt_previewimage"/>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="weui-cell" wx:for="{{comment.reply}}" wx:for-item="reply">
+                                    <view class="weui-cell__hd">
+                                        <view class="comment-author">{{reply.author_name}}</view>
+                                    </view>
+                                    <view class="weui-cell__bd">
+                                        <view class="comment-content">{{reply.content}}</view>
+                                    </view>
+                                </view>
+                                <view class="weui-cell">
+                                    <view class="weui-cell__bd no-hd">
+                                        <input type="number" style="display:none" name="reply[{{comment_id}}][goods_id]" value="{{comment.goods_id}}"/>
+                                        <input type="number" style="display:none" name="reply[{{comment_id}}][product_id]" value="{{comment.product_id}}"/>
+                                        <textarea class="weui-textarea" name="reply[{{comment_id}}][content]" placeholder="追加评论" auto-height="true"></textarea>
+                                    </view>
+                                </view>
+                            </block>
+                        </block>
+                        <block wx:if="{{!exits_comment || !exits_comment[item.product_id]}}">
+                        <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                综合评星
+                            </view>
+                            <view class="weui-cell__bd">
+                                <view class="star-picker">
+                                    <view class="star {{(!comment_mark[item.goods_id] ||comment_mark[item.goods_id]>0)?'active':''}}" data-si="1" bindtap="evt_starpicker" data-goodsid="{{item.goods_id}}">
+                                        <text>★</text>
+                                        <text>☆</text>
+                                    </view>
+                                    <view class="star {{(!comment_mark[item.goods_id] ||comment_mark[item.goods_id]>1)?'active':''}}" data-si="2" bindtap="evt_starpicker" data-goodsid="{{item.goods_id}}">
+                                        <text>★</text>
+                                        <text>☆</text>
+                                    </view>
+                                    <view class="star {{(!comment_mark[item.goods_id] ||comment_mark[item.goods_id]>2)?'active':''}}" data-si="3" bindtap="evt_starpicker" data-goodsid="{{item.goods_id}}">
+                                        <text>★</text>
+                                        <text>☆</text>
+                                    </view>
+                                    <view class="star {{(!comment_mark[item.goods_id] ||comment_mark[item.goods_id]>3)?'active':''}}" data-si="4" bindtap="evt_starpicker" data-goodsid="{{item.goods_id}}">
+                                        <text>★</text>
+                                        <text>☆</text>
+                                    </view>
+                                    <view class="star {{(!comment_mark[item.goods_id] ||comment_mark[item.goods_id]>4)?'active':''}}" data-si="5" bindtap="evt_starpicker" data-goodsid="{{item.goods_id}}">
+                                        <text>★</text>
+                                        <text>☆</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="weui-cell">
+                            <view class="weui-cell__bd no-hd">
+                                <textarea class="weui-textarea" name="comment[word][{{item.goods_id}}][{{item.product_id}}]" placeholder="请输入评价内容" auto-height="true"></textarea>
+                            </view>
+                        </view>
+                        <view class="weui-cell">
+                            <view class="weui-cell__hd">
+                                晒一晒
+                            </view>
+                            <view class="weui-cell__bd">
+                                <view class="weui-uploader__bd">
+                                    <view class="weui-uploader__files">
+                                        <block wx:for="{{comment_images[item.product_id]}}" wx:for-item="image" wx:key="index">
+                                            <view class="weui-uploader__file">
+                                                <image bindtap="evt_removeimage" data-productid="{{item.product_id}}"  data-imageid="{{image.image_id}}" class="weui-uploader__img" src="{{image.tmp_file}}" mode="aspectFit"/>
+                                            </view>
+                                        </block>
+                                    </view>
+                                    <view class="weui-uploader__input-box" data-goodsid="{{item.goods_id}}" data-productid="{{item.product_id}}" bindtap="evt_selimage">
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+        </view>
+    </block>
+    <button type="warn" class="button-submit" form-type="submit" >提交</button>
+</form>
+</block>

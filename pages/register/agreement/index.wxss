@@ -1,0 +1,10 @@
+/* pages/register/agreement/index.wxss */
+.agreement{
+  width: 90%;
+  margin-left: 5%;
+  font-family: PingFangSC;
+  font-weight: Regular;
+  color:#333;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}

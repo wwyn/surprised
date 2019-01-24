@@ -1,0 +1,10 @@
+
+<!--
+    widget-linehelper
+    线条辅助
+-->
+<template name="widget-linehelper">
+    <view class="widget-linehelper" style="{{data.padding?'margin:0 15px 15px':''}}">
+        <view class="widget-linehelper-line" style="border-bottom:1px {{data.line_color||'#E9E9E9'}} {{data.type||'solid'}}"></view>
+    </view>
+</template>

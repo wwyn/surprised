@@ -1,0 +1,12 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light",
+  "backgroundColor": "#666",
+  "navigationBarTitleText": "活动专场",
+  "usingComponents": {
+    "addcart-component": "/components/addcart-component",
+    "share-component": "/components/share-component",
+    "load-image": "/components/load-image",
+    "download-image": "/components/download-image"
+  }
+}

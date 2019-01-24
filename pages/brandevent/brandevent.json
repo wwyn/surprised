@@ -1,0 +1,11 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "light",
+  "backgroundColor": "#666",
+  "navigationBarTitleText": "品牌专场",
+  "usingComponents": {
+    "share-component": "/components/share-component",
+    "download-image": "/components/download-image",
+    "load-image": "/components/load-image"
+  }
+}

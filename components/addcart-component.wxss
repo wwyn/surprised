@@ -1,0 +1,281 @@
+.weui-mask {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.weui-actionsheet {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  z-index: 99999;
+  width: 100%;
+  background-color: #efeff4;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+
+.weui-actionsheet_toggle {
+  -webkit-transform: translate(0);
+  transform: translate(0);
+}
+
+.goods_actionsheet {
+  overflow-y: auto;
+  max-height: 100%;
+  padding-bottom: 30px;
+  background-color: #fff;
+  bottom: -30px;
+  width: 100%;
+}
+
+.goods_actionsheet .goods_infor {
+  padding: 15px 0;
+  padding-left: 4%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+
+.goods_actionsheet .goods_infor:after {
+  content: " ";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  height: 1px;
+  color: #e5e5e5;
+  bottom: 0;
+  border-bottom: 1px solid #eee;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.goods_actionsheet .goods_infor .goods_pic {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.goods_actionsheet .goods_infor .goods_pic .goods_image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.goods_actionsheet .goods_infor .price_stock {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+  padding-left: 10px;
+  font-size: 14px;
+  padding-right: 20px;
+  /* margin-top: 50rpx; */
+}
+
+.goods_actionsheet .goods_infor .price_stock .name {
+  height: 68rpx;
+  line-height: 34rpx;
+  overflow: hidden;
+  font-size: 28rpx;
+}
+
+.goods_actionsheet .goods_infor .price_stock .pri {
+  color: #fc4773;
+  font-size: 20px;
+  margin-top: 50rpx;
+}
+
+.goods_actionsheet .goods_infor .price_stock .pri text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(155, 155, 155, 1);
+  margin-left: 22rpx;
+}
+
+.stock {
+  color: #9b9b9b;
+  margin-left: 10px;
+  font-size: 24rpx;
+}
+
+.profit {
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 12px;
+  color: #fff;
+  background-color: #eb5775;
+  border-radius: 5rpx;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: -8rpx;
+}
+
+.goods_actionsheet .goods_infor .goods_close {
+  display: block;
+  margin-right: 15px;
+  width: 35rpx;
+  height: 35rpx;
+  font-size: 20px;
+  background-size: 22rpx 22rpx;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.goods_actionsheet .goods_choice {
+  padding: 5px 4%;
+  /*overflow: hidden;*/
+  font-size: 14px;
+}
+
+.goods_actionsheet .goods_choice .title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 23rpx;
+}
+
+.goods_actionsheet .goods_choice .spec-item {
+  /* padding:11rpx 24rpx; */
+  padding: 0 24rpx;
+  line-height: 56rpx;
+  font-size: 26rpx;
+  color: #999;
+  margin-right: 24rpx;
+  margin-bottom: 20rpx;
+  border: 1px solid #ccc;
+  display: inline-block;
+}
+
+.goods_actionsheet .spec-item.choosed {
+  border: 1px solid #fc4773;
+  color: #fc4773;
+}
+
+.goods_actionsheet .spec-item.disabled {
+  border-style: dashed;
+  color: #ccc;
+}
+
+.goods_actionsheet .spec-item.disabled image {
+  opacity: 0.5;
+}
+
+.goods_actionsheet .goods_amount, .goods_actionsheet .goods_remark {
+  overflow: hidden;
+  padding: 15px 8% 0 4%;
+  font-size: 14px;
+}
+
+.goods_actionsheet .goods_amount .label {
+  float: left;
+  font-size: 14px;
+  color: #666;
+  line-height: 56rpx;
+}
+
+.goods_actionsheet .goods_remark {
+  display: flex;
+}
+
+.goods_actionsheet .goods_remark .label {
+  width: 100rpx;
+  font-size: 14px;
+  color: #666;
+  display: block;
+  line-height: 56rpx;
+  /* flex:1; */
+}
+
+.goods_actionsheet .goods_remark .textarea {
+  flex: auto;
+}
+
+.goods_actionsheet .goods_remark input {
+  display: inline-block;
+  height: 54rpx;
+  border: 1rpx solid #ccc;
+  padding: 0rpx 5rpx;
+  font-size: 26rpx;
+  text-indent: 10rpx;
+  width: 100%;
+}
+
+.goods_actionsheet .goods_amount .limit {
+  float: right;
+  font-size: 13px;
+  color: #666;
+  margin-left: 5px;
+}
+
+.product-quantity {
+  float: right;
+  display: flex;
+  align-items: center;
+  height: 56rpx;
+}
+
+.product-quantity .pq-minus {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  border: 1rpx solid #ccc;
+  padding: 0;
+  border-radius: 3rpx;
+}
+
+.product-quantity .pq-ipt {
+  max-width: 40px;
+  height: 56rpx;
+  border-top: 1rpx solid #ccc;
+  border-bottom: 1rpx solid #ccc;
+  text-align: center;
+  min-height: 50rpx;
+  box-sizing: border-box;
+}
+
+.goods_actionsheet .goods_sure {
+  margin-top: 20px;
+}
+
+.goods_actionsheet .goods_sure .a {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #eb5775;
+  text-align: center;
+  background-color: #f5d7df;
+  display: block;
+}
+
+.goods_actionsheet .two-button .a {
+  width: 45%;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #eb5775;
+  text-align: center;
+  background-color: rgba(252, 71, 115, 0.1);
+  display: inline-block;
+  margin: 30rpx 2.5%;
+  border: 1rpx solid #fc4773;
+  box-sizing: border-box;
+  font-size: 30rpx;
+}
+
+.goods_actionsheet .two-button .buynow {
+  background-color: rgb(252, 71, 115);
+  color: #fff;
+}

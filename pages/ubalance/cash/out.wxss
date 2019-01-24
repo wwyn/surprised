@@ -1,0 +1,6 @@
+page{
+ background:#efefef;
+}
+.weui-label{
+    width: 70px;
+}

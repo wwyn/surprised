@@ -1,0 +1,91 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<form bindsubmit="evt_submit" wx:if="{{hideLoading}}">
+    <view class="weui-cells__title">{{setting.cash_rule}}</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <view class="weui-label">{{setting.name}}</view>
+            </view>
+            <view class="weui-cell__bd">
+                {{account.ubalance}}
+            </view>
+            <view class="weui-cell__ft" wx:if="{{account.ubalance<update_ubalance_val}}">
+                <view class="weui-badge">余额不足</view>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">扣除</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" value="{{update_ubalance_val||0}}" type="text" disabled="true"/>
+            </view>
+        </view>
+    </view>
+    <view class="weui-cells__title">提取到银行卡</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">银行</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="bill[payee_bank]"  type="text"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">姓名</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="bill[payee_name]"  type="text"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">账号</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="bill[payee_account]"  type="text"/>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+                <view class="weui-label">提现</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" placeholder="最多{{account.ubalance/setting.exchange_ratio*(1-setting.cash_out_fee_ratio)}}" name="cash_out" bindinput="evt_moneyipt" type="number"/>
+            </view>
+            <view>¥</view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <view class="weui-label">手机号</view>
+            </view>
+            <view class="weui-cell__bd">
+                {{member_mobile}}
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_input  weui-cell_vcode">
+            <view class="weui-cell__hd">
+                <view class="weui-label">验证码</view>
+            </view>
+            <view class="weui-cell__bd">
+                <input class="weui-input" name="vcode" type="number" placeholder="输入验证码"/>
+            </view>
+            <view class="weui-cell__ft">
+                <view class="weui-vcode-btn {{vcode_percent && vcode_percent>0?'vcode-sending':''}}" bindtap="evt_getcode" >{{vcode_percent && vcode_percent>0?"验证码已发送":"发送验证码"}}</view>
+                <progress percent="{{vcode_percent||0}}" stroke-width="2" />
+            </view>
+        </view>
+    </view>
+
+    <view class="weui-footer">
+        人民币与{{setting.name}}的汇率1:{{setting.exchange_ratio}}
+    </view>
+    <view class="weui-footer" wx:if="{{setting.cash_out_fee_ratio>0}}">
+        提现手续费率:{{setting.cash_out_fee_ratio}}
+    </view>
+    <view class="weui-btn-area">
+        <button class="weui-btn" disabled="{{!update_ubalance_val||update_ubalance_val == 0||account.ubalance<update_ubalance_val}}" type="warn" form-type="submit">确定提现</button>
+    </view>
+</form>

@@ -1,0 +1,76 @@
+<wxs src="../../utils/fmt.wxs" module='fmt'/>
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<form bindsubmit="evt_submit" wx:if="{{hideLoading && account}}">
+    <view class="weui-cells__title">用{{setting.name}}支付¥{{fmt.price(bill_arr.money)}}</view>
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <view class="weui-label">余额</view>
+            </view>
+            <view class="weui-cell__bd">
+                {{account.ubalance}}
+            </view>
+            <view class="weui-cell__ft" wx:if="{{account.ubalance<bill_arr.money*setting.exchange_ratio}}">
+                <view class="weui-badge">余额不足</view>
+            </view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__hd">
+                <view class="weui-label">应扣</view>
+            </view>
+            <view class="weui-cell__bd">
+                {{bill_arr.money*setting.exchange_ratio}}
+            </view>
+        </view>
+        <block wx:if="{{setting.larger_type == '1' && setting.larger_sum<=bill_arr.money*setting.exchange_ratio && account.ubalance>bill_arr.money*setting.exchange_ratio}}">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    {{member_mobile}}
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input  weui-cell_vcode">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">验证码</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" name="vcode" type="number" placeholder="输入验证码"/>
+                </view>
+                <view class="weui-cell__ft">
+                    <view class="weui-vcode-btn {{vcode_percent && vcode_percent>0?'vcode-sending':''}}" bindtap="evt_getcode" >{{vcode_percent && vcode_percent>0?"验证码已发送":"发送验证码"}}</view>
+                    <progress percent="{{vcode_percent||0}}" stroke-width="2" />
+                </view>
+            </view>
+        </block>
+    </view>
+    <block wx:if="{{account.ubalance<bill_arr.money*setting.exchange_ratio}}">
+        <view class="weui-btn-area" >
+            <button class="weui-btn" plain="true" bindtap="evt_goto" data-url="/pages/ubalance/recharge"  type="warn" form-type="button">立即充值</button>
+        </view>
+    </block>
+    <view class="weui-btn-area" wx:else>
+        <button class="weui-btn" type="warn" form-type="submit">确认支付</button>
+    </view>
+</form>
+<block wx:if="{{hideLoading && !account}}">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon type="warn" size="64"/>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">
+                异常
+            </view>
+            <view class="weui-msg__desc">
+                未知支付信息
+            </view>
+        </view>
+    </view>
+    <view class="weui-footer">
+            <view class="weui-footer__links">
+                <navigator url="/pages/index/index" open-type="switchTab" class="weui-footer__link">返回首页</navigator>
+            </view>
+    </view>
+</block>

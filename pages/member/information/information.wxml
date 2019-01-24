@@ -1,0 +1,55 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<block wx:if="{{hideLoading}}">
+    <view class='userid'>
+  <view class='left'>
+    <text>用户ID：</text>
+  </view>
+  <view class='right'>
+    <text>{{id}}</text>
+  </view>
+</view>
+<view class='tavar' bindtap='evt_chgavatar'>
+  <view class='left'>
+    <text>头像：</text>
+  </view>
+  <view class='right'>
+    <image class='tavar_img' wx:if="{{pagedata.member.avatar}}" src="{{images[pagedata.member.avatar]?images[pagedata.member.avatar]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{pagedata.member.avatar}}" bindload="load_image" mode="aspectFill"/>
+    <image class='tavar_img' mode="aspectFit" wx:else src='{{img_url}}/public/wechat/member/Group2.png'></image>
+  </view>
+</view>
+<view class='nike'>
+  <view class='left'>
+    <text>昵称：</text>
+  </view>
+  <view class='right'>
+    <!-- <text wx:if="{{update_name}}" bindtap='update_name'>{{pagedata.member.name?pagedata.member.name:pagedata.member.uname}}</text> -->
+      <input type='text' value='{{pagedata.member.name?pagedata.member.name:pagedata.member.uname}}' bindinput="up_name" maxlength="12" bindblur="e_bindblur"></input>
+  </view>
+</view>
+<view class='phone'>
+  <view class='left'>
+    <text>手机号：</text>
+  </view>
+  <view class='right'>
+    <text style='color:#999'>{{pagedata.member.mobile?pagedata.member.mobile:pagedata.member.login_account}}</text>
+  </view>
+</view>
+<navigator class='address' url="/pages/member/addr/addr">
+  <view class='left'>
+    <text>地址管理</text>
+  </view>
+  <view class='right'>
+    <image class='address_img' src='{{img_url}}/public/wechat/member/icon2.png'></image>
+  </view>
+</navigator>
+<!-- <view class='aboutus'>
+  <view class='left'>
+    <text>关于我们</text>
+  </view>
+  <view class='right'>
+   <image class='address_img' src='{{img_url}}/public/wechat/member/icon2.png'></image>
+  </view>
+</view> -->
+<button class='save' bindtap='evt_update'>保存当前设置</button>
+<button class='logout' bindtap='logout'>退出当前账号</button>
+</block>

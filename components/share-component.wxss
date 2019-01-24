@@ -1,0 +1,208 @@
+/* components/share-component.wxml.wxss */
+.share-mask{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.6);
+}
+.weui-actionsheet{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    z-index: 99999;
+    width: 100%;
+    background-color: #efeff4;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s,-webkit-transform .3s;
+}
+.weui-actionsheet_toggle{
+    -webkit-transform: translate(0);
+    transform: translate(0);
+}
+.goods_actionsheet{
+  overflow-y: auto;
+  max-height: 100%;
+  padding-bottom: 30px;
+  background-color: #fff;
+  bottom: -30px;
+  width: 100%;
+}
+.goods_actionsheet .goods_infor{
+  text-align:center;
+  position:relative;
+  padding:30rpx;
+  font-weight:600;
+}
+.goods_actionsheet .goods_infor:after{
+  content: " ";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  height: 1px;
+  color: #e5e5e5;
+  bottom: 0;
+  border-bottom: 1px solid #eee;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+}
+.goods_actionsheet .goods_infor .goods_close{
+  display: block;
+  width: 11px;
+  height: 25px;
+  font-size:20px;
+  position:absolute;
+  top:30rpx; 
+  right:30rpx;
+}
+.goods_actionsheet .goods_infor .goods_close image{
+  width: 18px;
+  height: 25px;
+}
+.goods_actionsheet  .goods_price{
+  display:flex;
+  color:#333;
+  font-size:28rpx;
+  justify-content: space-between;
+  padding:30rpx;
+  border-bottom:1rpx solid #efefef;
+}
+.goods_actionsheet  .goods_price text{
+  font-size:28rpx;
+}
+.goods_actionsheet  .choose_way{
+  padding:30rpx;
+  color:#333;
+  font-size:26rpx;
+}
+.goods_actionsheet  .choose_way image{
+    width:200rpx;
+    height:330rpx;
+    margin:0 auto;
+    display:block;
+}
+.goods_actionsheet  .choose_way .way{
+  display:flex;
+  padding:30rpx 0;
+}
+.goods_actionsheet  .choose_way .way .way-item{
+  flex:1;
+  text-align:center;
+}
+.goods_actionsheet  .choose_way .way .way-item label{
+  color:#333;
+  font-size:24rpx;
+  line-height:84rpx;
+  vertical-align: middle;
+  display:block;
+
+}
+.goods_actionsheet  .choose_way .way .way-item label image{
+  width:24rpx;
+  height:24rpx;
+  display: inline-block;
+  margin-right:5rpx;
+}
+.goods_actionsheet  .choose_way .way .way-item label view{
+  width:24rpx;
+  height:24rpx;
+  display: inline-block;
+  margin-right:5rpx;
+  border:1rpx solid #ccc;
+  border-radius:50%;
+}
+.goods_actionsheet .share-operate{
+  display:flex;
+  line-height:100rpx;
+}
+.goods_actionsheet .share-operate>view{
+  flex:1;
+}
+.goods_actionsheet .share-operate .share-btn{
+  text-align:center;
+  background:#FC4773;
+  color:#fff;
+  font-size:30rpx;
+  line-height:100rpx;
+}
+.goods_actionsheet .goods_amount{
+  overflow: hidden;
+  /* padding: 10rpx 4% 10rpx 4%; */
+  font-size: 14px;
+  vertical-align: middle;
+}
+.goods_actionsheet .goods_amount .label{
+  float: left;
+  font-size: 14px;
+  color: #666;
+  margin-left:30rpx;
+}
+.goods_actionsheet .goods_amount .limit{
+  float: right;
+  font-size: 13px;
+  color: #666;
+  margin-left:5px;
+}
+.product-quantity{
+    float: left;
+    display:flex;
+    align-items:center;
+    height:56rpx; 
+    margin-top:22rpx; 
+}
+.product-quantity .pq-minus{
+    width: 56rpx;
+    height: 56rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border:1px solid #ccc;
+    padding:0;
+    border-radius:3rpx;
+}
+.product-quantity .pq-ipt{
+    max-width: 40px;
+    height: 52rpx;
+    border-top: 1rpx solid #ccc;
+    border-bottom: 1rpx solid #ccc;
+    text-align: center;
+    min-height: 50rpx
+}
+.goods_actionsheet .goods_sure{
+  margin-top: 20px;
+}
+.goods_actionsheet .goods_sure .a{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #EB5775;
+  text-align: center;
+  background-color: #F5D7DF;
+  display: block;
+  
+}
+.goods_actionsheet .two-button .a{
+  width: 45%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #EB5775;
+  text-align: center;
+  background-color: rgb(252，234，239);
+  display: inline-block;
+  margin: 30rpx 2.5%;
+  border:1px solid #FC4773;
+  box-sizing: border-box;
+}
+.goods_actionsheet .two-button .buynow{
+  background-color: rgb(252,71,115);
+  color: #ffffff;
+}

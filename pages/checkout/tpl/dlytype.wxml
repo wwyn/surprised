@@ -1,0 +1,22 @@
+<template name="dlytype-use-panel">
+    <view class="weui-panel">
+        <view class="weui-panel__bd">
+                <block  wx:for="{{dlytypes}}" wx:for-item="dlytype" wx:key="index">
+                    <view bindtap="evt_dlytypechange" data-dtid="{{dlytype.dt_id}}" class="weui-cell">
+                        <view class="weui-cell__hd">
+                            <block wx:if="{{dlytype.selected == 'true'}}">
+                                <icon type="success" size="20" color="{{themecolor.checkbox_checked_color}}"/>
+                            </block>
+                            <block wx:else>
+                                <icon type="circle" size="20" />
+                            </block>
+                        </view>
+                        <view class="weui-cell__bd">
+                            {{dlytype.dt_name}}
+                            <view class="weui-cell__desc">{{dlytype.detail}}</view>
+                        </view>
+                    </view>
+                </block>
+        </view>
+    </view>
+</template>

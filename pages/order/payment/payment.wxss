@@ -1,0 +1,66 @@
+page{
+    background: #FAFAFA;
+}
+.icon-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+    background-color: #ffffff;
+}
+.icon-success{
+    width: 130rpx;
+    margin-bottom: 26rpx;
+}
+.icon-section .text{
+    line-height: 32px;
+    margin: 0 0 30px 0 0;
+    color: #333333;
+    font-size: 15px;
+}
+.weui-form-preview__label{
+    font-size: 15px;
+    color: #666666;
+}
+.payapp-cell{
+    font-size: 14px;
+}
+.payapp-cell .weui-cell__bd{
+    padding-left: 15px;
+}
+.weui-form-preview{
+    margin-top: 20rpx;
+    border:none;
+}
+.weui-form-preview:before{
+    border:none;
+}
+.weui-form-preview__bd:before{
+    border:none;
+}
+.weui-form-preview:after{
+    border:none;
+}
+.weui-form-preview__item{
+    padding: 8rpx 0;
+}
+.weui-form-preview__hd
+.weui-form-preview__value{
+    font-size: 22px
+}
+.weui-panel:before{
+    border:none;
+}
+.weui-panel:after{
+    border:none;
+}
+.btn{
+    width: 100%;
+}
+button{
+    background-color: #EB5775 !important;
+    border:none !important;
+    color: #ffffff !important;
+    font-size: 17px;
+    border-radius: 0;
+}

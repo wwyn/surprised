@@ -1,0 +1,51 @@
+<share-component>
+  <wxs src="../utils/fmt.wxs" module="fmt" />
+	<view>
+	  <view class="share-mask" id="share_mask" hidden="{{!showShare}}" bindtap="closeShare"></view>
+	  <view class="{{showShare?'weui-actionsheet weui-actionsheet_toggle goods_actionsheet':'weui-actionsheet goods_actionsheet'}}" id="goods_actionsheet">
+	      <view class="goods_spec">
+	        <view class="goods_infor">
+	          转发赚钱
+	          <image mode="aspectFit" class="goods_close" bindtap="closeShare" src="{{img_url}}/public/wechat/empty/close.png"></image>
+	        </view>
+          <view class="goods_price">
+              <view>进货价：￥{{goodsDetail.product.buy_price}}</view>
+              <view>代购费：<text style="color:#FC4773;">￥{{goodsDetail.product.purchase_fee}}</text></view>
+          </view> 
+          <view class="choose_way">
+              <view>选择分享方式</view>
+              <view class="way">
+                  <view class="way-item" bindtap="changeway" data-way="first">
+                      <image mode='widthFix' src="{{img_url}}/public/wechat/mall/product/way_first.png"></image>
+                      <label>
+                          <image src="{{img_url}}/public/wechat/mall/product/radio_check.png" wx:if="{{way=='first'}}"></image>
+                          <view wx:if="{{way=='second'}}"></view>
+                          单图文(文+图)
+                      </label>
+                  </view> 
+                  <view class="way-item"  bindtap="changeway" data-way="second">
+                      <image mode='widthFix' src="{{img_url}}/public/wechat/mall/product/way_second.png"></image>
+                      <label>
+                          <image src="{{img_url}}/public/wechat/mall/product/radio_check.png" wx:if="{{way=='second'}}"></image>
+                          <view wx:if="{{way=='first'}}"></view>
+                          单图文(图+文)
+                      </label>
+                  </view>
+              </view> 
+          </view>
+          <view class="share-operate">
+              <view class="goods_amount">
+                <view class="label">加价：</view>
+                <view class="product-quantity" style="width:200rpx;">
+                  <!-- <button class="pq-minus" plain="true" disabled="{{quantityVal<2}}" bindtap="tappqminus">-</button> -->
+                  <input type="digit" bindfocus="evt_focus" value="{{quantityVal}}" class="pq-ipt" bindinput="evt_quantityval" style="border:1rpx solid #ebebeb;width:198rpx;max-width:278rpx;background:#F6F4F4;"/>
+                  <!-- <button class="pq-minus" plain="true" bindtap="tappqplus">+</button> -->
+                </view>
+              </view>
+              <view class="share-btn"  bindtap="evt_image">转发(￥{{last_price}})</view>
+          </view>
+	        
+	      </view>
+	  </view>
+	</view>
+</share-component>

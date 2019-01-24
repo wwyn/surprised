@@ -1,0 +1,12 @@
+
+<!--
+    widget-textmsg
+    文本
+-->
+<template name="widget-textmsg">
+  <view class="widget-textmsg">
+    <view class="weui-cells weui-cells_in-small-appmsg">
+      <navigator class="weui-cell" wx:for="{{data.items}}" open-type="{{item.url?item.url.openType:'navigate'}}" wx:for-item="item" wx:key="*this" url="{{item.url.url}}"><text style="color:{{item.textColor}};text-align:{{item.position_type}};font-weight:{{(item.stronger?'700':'400')}};font-size:{{item.fontsize+'px'}};text-decoration:{{(item.underline?'underline':'none')}};font-style:{{(item.tilt?'italic':'normal')}}">{{item.content}}</text></navigator>
+    </view>
+  </view> 
+</template>

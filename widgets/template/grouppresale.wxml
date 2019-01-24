@@ -1,0 +1,51 @@
+
+<!--
+    widget-grouppresale
+    团购预售
+-->
+<template name="widget-grouppresale">
+    <view class="" wx:if="{{data.items.length>0}}">
+        <view>
+            <!-- 图片标题文字上下排列 -->
+            <view  class="grouppresale {{data.display_type=='card'?'has_radius has_gap':''}}" wx:if="{{data.filter_type=='group_id'}}">
+                <navigator class="link" url="{{data.items[0].statusname=='去开团'?'/pages/groupbooking/product/product?activity_id='+data.items[0].activity_id+'&product_id='+data.items[0].product_id:''}}">
+                    <view class="image-block">
+                        <image style="width:100%" mode="widthFix" class="image" src="{{data.imgSrc}}" wx:if="data.imgSrc"></image>
+                        <image style="width:100%" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                        <view class="flag" style="padding:0 5px;background:{{data.bgColor}};color:{{(data.bgColor!='#ffffff'?'#ffffff':'#000')}}">{{data.items[0].people_number}}人团</view>
+                    </view>
+                    <view class="content">
+	                    <view class="title">{{data.title?data.title:data.items[0].name}}</view>
+	                    <view>
+	                    	<label class="new_price">￥{{data.items[0].conditions[data.items[0].product_id].price}}</label>
+	                    	<label class="old_price">单买价￥{{data.items[0].products.price}}</label>
+	                    	<view class="group_btn" style="background:{{data.bgColor}};color:{{(data.bgColor!='#ffffff'?'#ffffff':'#000')}}" wx:if="{{data.items[0].statusname=='去开团'}}">{{data.items[0].statusname}}</view>
+	                    	<view class="group_btn" style="background:#999;color:#fff" wx:else>{{data.items[0].statusname}}</view>
+	                    </view>
+                    </view>
+                </navigator>
+            </view>
+
+
+            <view  class="grouppresale {{data.display_type=='card'?'has_radius has_gap':''}}" wx:elif="{{data.filter_type=='presale_id'}}">
+                <navigator class="link" url="/pages/preselling/product/product?activity_id={{data.items[0].activity_id}}&product_id={{data.items[0].product_id}}">
+                    <view class="image-block">
+                        <image style="width:100%" mode="widthFix" class="image" src="{{data.imgSrc}}" wx:if="data.imgSrc"></image>
+                        <image style="width:100%" mode="widthFix" src="data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw==" wx:else></image>
+                        <view class="flag"><label  style="background:#fff;color:{{(data.bgColor!='#ffffff'?data.bgColor:'#000')}}">定金￥{{data.items[0].conditions[data.items[0].product_id].deposit}}</label><label  style="background:{{data.bgColor}};color:{{(data.bgColor!='#ffffff'?'#ffffff':'#000')}}">可抵扣￥{{data.items[0].conditions[data.items[0].product_id].deposit_deduction}}</label> </view>
+                    </view>
+                    <view class="content">
+	                    <view class="title">{{data.title?data.title:data.items[0].name}}</view>
+	                    <view>
+	                    	<label class="new_price">预售价￥{{data.items[0].conditions[data.items[0].product_id].presell_price}}</label>
+	                    	<label class="old_price">原价{{data.items[0].products.price}}</label>
+	                    	<view class="group_btn" style="background:{{data.bgColor}};color:{{(data.bgColor!='#ffffff'?'#ffffff':'#000')}}">马上预约</view>
+	                    	<!-- <view class="group_btn" style="background:#999;color:#fff" wx:else>{{data.items[0].statusname}}</view> -->
+	                    </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</template>
+

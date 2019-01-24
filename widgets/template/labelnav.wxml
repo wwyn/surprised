@@ -1,0 +1,142 @@
+<!--
+    widget-labelnav
+    标签导航
+-->
+<template name="widget-labelnav">
+    <!-- 下拉,滚动,标签 -->
+    <view class="scroll-box" wx:if="{{data.slideDown == 'slidedown' && data.showType == 'label' && data.isScroll == 'scroll'}}">
+        <scroll-view class="scroll-view_H" scroll-x scroll-left="{{data.scrollLeft?data.scrollLeft:0}}" bindscroll="widget_event_delegate" data-event-scroll="evt_tabscroll" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width: {{sv_width-40}}px">
+            <view class="" hidden="{{!data.tabShow}}" style="color:#000000;font-size: 14px;padding: 9px 22px">全部频道</view>
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{(sv_width-40)/data.showNum}}px" hidden="{{data.tabShow}}">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active line-item':'cat-inner line-item'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}}">
+                {{catitem.text}}
+              </view>
+            </view>
+        </scroll-view>
+        <view class="scroll-box-more"  bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}">
+            <text class="MoreIcon {{data.tabShow?'downClass':''}}"></text>
+        </view>
+        <view class="weui-mask-tabMore" wx:if="{{data.tabShow}}" bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}"></view>
+        <view class="tabMore" wx:if="{{data.tabShow}}">
+            <view class="tabMore-con">
+                <view class="tabMore-con-text label-item {{catitem.activePage == 'active'?'act':''}}" 
+                wx:for="{{data.items}}" 
+                wx:for-item="catitem" wx:for-index="ind" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'#cccccc'}};border-radius: 5px;padding: 0 10px;margin-bottom: 7px">
+                    {{catitem.text}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 下拉,滚动,下划线 -->
+    <view class="scroll-box" wx:if="{{data.slideDown == 'slidedown' && data.showType == 'bottomLine' && data.isScroll == 'scroll'}}">
+        <scroll-view class="scroll-view_H" scroll-x scroll-left="{{data.scrollLeft?data.scrollLeft:0}}" bindscroll="widget_event_delegate" data-event-scroll="evt_tabscroll" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width: {{sv_width-40}}px">
+            <view class="" hidden="{{!data.tabShow}}" style="color:#000000;font-size: 14px;padding: 9px 22px">全部频道</view>
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{(sv_width-40)/data.showNum}}px" hidden="{{data.tabShow}}">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}}">
+                {{catitem.text}}
+              </view>
+            </view>
+        </scroll-view>
+        <view class="scroll-box-more"  bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}">
+            <text class="MoreIcon {{data.tabShow?'downClass':''}}"></text>
+        </view>
+        <view class="weui-mask-tabMore" wx:if="{{data.tabShow}}" bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}"></view>
+        <view class="tabMore" wx:if="{{data.tabShow}}">
+            <view class="tabMore-con">
+                <view class="tabMore-con-text line-item {{catitem.activePage == 'active'?'act':''}}" 
+                wx:for="{{data.items}}" 
+                wx:for-item="catitem" wx:for-index="ind" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}};padding: 0;">
+                    {{catitem.text}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 滚动,下划线 -->
+    <view class="scroll-box" wx:if="{{data.slideDown == 'no_slidedown' && data.showType == 'bottomLine' && data.isScroll == 'scroll'}}">
+        <scroll-view class="scroll-view_H" scroll-x scroll-left="{{data.scrollLeft?data.scrollLeft:0}}" bindscroll="widget_event_delegate" data-event-scroll="evt_tabscroll" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width: {{sv_width-40}}px">
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{(sv_width-40)/data.showNum}}px">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}}">
+                {{catitem.text}}
+              </view>
+            </view>
+        </scroll-view>
+    </view>
+    <!-- 滚动,标签 -->
+    <view class="scroll-box" wx:if="{{data.slideDown == 'no_slidedown' && data.showType == 'label' && data.isScroll == 'scroll'}}">
+        <scroll-view class="scroll-view_H" scroll-x scroll-left="{{data.scrollLeft?data.scrollLeft:0}}" bindscroll="widget_event_delegate" data-event-scroll="evt_tabscroll" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width: {{sv_width-40}}px">
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{(sv_width-40)/data.showNum}}px">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border:1px solid {{catitem.activePage == 'active'?data.activeColor:'#cccccc'}};padding: 2.5px 5px;margin: 5px 15px;border-radius: 5px;">
+                {{catitem.text}}
+              </view>
+            </view>
+        </scroll-view>
+    </view>
+    <!-- 下拉,标签 -->
+    <view class="scroll-box" wx:if="{{data.slideDown == 'slidedown' && data.showType == 'label' && data.isScroll == 'no_scroll'}}">
+        <scroll-view class="scroll-view_H" scroll-x scroll-left="{{data.scrollLeft?data.scrollLeft:0}}" bindscroll="widget_event_delegate" data-event-scroll="evt_tabscroll" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width: {{sv_width-40}}px">
+            <view class="" hidden="{{!data.tabShow}}" style="color:#000000;font-size: 14px;padding: 9px 22px">全部频道</view>
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{(sv_width-40)/data.showNum}}px" hidden="{{data.tabShow}}">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border:1px solid {{catitem.activePage == 'active'?data.activeColor:'#cccccc'}};padding: 2.5px 5px;margin: 5px 15px;border-radius: 5px;">
+                {{catitem.text}}
+              </view>
+            </view>
+        </scroll-view>
+        <view class="scroll-box-more"  bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}">
+            <text class="MoreIcon {{data.tabShow?'downClass':''}}"></text>
+        </view>
+        <view class="weui-mask-tabMore" wx:if="{{data.tabShow}}" bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}"></view>
+        <view class="tabMore" wx:if="{{data.tabShow}}">
+            <view class="tabMore-con">
+                <view class="tabMore-con-text label-item {{catitem.activePage == 'active'?'act':''}}" 
+                wx:for="{{data.items}}" 
+                wx:for-item="catitem" wx:for-index="ind" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}};border-radius: 5px;padding: 0 10px;">
+                    {{catitem.text}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 下拉,下划线 -->
+    <view class="scroll-box" wx:if="{{data.slideDown == 'slidedown' && data.showType == 'bottomLine' && data.isScroll == 'no_scroll'}}">
+        <scroll-view class="scroll-view_H" scroll-x scroll-left="{{data.scrollLeft?data.scrollLeft:0}}" bindscroll="widget_event_delegate" data-event-scroll="evt_tabscroll" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width: {{sv_width-40}}px">
+            <view class="" hidden="{{!data.tabShow}}" style="color:#000000;font-size: 14px;padding: 9px 22px">全部频道</view>
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{(sv_width-40)/data.showNum}}px" hidden="{{data.tabShow}}">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}}">
+                {{catitem.text}}
+              </view>
+            </view>
+        </scroll-view>
+        <view class="scroll-box-more"  bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}">
+            <text class="MoreIcon {{data.tabShow?'downClass':''}}"></text>
+        </view>
+        <view class="weui-mask-tabMore" wx:if="{{data.tabShow}}" bindtap="widget_event_delegate" data-event-tap="evt_selectcatMore" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}"></view>
+        <view class="tabMore" wx:if="{{data.tabShow}}">
+            <view class="tabMore-con">
+                <view class="tabMore-con-text line-item {{catitem.activePage == 'active'?'act':''}}" 
+                wx:for="{{data.items}}" 
+                wx:for-item="catitem" wx:for-index="ind" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}};padding: 0;">
+                    {{catitem.text}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 非滚动,非下拉,下划线 -->
+    <view class="scroll-box" style="background-color: #ffffff" wx:if="{{data.slideDown == 'no_slidedown' && data.showType == 'bottomLine' && data.isScroll == 'no_scroll'}}">
+        <view style="width: 100%">
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{sv_width/data.showNum}}px">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border-color: {{catitem.activePage == 'active'?data.activeColor:'transparent'}}">
+                {{catitem.text}}
+              </view>
+            </view>
+        </view>
+    </view>
+    <!-- 非滚动,非下拉,标签 -->
+    <view class="scroll-box" style="background-color: #ffffff" wx:if="{{data.slideDown == 'no_slidedown' && data.showType == 'label' && data.isScroll == 'no_scroll'}}">
+        <view style="width: 100%">
+            <view class="scroll-view-item_H" wx:for="{{data.items}}" wx:for-item="catitem" wx:key="index" data-url="{{catitem.url.url}}" data-opentype="{{data.navigate}}" data-isactive="{{catitem.activePage}}" bindtap="widget_event_delegate" data-event-tap="evt_openPage" data-widget-name="labelnav" data-widget-index="{{data.widget_index}}" style="width:{{sv_width/data.showNum}}px">
+              <view class="{{catitem.activePage == 'active'?'cat-inner active':'cat-inner'}}" style="color:{{catitem.activePage == 'active'?data.activeColor:data.textColor}};border:1px solid {{catitem.activePage == 'active'?data.activeColor:'#cccccc'}};padding: 2.5px 5px;margin: 5px 15px;border-radius: 5px;">
+                {{catitem.text}}
+              </view>
+            </view>
+        </view>
+    </view>
+</template>

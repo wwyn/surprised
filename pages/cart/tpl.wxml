@@ -1,0 +1,71 @@
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<template name="goods-cart">
+    <view class="weui-media-box cart-item"  wx:for="{{data_list}}" wx:for-item="cart_object_goods" wx:for-index="cart_object_index" wx:key="index">
+                    <view style="margin-left:-{{coitem_transform_dis[cart_object_goods.obj_ident]}}rpx" class="co-item" wx:if="{{cart_object_goods.quantity}}" bindtouchstart="evt_tcoitem_start" bindtouchmove="evt_tcoitem_move" bindtouchend="evt_tcoitem_end" data-ident="{{cart_object_goods.obj_ident}}">
+                        <view>
+                            <view class="weui-media-box_appmsg">
+                                <view class="co-check" bindtap="evt_cocheck" data-ident="{{cart_object_goods.obj_ident}}" data-nextstatus="{{(cart_object_goods.disabled && cart_object_goods.disabled == 'true')?'enabled':'disabled'}}">
+                                    <icon type="circle" size="18" color="#ccc" wx:if="{{(cart_object_goods.disabled&&cart_object_goods.disabled=='true') || cart_object_goods.warning}}"/>
+                                    <icon type="success" size="18" color="{{themecolor.cart_checkouticon_color}}" wx:if="{{(!cart_object_goods.disabled || cart_object_goods.disabled == 'false') && !cart_object_goods.warning}}"/>
+                                </view>
+                                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg" bindtap="evt_cocheck" data-ident="{{cart_object_goods.obj_ident}}" data-nextstatus="{{(cart_object_goods.disabled && cart_object_goods.disabled == 'true')?'enabled':'disabled'}}">
+                                    <image mode="aspectFit" class="weui-media-box__thumb" bindload="load_image" src="{{images[cart_object_goods.item.product.image_id]?images[cart_object_goods.item.product.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{cart_object_goods.item.product.image_id}}" />
+                                </view>
+                                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                                    <view class="weui-media-box__desc co-name">{{cart_object_goods.item.product.name}}</view>
+                                    <view class="weui-media-box__desc co-inline">
+                                        <view class="co-spec">{{cart_object_goods.item.product.spec_info?cart_object_goods.item.product.spec_info:''}}</view>
+                                        <view>ID:{{cart_object_goods.item.product.goods_id?cart_object_goods.item.product.goods_id:''}}</view>
+                                        <!-- <view class="co-price" style="color:{{themecolor.price_text}}">
+                                            ￥{{fmt.price(cart_object_goods.item.product.buy_price)}}<text>x {{cart_object_goods.quantity}} </text>
+                                        </view> -->
+                                    </view>
+                                    
+                                    <view class="weui-media-box__desc co-inline">
+                                        <view class="co-price" style="color:{{themecolor.price_text}}">
+                                            ￥{{fmt.price(cart_object_goods.item.product.buy_price)}}
+                                        </view>
+                                        <view class="product-quantity">
+                                          <button class="pq-minus" plain="true" data-cogindex="{{index}}" data-ident="{{cart_object_goods.obj_ident}}" data-quantity="-1" data-num="{{cart_object_goods.quantity}}" disabled="{{cart_object_goods.quantity<1}}" bindtap="tapquantity">-</button>
+                                          <input type="number" data-cur="{{cart_object_goods.quantity}}" bindblur="event_quantity_blur"  data-num="{{cart_object_goods.quantity}}" data-ident="{{cart_object_goods.obj_ident}}" value="{{cart_object_goods.quantity}}" bindfocus='evt_focus' class="pq-ipt"/>
+                                          <button class="pq-minus" plain="true" data-quantity="+1" data-cogindex="{{index}}" bindtap="tapquantity"  data-num="{{cart_object_goods.quantity}}" data-ident="{{cart_object_goods.obj_ident}}">+</button>
+                                      </view>
+                                    </view>
+                                    <view class="weui-media-box__desc co-warning" wx:if="{{cart_object_goods.warning}}">
+                                        <icon type="warn" size="14" />{{cart_object_goods.warning}}
+                                    </view>
+                                    <view class="promotion-list goods-promotion" wx:for="{{promotions.goods}}" wx:for-item="promotion" wx:key="ident" wx:for-index="ident">
+                                        <block wx:if="{{ident == cart_object_goods.obj_ident}}">
+                                            <view class="p-item" wx:for="{{promotion}}" wx:for-item="item" wx:key="index">
+                                                <view class="p-tag" wx:if="{{item.tag!='送赠品'}}">{{item.tag}}</view>
+                                                <view class="p-desc">
+                                                    <view wx:if="{{item.tag=='送赠品'}}">
+                                                        <view class="git-item" wx:for="{{item.solution}}">
+                                                            <block wx:if="{{item}}">[赠品] {{item}}</block>
+                                                        </view>
+                                                    </view>
+                                                    <block wx:else>
+                                                    {{item.name}}<block wx:if="{{item.save&&item.save>0}}">,优惠 <text>¥</text>{{fmt.price(item.save)}}</block>
+                                                    </block>
+                                                </view>
+                                            </view>
+                                        </block>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="cart-remark">
+                            <text>备注：</text>
+                            {{cart_object_goods.params.remark?cart_object_goods.params.remark:'暂无备注'}}
+                            <label catchtap="evt_remark" data-remark="{{cart_object_goods.params.remark?cart_object_goods.params.remark:''}}" data-first="{{object_index}}" data-second="{{cart_object_index}}" data-id="{{cart_object_goods.item.product.product_id}}">备注</label>
+                        </view>
+                    </view>
+                        
+                    <view class="weui-media-box-trash" bindtap="event_co_trash" data-coindex="{{index}}" data-ident="{{cart_object_goods.obj_ident}}" style="margin-left:-{{coitem_transform_dis[cart_object_goods.obj_ident]}}rpx">
+                        <view class="box">
+                            <image src="{{img_url}}/public/wechat/mall/cart/car_del.png" />
+                            <text>删除</text>
+                        </view>
+                    </view>
+                </view>
+</template>

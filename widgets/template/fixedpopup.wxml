@@ -1,0 +1,51 @@
+
+<template name="widget-fixedpopup">
+        <view class="fixedpopup-fixedBg" wx:if="{{data.location=='center'&&data.items.length>0&&data.isShow}}" bindtap="widget_event_delegate" data-event-tap="evt_closePopup" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}">
+          <view class="fixedpopup-block {{data.location}}" style="width:{{data.items[0].image.width>data.systeminfo.windowWidth*0.7?data.systeminfo.windowWidth*0.7+'px':data.items[0].image.width+'px'}};margin-left:{{data.items[0].image.width>data.systeminfo.windowWidth*0.7?'-'+data.systeminfo.windowWidth*0.7/2+'px':'-'+data.items[0].image.width/2+'px'}};height:{{data.items[0].image.width>data.systeminfo.windowWidth*0.7?data.systeminfo.windowWidth*0.7/data.items[0].image.width*data.items[0].image.height+'px':data.items[0].image.height+'px'}};margin-top:{{data.items[0].image.width>data.systeminfo.windowWidth*0.7?'-'+data.systeminfo.windowWidth*0.7/data.items[0].image.width*data.items[0].image.height/2+'px':'-'+data.items[0].image.height/2+'px'}}">
+            <label>
+              <navigator  open-type="{{data.items[0].url.openType}}" class="link" url="{{data.items[0].url.url}}"><image mode="widthFix" src="{{data.items[0].image.src}}"></image></navigator> 
+              <view class="close"   catchtap="widget_event_delegate" data-event-tap="evt_closePopup"  data-widget-index="{{data.widget_index}}" data-widget-name="fixedpopup" style="background-image:url({{data.img_url}}/public/wechat/statics/image/template/close.png)"></view>
+            </label>
+          </view>
+        </view>
+        <view class="fixedpopup-block {{data.location}}" wx:elif="{{data.location=='right-bottom'&&data.items.length>0}}" style="right:{{data.systeminfo.windowWidth*0.14*0.2+'px'}};bottom:{{data.systeminfo.windowWidth*0.14*0.4+'px'}}">
+        	<label class="fixedpopup-item" wx:for="{{data.items}}" style="width:{{data.systeminfo.windowWidth*0.14+'px'}};height:{{data.systeminfo.windowWidth*0.14+'px'}}">
+        		<navigator  open-type="{{item.url.openType}}" class="link" url="{{item.url.url}}"><image mode="aspectFill" src="{{item.image.src}}"></image></navigator>
+            <contact-button wx:if="{{item.isContact=='yes'}}"></contact-button>
+            <button wx:if="{{item.isContact=='code'}}" bindtap="widget_event_delegate" data-event-tap="evt_codestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='gotop'}}" bindtap="widget_event_delegate" data-event-tap="evt_gotopstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='wxapp'}}" bindtap="widget_event_delegate" data-event-tap="evt_wxappstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-appid="{{item.appid}}"></button>
+            <button wx:if="{{item.isContact=='tel'}}" bindtap="widget_event_delegate" data-event-tap="evt_phonestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-phone="{{item.phone}}"></button>
+        	</label>
+        </view>
+        <view class="fixedpopup-block {{data.location}}" wx:elif="{{data.location=='right-top'&&data.items.length>0}}" style="right:{{data.systeminfo.windowWidth*0.14*0.2+'px'}};top:{{data.systeminfo.windowWidth*0.14*0.4+'px'}}">
+        	<label class="fixedpopup-item" wx:for="{{data.items}}" style="width:{{data.systeminfo.windowWidth*0.14+'px'}};height:{{data.systeminfo.windowWidth*0.14+'px'}}">
+        		<navigator  open-type="{{item.url.openType}}" class="link" url="{{item.url.url}}"><image mode="aspectFill" src="{{item.image.src}}"></image></navigator>
+            <contact-button wx:if="{{item.isContact=='yes'}}"></contact-button>
+             <button wx:if="{{item.isContact=='code'}}" bindtap="widget_event_delegate" data-event-tap="evt_codestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='gotop'}}" bindtap="widget_event_delegate" data-event-tap="evt_gotopstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='wxapp'}}" bindtap="widget_event_delegate" data-event-tap="evt_wxappstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-appid="{{item.appid}}"></button>
+            <button wx:if="{{item.isContact=='tel'}}" bindtap="widget_event_delegate" data-event-tap="evt_phonestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-phone="{{item.phone}}"></button>
+        	</label>
+        </view>
+        <view class="fixedpopup-block {{data.location}}" wx:elif="{{data.location=='left-top'&&data.items.length>0}}" style="left:{{data.systeminfo.windowWidth*0.14*0.2+'px'}};top:{{data.systeminfo.windowWidth*0.14*0.4+'px'}}">
+        	<label class="fixedpopup-item" wx:for="{{data.items}}" style="width:{{data.systeminfo.windowWidth*0.14+'px'}};height:{{data.systeminfo.windowWidth*0.14+'px'}}">
+        		<navigator  open-type="{{item.url.openType}}" class="link" url="{{item.url.url}}"><image mode="aspectFill" src="{{item.image.src}}"></image></navigator>
+            <contact-button wx:if="{{item.isContact=='yes'}}"></contact-button>
+             <button wx:if="{{item.isContact=='code'}}" bindtap="widget_event_delegate" data-event-tap="evt_codestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='gotop'}}" bindtap="widget_event_delegate" data-event-tap="evt_gotopstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='wxapp'}}" bindtap="widget_event_delegate" data-event-tap="evt_wxappstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-appid="{{item.appid}}"></button>
+            <button wx:if="{{item.isContact=='tel'}}" bindtap="widget_event_delegate" data-event-tap="evt_phonestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-phone="{{item.phone}}"></button>
+        	</label>
+        </view>
+        <view class="fixedpopup-block {{data.location}}" wx:elif="{{data.location=='left-bottom'&&data.items.length>0}}" style="left:{{data.systeminfo.windowWidth*0.14*0.2+'px'}};bottom:{{data.systeminfo.windowWidth*0.14*0.4+'px'}}">
+        	<label class="fixedpopup-item" wx:for="{{data.items}}" style="width:{{data.systeminfo.windowWidth*0.14+'px'}};height:{{data.systeminfo.windowWidth*0.14+'px'}}">
+        		<navigator  open-type="{{item.url.openType}}" class="link" url="{{item.url.url}}"><image mode="aspectFill" src="{{item.image.src}}"></image></navigator>
+            <contact-button wx:if="{{item.isContact=='yes'}}"></contact-button>
+            <button wx:if="{{item.isContact=='code'}}" bindtap="widget_event_delegate" data-event-tap="evt_codestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='gotop'}}" bindtap="widget_event_delegate" data-event-tap="evt_gotopstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}"></button>
+            <button wx:if="{{item.isContact=='wxapp'}}" bindtap="widget_event_delegate" data-event-tap="evt_wxappstart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-appid="{{item.appid}}"></button>
+            <button wx:if="{{item.isContact=='tel'}}" bindtap="widget_event_delegate" data-event-tap="evt_phonestart" data-widget-name="fixedpopup"  data-widget-index="{{data.widget_index}}" data-phone="{{item.phone}}"></button>
+        	</label>
+        </view>
+</template>

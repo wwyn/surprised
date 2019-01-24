@@ -1,0 +1,42 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<block wx:if="{{hideLoading}}">
+    <view class="limit-container">
+        <!-- <view class="banner-image" wx:if="{{activity_list[currentid].banner_url}}">
+          <image src="{{activity_list[currentid].banner_url}}" mode="widthFix"></image>
+        </view> -->
+        <view class="time-list" wx:if="{{plan_tab[1]}}">
+          <view wx:for="{{plan_tab}}" wx:for-item="item" class="time-item {{item.plan_id==currentid?'active':''}}" data-id="{{item.plan_id}}" bindtap="evt_chooseTag">
+            <view class="time">
+              <view>{{item.carry_out_time}}</view>
+              <view>{{item.show_tag}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="countdown" wx:if="{{countdown.days>0 || countdown.hours>0 || countdown.minutes >0|| countdown.seconds>0}}">
+            {{(activity_list[currentid].carry_out_time < timestamp)&&(activity_list[currentid].rollback_time > timestamp)?'距结束':'距开启'}}
+            <text>{{ countdown.days }}</text>天
+            <text>{{ countdown.hours }}</text>:
+            <text>{{ countdown.minutes }}</text>:
+            <text>{{ countdown.seconds }}</text>
+        </view>
+        <view class="banner" wx:if="{{activity_list[currentid].banner_url}}">
+            <image src="{{activity_list[currentid].banner_url}}" mode="aspectFill"/>
+        </view>
+        <view class="adjust-list">
+          <navigator class="link" url="/pages/product/product?product_id={{item.product_id}}" wx:for="{{activity_list[currentid].products}}">
+            <image bindload="load_image_m" src="{{images[item.image_id]?images[item.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" mode="aspectFit" data-ident="{{item.image_id}}"></image>
+            <view class="content">
+              <view class="name">{{item.name}}</view>
+              <view class="price"><text>￥{{fmt.price(item.end_price)}}</text><text>￥{{fmt.price(item.begin_price)}}</text></view>
+              <view class="stock">
+                剩余{{item.stock}}件
+                <button class="havenone" wx:if="{{item.stock<=0}}">已抢光</button>
+                <button class="waitStart" wx:elif="{{activity_list[currentid].carry_out_time > timestamp}}">准时开启</button>
+                <button class="buynow" wx:elif="{{(activity_list[currentid].carry_out_time < timestamp)&&(activity_list[currentid].rollback_time > timestamp)}}">立即抢购</button>
+              </view>
+            </view>
+          </navigator>
+        </view>
+    </view>
+</block>

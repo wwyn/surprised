@@ -1,0 +1,90 @@
+page{
+    background: #efefef;
+
+}
+
+.gr-stars{
+    display: flex;
+    align-items: center;
+}
+.comment-author{
+    display: flex;
+    align-items: center;
+}
+.comment-author .author-avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-right: 5px;
+}
+.comment-hd{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.comment-cell{
+    margin-right: 4px;
+}
+.images-wrap{
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.selected-image{
+    padding: 1px;
+    border: 1px #ccc solid;
+    margin: 5px 5px 0 0;
+}
+
+.images-wrap.mini .selected-image{
+    width: 40px;
+    height: 40px;
+}
+
+.star-picker{
+    display: flex;
+}
+.star-picker .star{
+    color: #ccc;
+
+}
+
+.star-picker text{
+    font-size: 24px;
+    display: none;
+    text-shadow: 1px 0px 0px #FFF;
+}
+.star-picker.sp-mini .star{
+    padding:0 1px;
+}
+.star-picker.sp-mini text{
+    font-size: 12px;
+}
+.star-picker text:last-child{
+    display: inline;
+}
+.star-picker .active{
+    color: #ffc926;
+}
+.star-picker .active text:last-child{
+    display: none;
+}
+.star-picker .active text:first-child{
+    display: inline;
+    text-shadow: 1px 0px 0px #B38600;
+}
+.comment-author{
+    font-size: 13px;
+}
+.comment-content{
+    font-size: 13px;
+    color: #777;
+    padding: 5px 0;
+}
+.comment-time{
+    font-size: 12px;
+    color: #999;
+}

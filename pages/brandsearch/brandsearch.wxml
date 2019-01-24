@@ -1,0 +1,26 @@
+<view class="">
+  <view class="search-bar">
+      <view class="search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="search-bar__input" value="{{input_val}}" placeholder="请输入商品名称/品牌名称" bindconfirm="evt_confirm" bindinput="evt_input" auto-focus/>
+          <view class="weui-icon-clear" wx:if="{{input_val.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+          </view>
+      </view>
+      <view class="search-btn" bindtap="evt_confirm">搜索</view>
+  </view>
+	<view class="page-content">
+		<view class="hotsearch-block">
+			<view wx:if="{{searchHistory != ''}}">
+				<view>
+					<view class="title">搜索历史</view>
+					<image class="trash-icon" mode="widthFix" bindtap="evt_delete_history" src="{{BASE_HOST}}/public/wechat/member/delete_grey.png"></image>
+				</view>
+				<view class="hotsearch-items">
+					<navigator class="item" wx:for="{{searchHistory}}" wx:for-item="item" wx:for-index="index" wx:key="index"  url="/pages/brand/brand?keyword={{item}}" open-type="reLaunch">{{item}}
+					</navigator>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

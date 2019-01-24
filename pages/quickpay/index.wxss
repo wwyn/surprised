@@ -1,0 +1,77 @@
+page{
+    background: #efefef;
+}
+.payfee-top{
+    text-align: center;
+}
+.payfee-logo{
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 5px;
+}
+.payfee-tip{
+    font-size: 14px;
+    color: #333;
+}
+.payfee-tip text{
+    font-size: 14px;
+    color: #000;
+}
+.payfee-warning{
+    font-size: 13px;
+    color: #666;
+
+}
+.weui-cells{
+    background: #efefef;
+    margin: 15px 15px;
+}
+.weui-cells::after{
+    display: none;
+}
+.weui-cell{
+    border-radius: 5px;
+}
+.weui-cell__ft{
+    color: #000;
+    padding-left: 5px;
+}
+.weui-cell-tip{
+    font-size: 13px;
+    padding-left: 15px;
+    padding:4px 0 0 15px;
+    color: #888;
+}
+.weui-cell{
+  font-size:16px;
+  padding:0 15px;
+  margin-top:10px;
+  background:#fff;
+}
+.wc-lg .weui-input{
+    height: 25px;
+    line-height: 25px;
+    font-size:25px;
+    font-weight: 500;
+}
+.weui-cell:before{
+  border:0;
+}
+.weui-textarea{
+    padding: 10px 0;
+}
+.discount-cell{
+    border-color: #f2d0ad;
+}
+.discount-cell .weui-input,.out-discount .weui-input{
+    text-align: right;
+}
+.weui-footer{
+    position: fixed;
+    bottom: 15px;
+    width: 100%;
+}
+.weui-footer__text{
+
+}

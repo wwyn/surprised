@@ -1,0 +1,61 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../utils/fmt.wxs" module="fmt" />
+<wxs src="../../utils/date.wxs" module="date" />
+<block wx:if="{{hideLoading}}">
+    <view class="search_fix" bindtap="evt_link_search">
+        <view class="search-bar__box">
+            <view class="weui-icon-search_in-box" type="search" style="background-image:url({{img_url}}/public/wechat/empty/search.png)"></view>
+            输入商品名称/品牌名称
+        </view>
+    </view>
+    <swiper class="widget-slider slider" indicator-dots="{{banner.length>1}}"  interval="5000" duration="1000" circular="true"  indicator-active-color="#FC4773" autoplay="true">
+        <swiper-item wx:for="{{banner}}" wx:for-item="item" wx:key="*this" >
+           <navigator url="{{item.link}}" open-type="navigate">
+              <image class="slide" mode="aspectFill" bindload="load_image_l" src="{{images[item.image_id]?images[item.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.image_id}}"/>
+           </navigator>
+        </swiper-item>
+    </swiper>
+    <view class="index-tab">
+        <view class="tab-item">
+            <view class="{{indextype=='hot'?'actived':''}}" bindtap="changeType" data-type="hot">热门活动</view>
+        </view>
+        <view class="tab-item">
+            <view class="{{indextype=='advance'?'actived':''}}"  bindtap="changeType" data-type="advance">预告</view>
+        </view>
+    </view> 
+    <view class="active-list" wx:if="{{empty_list=='NO'}}">
+        <view class="active-item" wx:for="{{data_list}}" bindtap="evt_link_event" data-id="{{item.activity_id}}">
+            <view class="active-brand">
+                <image mode="aspectFill"  bindload="load_image" src="{{images[item.merchant.logo_image]?images[item.merchant.logo_image]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{item.merchant.logo_image}}"></image>
+            </view>
+            <view class="active-detail">
+                <view class="active-title">{{item.name}}</view>
+                <view class="active-time"  wx:if="{{indextype=='hot'}}"><view class="flag">进行中</view>距离活动结束仅{{date.count(item.to_time,current_time)}}</view>
+                <view class="active-time advance"  wx:if="{{indextype=='advance'}}"><view class="flag">预告</view>{{date.dateFormat(item.from_time*1000,'MM月dd hh:mm')}}开抢</view>
+                <view class="active-desc" data-index="{{index}}" style="max-height:{{item.display=='close'?auto:200}}rpx;overflow:hidden;"><text class="active-desc_text">{{item.description}}</text></view>
+                <view class="active-display" wx:if="{{item.display=='open'}}" data-index="{{index}}" catchtap='see_more'>展开全文</view>
+                <view  class="active-display2" wx:if="{{item.display=='close'}}" data-index="{{index}}" catchtap='close_more'>点击收起</view>
+                <view class="active-img">
+                    <image wx:for="{{item.images}}" wx:for-item="img" wx:for-index="index" mode="aspectFit" bindload="load_image" src="{{images[img.image_id]?images[img.image_id]:'data:image/gif;base64,R0lGODlhAQABAIAAAO/v7////yH5BAAHAP8ALAAAAAABAAEAAAICRAEAOw=='}}" data-ident="{{img.image_id}}" data-index="{{index}}" data-imgs="{{item.images}}"  catchtap="evt_previewimage"></image>
+                </view>
+                <view class="active-time" wx:if="{{item.tag_description}}"><view class="flag flag-active">{{item.active_tag}}</view>{{item.tag_description}}</view>
+                <!-- <view class="active-time"><view class="flag flag-active">满减</view>品牌专场满599返100，仅一次</view> -->
+                <view class="end_time" wx:if="{{indextype=='hot'}}">结束时间：{{date.dateFormat(item.to_time*1000,'MM月dd日 hh:mm')}}
+                    <label catchtap="evt_link_event" data-id="{{item.activity_id}}">去抢购</label>
+                </view>
+                <view class="end_time advance"  wx:if="{{indextype=='advance'}}">开始时间：{{date.dateFormat(item.from_time*1000,'MM月dd日 hh:mm')}}
+                    <label catchtap="evt_link_event"  data-id="{{item.activity_id}}">去看看</label>
+                </view>
+            </view>
+        </view>
+        <view class="bottom" wx:if="{{pager.total&&pager.current && pager.total>pager.current}}">正在加载</view>
+        <view class="bottom" wx:if="{{pager.total&&pager.total == pager.current}}">~  已经到底部  ~</view>
+    </view>
+    <view class="prompt-panel" wx:if="{{empty_list=='YES'}}">
+        <image mode="widthFix" src="{{img_url}}/public/wechat/empty/event_empty.png" />
+        <view class="text" style="color:#999;">暂无任何活动哦～</view>
+    </view>
+    <navigator class="study" url="/pages/index/page/page?s=study" open-type='navigate'>
+        <image mode="widthFix" src="{{img_url}}/public/wechat/mall/index/study.png"></image>
+    </navigator>
+</block>

@@ -1,0 +1,13 @@
+
+<!--
+    widget-imgnav
+    图片导航
+-->
+<template name="widget-imgnav">
+    <view class="widget-imgnav">
+        <navigator style="width:{{100/data.limit}}%;margin-bottom:{{data.bottom_margin}}px;" wx:for="{{data.items}}"  url="{{item.url.url}}" open-type="{{item.url?item.url.openType:'navigate'}}">
+              <image class="widget-imgnav-image" style="height:{{data.img_height}}px;width:{{data.img_width?data.img_width+'px':'100%'}}" src="{{item.image.src}}" mode="{{item.image.mode||'widthFix'}}" />
+              <view style="width:{{data.img_width?data.img_width+'px':'100%'}}" class="widget-imgnav-text" wx:if="{{data.show_text}}">{{item.text}}</view>
+       </navigator>
+    </view>
+</template>

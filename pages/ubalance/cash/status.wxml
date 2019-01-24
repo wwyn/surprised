@@ -1,0 +1,42 @@
+<view class="page-loading" wx:if="{{!hideLoading}}"></view>
+<wxs src="../../../utils/fmt.wxs" module='fmt'/>
+<block wx:if="{{hideLoading}}">
+    <view class="weui-form-preview">
+        <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">提现</label>
+                <text class="weui-form-preview__value">¥{{fmt.price(bill.money)}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">余额变动</label>
+                <text class="weui-form-preview__value">{{fundlog.change_fund}}</text>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">提现流水号</label>
+                <text class="weui-form-preview__value">{{bill.bill_id}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">处理状态</label>
+                <text class="weui-form-preview__value weui-badge {{bill.status}}">{{bill_status_map[bill.status]}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">收款人</label>
+                <text class="weui-form-preview__value">{{bill.payee_name}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">银行</label>
+                <text class="weui-form-preview__value">{{bill.payee_bank}}</text>
+            </view>
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">账号</label>
+                <text class="weui-form-preview__value">{{bill.payee_account}}</text>
+            </view>
+            <view class="weui-form-preview__item" wx:if="{{bill.pay_fee>0}}">
+                <label class="weui-form-preview__label">手续费</label>
+                <text class="weui-form-preview__value">¥{{fmt.price(bill.pay_fee)}}</text>
+            </view>
+        </view>
+    </view>
+</block>

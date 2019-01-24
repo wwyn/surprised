@@ -1,0 +1,16 @@
+<view class="weui-msg">
+    <view class="weui-msg__icon-area">
+        <view class="icon icon-noconnect" style="background-image:url({{img_url}}/public/wechat/statics/image/xcxicon/nocontect.png)"></view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">
+                网络链接异常
+            </view>
+            <view class="weui-msg__desc">
+                请检查您当前设备的网络链接,并重试
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-btn-area">
+    <button form-type="button" bindtap="evt_retry" type="default" plain="true">重试</button>
+</view>

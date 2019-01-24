@@ -1,0 +1,45 @@
+
+<!--
+    widget-textnav
+    文本导航
+-->
+<template name="widget-textnav">
+    <view class="widget-textnav" wx:if="{{data.show_type === 'list'}}">
+        <view class="weui-cells weui-cells_in-small-appmsg">
+            <navigator wx:for="{{data.items}}" open-type="{{item.url?item.url.openType:'navigate'}}" wx:for-item="item" wx:key="*this" url="{{item.url.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd weui-cell_primary">
+                    <image class="speaker" mode="widthFix" src="/statics/image/speaker.png" wx:if="{{data.icon === 'true'}}"></image>{{item.text}}
+                </view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+        </view>
+    </view>
+    <view class="clearfix notice" wx:if="{{data.show_type === 'scroll'}}">
+        <view wx:if="{{data.icon === 'true'}}">
+           <view class="notice-left">
+               <image class="speaker-icon" mode="widthFix" src="/statics/image/speaker.png"></image>
+           </view> 
+           <view class="line"></view>
+           <view class="" style="margin-left: 57px;overflow: hidden;height: 29px;">
+               <view class="list-unstyled notice-lists" style="top:{{-data.activeIndex*29}}px">
+                   <view class="notice-item" wx:for="{{data.items}}" wx:for-item="item" wx:key="*this">
+                       <navigator open-type="{{item.url?item.url.openType:'navigate'}}" url="{{item.url.url}}">
+                           {{item.text}}
+                       </navigator>
+                   </view>
+               </view>
+           </view> 
+        </view>
+        <view wx:else>
+            <view class="" style="overflow: hidden;height: 29px;">
+               <view class="list-unstyled notice-lists" style="top:{{-data.activeIndex*29}}px">
+                   <view class="notice-item" wx:for="{{data.items}}" wx:for-item="item" wx:key="*this">
+                       <navigator open-type="{{item.url?item.url.openType:'navigate'}}" url="{{item.url.url}}">
+                           {{item.text}}
+                       </navigator>
+                   </view>
+               </view>
+           </view> 
+        </view>
+    </view>
+</template>

@@ -1,0 +1,52 @@
+page{
+    padding-bottom: 56px;
+}
+.name-and-mobile{
+    display: flex;
+}
+.name-and-mobile .mobile{
+    margin-left: 10px;
+}
+.name-and-mobile .name text{
+    color: #666;
+}
+.addr-options{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px #e9e9e9 solid;
+}
+.addr-options .is-default{
+    padding-left: 15px;
+    font-size: 12px;
+}
+.panel-ft-actions{
+    border-top: none;
+}
+
+.panel-ft-actions .btn{
+    font-size: 12px;
+    line-height: 30px;
+    margin-left: 15px;
+}
+.panel-ft-actions image{
+    width: 12px;
+    height: 12px;
+}
+.add-addr{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 30rpx 10px 30rpx;
+    box-sizing: border-box;
+}
+.add-addr .new-addr-btn{
+    border-radius: 8rpx;
+    line-height:88rpx;
+    font-size:30rpx;
+}
+.new-addr-btn::after{
+    border-radius: 0;
+}

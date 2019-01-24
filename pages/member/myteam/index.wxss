@@ -1,0 +1,103 @@
+/* pages/member/myteam/index.wxss */
+.no_team{
+  width: 100%;
+  height: 100%;
+}
+.no_team>image{
+  position: absolute;
+  left: 132rpx;
+  top: 264rpx;
+  width: 482rpx;
+  height: 446rpx;
+}
+.no_team>text{
+  display: block;
+  text-align: center;
+  color: RGBA(252, 71, 115, 0.48);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 28rpx;
+  line-height: 94rpx;
+  margin-top: 718rpx;
+}
+.team_one{
+  width: 100%;
+  height: 150rpx;
+  border-top: 1rpx solid RGBA(235, 235, 235, 1);
+  background: #fff;
+}
+.team_one_left{
+  width: 65%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+}
+.team_one_left>image{
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 30rpx;
+  margin-top: 26rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  float: left;
+}
+.team_one_left>text{
+  color:RGBA(51, 51, 51, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 28rpx;
+  line-height: 150rpx;
+}
+.team_one_right{
+  width: 35%;
+  float: left;
+  height: 100%;
+}
+.team_one_right>text{
+  display: block;
+  float: right;
+  margin-right: 30rpx;
+  color:RGBA(153, 153, 153, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 24rpx;
+  line-height: 150rpx;
+}
+
+
+
+
+
+.invite_btn{
+  width: 100%;
+  text-align: center;
+  height: 94rpx;
+  position: fixed;
+  bottom: 0;
+  background: rgb(252, 71, 115);
+  color: RGBA(255, 255, 255, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 30rpx;
+  line-height: 94rpx;
+}
+.team_all{
+  margin-top: 60rpx;
+  margin-left: 120rpx;
+  width: 246rpx;
+  height: 182rpx;
+}
+.product-quantity{
+  color: RGBA(51, 51, 51, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 34rpx;
+  /* line-height: 94rpx; */
+}
+.add-operate{
+  color: RGBA(255, 255, 255, 1);
+  font-family: PingFangSC;
+  font-weight: Regular;
+  font-size: 30rpx;
+  line-height: 80rpx;
+}

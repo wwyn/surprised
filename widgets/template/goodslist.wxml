@@ -1,0 +1,112 @@
+
+<!--
+    widget-goodslist
+    商品列表
+-->
+<template name="widget-goodslist">
+    <view class="widget-goodslist {{data.with_panel?'weui-panel':''}} widget-goodslist-{{data.type}} {{data.show_title?'with-title':''}}">
+            <view class="{{data.with_panel?'weui-panel__hd':'goodslist-title'}}" wx:if="{{data.show_title}}">{{data.title}}</view>
+            <view class="goodslist-body {{data.with_panel?'weui-panel__bd':''}}">
+                <!--type:swiper-->
+                <scroll-view scroll-x="true" style="height:{{data.swiper_height*1+data.swiper_item_margin*2}}px;" wx:if="{{data.type=='swiper'}}">
+                    <view class="widget-goodslist-swiper-scrollviewbox">
+                            <navigator wx:if="{{data.show_product_title&&data.show_product_brief&&data.show_product_price}}" style="margin:{{data.swiper_item_margin}}px;width:{{data.swiper_height}}px" wx:for="{{data.items}}"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                                <image src="{{item.product.image}}" style="width:{{data.swiper_height-60}}px;height:{{data.swiper_height-60}}px;" mode="aspectFit" />
+                                <view style="width:{{data.swiper_height-60}}px;color:{{data.themecolor.text_primary}}" class="g-name" wx:if="{{data.show_product_title}}">{{item.name}}</view>
+                                <view style="width:{{data.swiper_height-60}}px;color:{{data.themecolor.text_info}}" class="g-brief" wx:if="{{data.show_product_brief}}">{{item.brief}}</view>
+                                <view style="width:{{data.swiper_height-60}}px;color:{{data.themecolor.price_text}}" class="g-price" wx:if="{{data.show_product_price}}">￥{{item.product.buy_price}}</view>
+                            </navigator>
+                            <navigator wx:if="{{!data.show_product_title&&!data.show_product_brief&&!data.show_product_price}}" style="margin:{{data.swiper_item_margin}}px;width:{{data.swiper_height}}px" wx:for="{{data.items}}"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                                <image src="{{item.product.image}}" style="width:{{data.swiper_height}}px;height:{{data.swiper_height}}px;" mode="aspectFit" />
+                            </navigator>
+                            <navigator wx:if="{{(!data.show_product_title&&!data.show_product_brief&&data.show_product_price)||(!data.show_product_title&&data.show_product_brief&&!data.show_product_price)||(data.show_product_title&&!data.show_product_brief&&!data.show_product_price)}}" style="margin:{{data.swiper_item_margin}}px;width:{{data.swiper_height}}px" wx:for="{{data.items}}"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                                <image src="{{item.product.image}}" style="width:{{data.swiper_height-20}}px;height:{{data.swiper_height-20}}px;" mode="aspectFit" />
+                                <view style="width:{{data.swiper_height-20}}px;color:{{data.themecolor.text_primary}}" class="g-name" wx:if="{{data.show_product_title}}">{{item.name}}</view>
+                                <view style="width:{{data.swiper_height-20}}px;color:{{data.themecolor.text_info}}" class="g-brief" wx:if="{{data.show_product_brief}}">{{item.brief}}</view>
+                                <view style="width:{{data.swiper_height-20}}px;color:{{data.themecolor.price_text}}" class="g-price" wx:if="{{data.show_product_price}}">￥{{item.product.buy_price}}</view>
+                            </navigator>
+                             <navigator wx:if="{{(!data.show_product_title&&data.show_product_brief&&data.show_product_price)||(data.show_product_title&&!data.show_product_brief&&data.show_product_price)||(data.show_product_title&&data.show_product_brief&&!data.show_product_price)}}" style="margin:{{data.swiper_item_margin}}px;width:{{data.swiper_height}}px" wx:for="{{data.items}}"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                                <image src="{{item.product.image}}" style="width:{{data.swiper_height-40}}px;height:{{data.swiper_height-40}}px;" mode="aspectFit" />
+                                <view style="width:{{data.swiper_height-40}}px;color:{{data.themecolor.text_primary}}" class="g-name" wx:if="{{data.show_product_title}}">{{item.name}}</view>
+                                <view style="width:{{data.swiper_height-40}}px;color:{{data.themecolor.text_info}}" class="g-brief" wx:if="{{data.show_product_brief}}">{{item.brief}}</view>
+                                <view style="width:{{data.swiper_height-40}}px;color:{{data.themecolor.price_text}}" class="g-price" wx:if="{{data.show_product_price}}">￥{{item.product.buy_price}}</view>
+                            </navigator>
+                    </view>
+                </scroll-view>
+                <!--type:gallery-->
+                <navigator class="{{data.card_style?'card':''}}" wx:if="{{data.type=='gallery'}}" wx:for="{{data.items}}"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                    <view class="g-image">
+                        <image src="{{item.product.image}}" mode="aspectFit" />
+                    </view>
+                    <view class="g-name" style="color:{{data.themecolor.text_primary}}" wx:if="{{data.show_product_title}}">
+                        {{item.product.name}}
+                    </view>
+                    <view class="g-brief" style="color:{{data.themecolor.text_info}}" wx:if="{{data.show_product_brief}}">
+                        {{item.brief}}
+                    </view>
+                    <view class="g-price" style="color:{{data.themecolor.price_text}}" wx:if="{{data.show_product_price}}">
+                        ￥{{item.product.buy_price}}
+                    </view>
+                </navigator>
+                <!--type:grid-->
+                <navigator wx:if="{{data.type=='grid'}}" wx:for="{{data.items}}" wx:for-item="item"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                    <view class="grid-wrap">
+                        <view class="{{data.card_style?'card':''}}">
+                            <view class="g-image">
+                                <image src="{{item.product.image}}" mode="aspectFit" />
+                            </view>
+                            <view class="g-name" style="color:{{data.themecolor.text_primary}}"  wx:if="{{data.show_product_title}}">
+                                {{item.product.name}}
+                            </view>
+                            <view class="g-brief" style="color:{{data.themecolor.text_info}}" wx:if="{{data.show_product_brief}}">
+                                {{item.brief}}
+                            </view>
+                            <view class="g-price" style="color:{{data.themecolor.price_text}}" wx:if="{{data.show_product_price}}">
+                                ￥{{item.product.buy_price}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <!--type:tower-->
+                <navigator class="{{index%3==0?'tower':''}}" wx:if="{{data.type=='tower'}}" wx:for="{{data.items}}"  url="/pages/product/product?product_id={{item.product.product_id}}">
+                    <view class="grid-wrap">
+                        <view class="{{data.card_style?'card':''}}">
+                            <view class="g-image">
+                                <image src="{{item.product.image}}" mode="aspectFit" />
+                            </view>
+                            <view class="g-name" style="color:{{data.themecolor.text_primary}}"  wx:if="{{data.show_product_title}}">
+                                {{item.product.name}}
+                            </view>
+                            <view class="g-brief" style="color:{{data.themecolor.text_info}}" wx:if="{{data.show_product_brief}}">
+                                {{item.brief}}
+                            </view>
+                            <view class="g-price" style="color:{{data.themecolor.price_text}}" wx:if="{{data.show_product_price}}">
+                                ￥{{item.product.buy_price}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+                <!--type:list-->
+                <navigator class="weui-media-box weui-media-box_appmsg co-item"  wx:if="{{data.type=='list'}}" wx:for="{{data.items}}" url="/pages/product/product?product_id={{item.product.product_id}}">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg g-image">
+                            <image src="{{item.product.image}}" mode="aspectFit" />
+                    </view>
+                    <view class="weui-media-box__bd">
+                        <view class="weui-media-box__desc co-name">
+                            <view class="g-name" style="color:{{data.themecolor.text_primary}}"  wx:if="{{data.show_product_title}}">
+                                {{item.product.name}}
+                            </view>
+                        </view>
+                        <view class="weui-media-box__desc co-inline co-brief g-brief" style="color:{{data.themecolor.text_info}}"  wx:if="{{data.show_product_brief}}">
+                                {{item.brief}}
+                        </view>
+                        <view class="weui-media-box__desc co-inline">
+                            <view class="g-price" wx:if="{{data.show_product_price}}" style="color:{{data.themecolor.price_text}}">
+                                ￥{{item.product.buy_price}}
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+    </view>
+</template>

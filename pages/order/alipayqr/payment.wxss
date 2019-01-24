@@ -1,0 +1,40 @@
+page{
+    background: #ffffff;
+}
+.QRcode{
+    background-color: #419FE2;
+    color: #ffffff;
+}
+.order-id{
+    text-align: center;
+    font-size: 18px;
+    padding-top: 30px;
+}
+.order-total{
+    text-align: center;
+    font-size: 22px;
+    margin: 15px 0;
+}
+.order-pay-qrcode{
+    width: 200px;
+    height: 200px;
+    padding: 15px; 
+    display: block;
+    background-color: #ffffff;
+    margin: 0 auto;
+}
+.order-pay-qrcode image{
+    width: 200px;
+}
+.tips{
+    margin-top: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+.step-list{
+    margin-top: 20px;
+}
+.step-item{
+    text-align: center;
+    font-size: 18px;
+}
